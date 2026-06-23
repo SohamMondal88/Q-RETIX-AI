@@ -2,17 +2,14 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import {
   ArrowRight,
   Clock,
   Calendar,
   User,
-  ChevronLeft,
 } from "lucide-react";
 import Link from "next/link";
-import NewsletterSection from "./NewsletterSection";
-import CommunitySection from "./CommunitySection";
+import WaitlistCommunitySection from "./WaitlistCommunitySection";
 
 const categories = [
   "Research",
@@ -38,8 +35,7 @@ const latestPosts = [
   {
     slug: "optimizing-clinical-trials-ml",
     title: "Optimizing Clinical Trials with Machine Learning",
-    excerpt:
-      "Machine learning approaches to patient stratification, adaptive trial design, and real-world evidence integration.",
+    excerpt: "Machine learning approaches to patient stratification, adaptive trial design, and real-world evidence integration.",
     category: "Clinical Trials",
     date: "June 12, 2026",
     readTime: "6 min read",
@@ -48,8 +44,7 @@ const latestPosts = [
   {
     slug: "generative-ai-molecule-design",
     title: "Generative AI for Molecule Design",
-    excerpt:
-      "Exploring how generative models like diffusion models and transformers are revolutionizing de novo drug design.",
+    excerpt: "Exploring how generative models like diffusion models and transformers are revolutionizing de novo drug design.",
     category: "Drug Discovery",
     date: "June 8, 2026",
     readTime: "10 min read",
@@ -58,8 +53,7 @@ const latestPosts = [
   {
     slug: "real-world-evidence-2026",
     title: "Real-World Evidence in 2026: A Regulatory Perspective",
-    excerpt:
-      "An overview of how regulatory agencies are embracing real-world data and AI-driven evidence generation.",
+    excerpt: "An overview of how regulatory agencies are embracing real-world data and AI-driven evidence generation.",
     category: "Research",
     date: "June 5, 2026",
     readTime: "7 min read",
@@ -68,8 +62,7 @@ const latestPosts = [
   {
     slug: "precision-medicine-breakthroughs",
     title: "Precision Medicine Breakthroughs Powered by AI",
-    excerpt:
-      "From genomic biomarkers to personalized dosing algorithms, AI is enabling truly individualized therapies.",
+    excerpt: "From genomic biomarkers to personalized dosing algorithms, AI is enabling truly individualized therapies.",
     category: "Healthcare Innovation",
     date: "June 1, 2026",
     readTime: "9 min read",
@@ -78,8 +71,7 @@ const latestPosts = [
   {
     slug: "pharma-supply-chain-ai",
     title: "Pharma Supply Chain Resilience with AI",
-    excerpt:
-      "Predictive analytics and digital twins are helping pharmaceutical companies build resilient supply chains.",
+    excerpt: "Predictive analytics and digital twins are helping pharmaceutical companies build resilient supply chains.",
     category: "Pharmaceutical Industry",
     date: "May 28, 2026",
     readTime: "5 min read",
@@ -88,8 +80,7 @@ const latestPosts = [
   {
     slug: "ai-regulatory-compliance",
     title: "Navigating AI Regulatory Compliance in Pharma",
-    excerpt:
-      "Key considerations for ensuring AI systems meet FDA, EMA, and global regulatory standards.",
+    excerpt: "Key considerations for ensuring AI systems meet FDA, EMA, and global regulatory standards.",
     category: "Research",
     date: "May 25, 2026",
     readTime: "11 min read",
@@ -99,7 +90,7 @@ const latestPosts = [
 
 export default function BlogPage() {
   return (
-    <div className="pt-[72px]">
+    <div className="pt-[96px]">
       <section className="relative py-20 bg-white overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-20 right-10 w-[400px] h-[400px] bg-[#98D7C2]/10 rounded-full blur-[150px]" />
@@ -120,8 +111,7 @@ export default function BlogPage() {
               Blog
             </h1>
             <p className="text-lg text-[#5A6B82] max-w-2xl mx-auto">
-              Latest research, pharmaceutical innovation, AI breakthroughs, and
-              industry intelligence.
+              Latest research, pharmaceutical innovation, AI breakthroughs, and industry intelligence.
             </p>
           </motion.div>
 
@@ -147,44 +137,16 @@ export default function BlogPage() {
               >
                 <div className="grid lg:grid-cols-2">
                   <div className="h-64 lg:h-auto bg-gradient-to-br from-[#2C4D78]/10 via-[#A8DADC]/10 to-[#98D7C2]/10 flex items-center justify-center relative overflow-hidden">
-                    <div className="absolute inset-0 opacity-30">
+                    <div className="absolute inset-0 opacity-20">
                       <svg viewBox="0 0 400 300" className="w-full h-full">
                         {[...Array(6)].map((_, i) => (
                           <g key={i}>
-                            <circle
-                              cx={80 + i * 60}
-                              cy={150 + Math.sin(i) * 40}
-                              r="8"
-                              fill="#2C4D78"
-                              opacity="0.3"
-                            >
-                              <animate
-                                attributeName="cy"
-                                values={`${150 + Math.sin(i) * 40};${150 + Math.sin(i + 1) * 40};${150 + Math.sin(i) * 40}`}
-                                dur="4s"
-                                repeatCount="indefinite"
-                              />
+                            <circle cx={80 + i * 60} cy={150 + Math.sin(i) * 40} r="8" fill="#2C4D78" opacity="0.3">
+                              <animate attributeName="cy" values={`${150 + Math.sin(i) * 40};${150 + Math.sin(i + 1) * 40};${150 + Math.sin(i) * 40}`} dur="4s" repeatCount="indefinite" />
                             </circle>
-                            <line
-                              x1={80 + i * 60}
-                              y1={150 + Math.sin(i) * 40}
-                              x2={i < 5 ? 80 + (i + 1) * 60 : 80 + i * 60}
-                              y2={150 + Math.sin(i + 1) * 40}
-                              stroke="#D0E0E8"
-                              strokeWidth="2"
-                            >
-                              <animate
-                                attributeName="y1"
-                                values={`${150 + Math.sin(i) * 40};${150 + Math.sin(i + 1) * 40};${150 + Math.sin(i) * 40}`}
-                                dur="4s"
-                                repeatCount="indefinite"
-                              />
-                              <animate
-                                attributeName="y2"
-                                values={`${150 + Math.sin(i + 1) * 40};${150 + Math.sin(i + 2) * 40};${150 + Math.sin(i + 1) * 40}`}
-                                dur="4s"
-                                repeatCount="indefinite"
-                              />
+                            <line x1={80 + i * 60} y1={150 + Math.sin(i) * 40} x2={i < 5 ? 80 + (i + 1) * 60 : 80 + i * 60} y2={150 + Math.sin(i + 1) * 40} stroke="#D0E0E8" strokeWidth="2">
+                              <animate attributeName="y1" values={`${150 + Math.sin(i) * 40};${150 + Math.sin(i + 1) * 40};${150 + Math.sin(i) * 40}`} dur="4s" repeatCount="indefinite" />
+                              <animate attributeName="y2" values={`${150 + Math.sin(i + 1) * 40};${150 + Math.sin(i + 2) * 40};${150 + Math.sin(i + 1) * 40}`} dur="4s" repeatCount="indefinite" />
                             </line>
                           </g>
                         ))}
@@ -194,9 +156,7 @@ export default function BlogPage() {
                       <div className="w-16 h-16 rounded-2xl bg-white/80 backdrop-blur border border-[#D0E0E8] flex items-center justify-center mx-auto mb-4">
                         <span className="text-3xl">🧬</span>
                       </div>
-                      <p className="text-sm font-medium text-[#2C4D78]">
-                        Featured Article
-                      </p>
+                      <p className="text-sm font-medium text-[#2C4D78]">Featured Article</p>
                     </div>
                   </div>
 
@@ -231,9 +191,7 @@ export default function BlogPage() {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-xl font-semibold text-[#33415C] mb-6">
-              Latest Articles
-            </h3>
+            <h3 className="text-xl font-semibold text-[#33415C] mb-6">Latest Articles</h3>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -297,8 +255,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <NewsletterSection />
-      <CommunitySection />
+      <WaitlistCommunitySection />
     </div>
   );
 }

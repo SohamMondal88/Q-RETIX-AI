@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import {
   ArrowLeft,
   Clock,
@@ -13,8 +12,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import Link from "next/link";
-import NewsletterSection from "./NewsletterSection";
-import CommunitySection from "./CommunitySection";
+import WaitlistCommunitySection from "./WaitlistCommunitySection";
 
 const post = {
   title: "The Future of AI in Pharmaceutical Research",
@@ -60,7 +58,7 @@ const relatedPosts = [
 
 export default function BlogPost() {
   return (
-    <div className="pt-[72px]">
+    <div className="pt-[96px]">
       <section className="relative py-16 bg-white">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
@@ -153,93 +151,55 @@ export default function BlogPost() {
                   Introduction
                 </h2>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  The pharmaceutical industry stands at the precipice of a
-                  transformation. Artificial intelligence — particularly large
-                  language models and multimodal systems — is reshaping how we
-                  discover, develop, and deliver medicines. At Q-RETIX AI, we are
-                  building the infrastructure that will power this next era of
-                  pharmaceutical innovation.
+                  The pharmaceutical industry stands at the precipice of a transformation. Artificial intelligence — particularly large language models and multimodal systems — is reshaping how we discover, develop, and deliver medicines. At Q-RETIX AI, we are building the infrastructure that will power this next era of pharmaceutical innovation.
                 </p>
 
                 <h2 id="the-ai-revolution" className="text-2xl font-bold text-[#33415C] mt-12 mb-4">
                   The AI Revolution in Drug Discovery
                 </h2>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  Traditional drug discovery is a lengthy and expensive process,
-                  often taking over a decade and billions of dollars to bring a
-                  single drug to market. AI is changing this paradigm by
-                  accelerating target identification, optimizing compound
-                  design, and predicting clinical outcomes with unprecedented
-                  accuracy.
+                  Traditional drug discovery is a lengthy and expensive process, often taking over a decade and billions of dollars to bring a single drug to market. AI is changing this paradigm by accelerating target identification, optimizing compound design, and predicting clinical outcomes with unprecedented accuracy.
                 </p>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  Machine learning models trained on vast molecular datasets can
-                  now predict binding affinities, toxicity profiles, and
-                  pharmacokinetic properties in silico — dramatically reducing
-                  the need for early-stage wet lab experiments.
+                  Machine learning models trained on vast molecular datasets can now predict binding affinities, toxicity profiles, and pharmacokinetic properties in silico — dramatically reducing the need for early-stage wet lab experiments.
                 </p>
 
                 <h2 id="multimodal-models" className="text-2xl font-bold text-[#33415C] mt-12 mb-4">
                   Multimodal Models for Molecule Design
                 </h2>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  The latest generation of AI models can simultaneously process
-                  chemical structures, genomic sequences, clinical text, and
-                  imaging data. This multimodal capability enables a holistic
-                  understanding of drug behavior across biological contexts.
+                  The latest generation of AI models can simultaneously process chemical structures, genomic sequences, clinical text, and imaging data. This multimodal capability enables a holistic understanding of drug behavior across biological contexts.
                 </p>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  Diffusion models and transformers trained on molecular graphs
-                  are generating novel chemical scaffolds that human chemists
-                  might never conceive — opening new avenues for treating
-                  previously undruggable targets.
+                  Diffusion models and transformers trained on molecular graphs are generating novel chemical scaffolds that human chemists might never conceive — opening new avenues for treating previously undruggable targets.
                 </p>
 
                 <h2 id="real-world-evidence" className="text-2xl font-bold text-[#33415C] mt-12 mb-4">
                   Real-World Evidence Integration
                 </h2>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  Beyond the lab, AI is unlocking value from real-world data —
-                  electronic health records, insurance claims, wearable device
-                  outputs, and patient registries. NLP pipelines extract
-                  structured insights from unstructured clinical narratives,
-                  enabling post-market surveillance and indication expansion.
+                  Beyond the lab, AI is unlocking value from real-world data — electronic health records, insurance claims, wearable device outputs, and patient registries. NLP pipelines extract structured insights from unstructured clinical narratives, enabling post-market surveillance and indication expansion.
                 </p>
 
                 <h2 id="regulatory" className="text-2xl font-bold text-[#33415C] mt-12 mb-4">
                   Regulatory and Ethical Considerations
                 </h2>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  As AI becomes more deeply embedded in pharmaceutical decision
-                  making, regulators worldwide are developing frameworks for
-                  algorithmic accountability. The FDA's AI/ML-based Software as
-                  a Medical Device action plan, and the EMA's draft guidance on
-                  AI in drug development, signal a maturing approach to
-                  oversight.
+                  As AI becomes more deeply embedded in pharmaceutical decision making, regulators worldwide are developing frameworks for algorithmic accountability. The FDA's AI/ML-based Software as a Medical Device action plan, and the EMA's draft guidance on AI in drug development, signal a maturing approach to oversight.
                 </p>
 
                 <h2 id="looking-ahead" className="text-2xl font-bold text-[#33415C] mt-12 mb-4">
                   Looking Ahead: 2026 and Beyond
                 </h2>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  We envision a future where AI agents autonomously design
-                  clinical trials, monitor patient safety in real time, and
-                  personalize dosing regimens based on individual genomic and
-                  proteomic profiles. The convergence of AI, robotics, and
-                  synthetic biology will compress the drug development timeline
-                  from years to months.
+                  We envision a future where AI agents autonomously design clinical trials, monitor patient safety in real time, and personalize dosing regimens based on individual genomic and proteomic profiles. The convergence of AI, robotics, and synthetic biology will compress the drug development timeline from years to months.
                 </p>
 
                 <h2 id="conclusion" className="text-2xl font-bold text-[#33415C] mt-12 mb-4">
                   Conclusion
                 </h2>
                 <p className="text-[#5A6B82] leading-relaxed mb-6">
-                  The future of pharmaceutical research is inextricably linked
-                  to the future of AI. Organizations that invest in robust AI
-                  infrastructure, high-quality data pipelines, and
-                  interdisciplinary talent today will be the leaders of tomorrow.
-                  Q-RETIX AI is committed to accelerating this transition for
-                  researchers and clinicians worldwide.
+                  The future of pharmaceutical research is inextricably linked to the future of AI. Organizations that invest in robust AI infrastructure, high-quality data pipelines, and interdisciplinary talent today will be the leaders of tomorrow. Q-RETIX AI is committed to accelerating this transition for researchers and clinicians worldwide.
                 </p>
               </motion.article>
 
@@ -269,9 +229,7 @@ export default function BlogPost() {
             <div className="hidden lg:block">
               <div className="sticky top-24 space-y-6">
                 <div className="bg-white rounded-2xl border border-[#D0E0E8] p-6">
-                  <h4 className="text-sm font-semibold text-[#33415C] mb-4">
-                    Table of Contents
-                  </h4>
+                  <h4 className="text-sm font-semibold text-[#33415C] mb-4">Table of Contents</h4>
                   <nav className="space-y-2">
                     {tableOfContents.map((item) => (
                       <a
@@ -286,9 +244,7 @@ export default function BlogPost() {
                 </div>
 
                 <div className="bg-white rounded-2xl border border-[#D0E0E8] p-6">
-                  <h4 className="text-sm font-semibold text-[#33415C] mb-4">
-                    Related Posts
-                  </h4>
+                  <h4 className="text-sm font-semibold text-[#33415C] mb-4">Related Posts</h4>
                   <div className="space-y-4">
                     {relatedPosts.map((rp) => (
                       <Link
@@ -309,15 +265,13 @@ export default function BlogPost() {
                 </div>
 
                 <div className="bg-gradient-to-br from-[#2C4D78] to-[#3D5F8A] rounded-2xl p-6 text-white">
-                  <h4 className="text-sm font-semibold mb-2">
-                    Stay Updated
-                  </h4>
-                  <p className="text-sm text-white/80 mb-4">
+                  <h4 className="text-sm font-semibold mb-2">Stay Updated</h4>
+                  <p className="text-sm text-white/70 mb-4">
                     Get the latest research insights delivered to your inbox.
                   </p>
                   <Link
                     href="/blog"
-                    className="w-full bg-white text-[#2C4D78] hover:bg-white/90 font-semibold inline-flex items-center justify-center gap-2 h-8 rounded-md text-sm px-3 py-2"
+                    className="w-full bg-white text-[#2C4D78] hover:bg-white/90 font-semibold inline-flex items-center justify-center gap-2 h-10 rounded-lg text-sm px-4 py-2"
                   >
                     Subscribe
                     <ChevronRight className="w-4 h-4" />
@@ -329,8 +283,7 @@ export default function BlogPost() {
         </div>
       </section>
 
-      <NewsletterSection />
-      <CommunitySection />
+      <WaitlistCommunitySection />
     </div>
   );
 }

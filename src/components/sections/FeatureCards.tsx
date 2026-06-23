@@ -20,7 +20,6 @@ const cards = [
     color: "#2C4D78",
     bgColor: "bg-[#2C4D78]/5",
     borderColor: "border-[#2C4D78]/20",
-    hoverBorder: "hover:border-[#2C4D78]/40",
   },
   {
     icon: Network,
@@ -30,7 +29,6 @@ const cards = [
     color: "#98D7C2",
     bgColor: "bg-[#98D7C2]/10",
     borderColor: "border-[#98D7C2]/30",
-    hoverBorder: "hover:border-[#98D7C2]/50",
   },
   {
     icon: FlaskConical,
@@ -40,7 +38,6 @@ const cards = [
     color: "#A8DADC",
     bgColor: "bg-[#A8DADC]/10",
     borderColor: "border-[#A8DADC]/30",
-    hoverBorder: "hover:border-[#A8DADC]/50",
   },
   {
     icon: Microscope,
@@ -50,7 +47,6 @@ const cards = [
     color: "#5A6B82",
     bgColor: "bg-[#5A6B82]/5",
     borderColor: "border-[#5A6B82]/20",
-    hoverBorder: "hover:border-[#5A6B82]/40",
   },
   {
     icon: TrendingUp,
@@ -60,7 +56,6 @@ const cards = [
     color: "#2C4D78",
     bgColor: "bg-[#2C4D78]/5",
     borderColor: "border-[#2C4D78]/20",
-    hoverBorder: "hover:border-[#2C4D78]/40",
   },
   {
     icon: BarChart3,
@@ -70,13 +65,12 @@ const cards = [
     color: "#98D7C2",
     bgColor: "bg-[#98D7C2]/10",
     borderColor: "border-[#98D7C2]/30",
-    hoverBorder: "hover:border-[#98D7C2]/50",
   },
 ];
 
 export default function FeatureCards() {
   return (
-    <section id="solutions" className="relative py-24 bg-[#E6EEF2]/30">
+    <section id="solutions" className="relative py-28 bg-[#F5F9FB]">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -88,13 +82,12 @@ export default function FeatureCards() {
           <h2 className="text-4xl sm:text-5xl font-bold text-[#2C4D78] mb-4 tracking-tight">
             Platform Solutions
           </h2>
-          <p className="text-lg text-[#5A6B82] max-w-2xl mx-auto">
-            Comprehensive AI tools designed for every stage of pharmaceutical
-            research and development.
+          <p className="text-base text-[#5A6B82] max-w-xl mx-auto">
+            Comprehensive AI tools designed for every stage of pharmaceutical research and development.
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {cards.map((card, i) => (
             <motion.div
               key={card.title}
@@ -102,37 +95,30 @@ export default function FeatureCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className={`group relative bg-white rounded-2xl border ${card.borderColor} ${card.hoverBorder} p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-[#2C4D78]/5 cursor-pointer`}
+              whileHover={{ y: -6, scale: 1.01 }}
+              className="group relative bg-white rounded-2xl border border-[#D0E0E8]/60 p-7 transition-all duration-300 hover:shadow-2xl hover:shadow-[#2C4D78]/5 hover:border-[#2C4D78]/20 cursor-pointer"
             >
-              <div
-                className={`w-14 h-14 rounded-xl ${card.bgColor} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-              >
-                <card.icon
-                  className="w-7 h-7"
-                  style={{ color: card.color }}
-                />
+              <div className="flex items-center gap-4 mb-5">
+                <div
+                  className={`w-11 h-11 rounded-xl ${card.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <card.icon className="w-5.5 h-5.5" style={{ color: card.color } as React.CSSProperties} />
+                </div>
+                <h3 className="text-lg font-semibold text-[#33415C] group-hover:text-[#2C4D78] transition-colors">
+                  {card.title}
+                </h3>
               </div>
 
-              <h3 className="text-xl font-semibold text-[#33415C] mb-3 group-hover:text-[#2C4D78] transition-colors">
-                {card.title}
-              </h3>
-              <p className="text-[#5A6B82] leading-relaxed">{card.description}</p>
+              <p className="text-sm text-[#5A6B82] leading-relaxed">
+                {card.description}
+              </p>
 
-              <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#E6EEF2] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <svg
-                  className="w-4 h-4 text-[#2C4D78]"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
+              <div className="absolute top-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="w-7 h-7 rounded-full bg-[#E6EEF2] flex items-center justify-center">
+                  <svg className="w-3.5 h-3.5 text-[#2C4D78]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </div>
               </div>
             </motion.div>
           ))}
