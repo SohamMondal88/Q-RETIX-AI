@@ -71,31 +71,38 @@ function BlogCard({
   const isFirst = index === 0;
 
   const entryStart = index * step;
-  const entryEnd = entryStart + step * 0.40;
-  const shrinkStart = entryStart + step * 0.55;
-  const shrinkEnd = entryStart + step * 0.85;
+  const entryEnd = entryStart + step * 0.30;
+  const shrinkStart = entryStart + step * 0.45;
+  const shrinkEnd = entryStart + step * 0.95;
 
   const cardY = useTransform(
     progress,
     [entryStart, entryEnd, shrinkStart, shrinkEnd],
-    isFirst ? [0, 0, 0, -30] : [80, 0, 0, -30]
+    isFirst ? [0, 0, 0, -55] : [55, 0, 0, -55]
   );
 
   const cardScale = useTransform(
     progress,
     [entryStart, entryEnd, shrinkStart, shrinkEnd],
-    isFirst ? [1, 1, 1, 0.94] : [0.92, 1, 1, 0.94]
+    isFirst ? [1, 1, 1, 0.86] : [0.90, 1, 1, 0.86]
   );
 
   const cardOpacity = useTransform(
     progress,
-    [entryStart, entryStart + step * 0.10, shrinkStart, shrinkEnd],
-    isFirst ? [1, 1, 1, 0.6] : [0, 1, 1, 0.6]
+    [entryStart, entryStart + step * 0.06, shrinkStart, shrinkEnd],
+    isFirst ? [1, 1, 1, 0.15] : [0, 1, 1, 0.15]
   );
 
-  const springY = useSpring(cardY, { stiffness: 75, damping: 20, restDelta: 0.001 });
-  const springScale = useSpring(cardScale, { stiffness: 80, damping: 22, restDelta: 0.001 });
-  const springOpacity = useSpring(cardOpacity, { stiffness: 80, damping: 22, restDelta: 0.001 });
+  const overlayOpacity = useTransform(
+    progress,
+    [shrinkStart, shrinkEnd],
+    [0, 0.75]
+  );
+
+  const springY = useSpring(cardY, { stiffness: 55, damping: 16, restDelta: 0.001 });
+  const springScale = useSpring(cardScale, { stiffness: 65, damping: 18, restDelta: 0.001 });
+  const springOpacity = useSpring(cardOpacity, { stiffness: 55, damping: 16, restDelta: 0.001 });
+  const springOverlay = useSpring(overlayOpacity, { stiffness: 55, damping: 16, restDelta: 0.001 });
 
   return (
     <motion.div
@@ -107,9 +114,15 @@ function BlogCard({
         zIndex: index + 1,
       }}
     >
-      <div className="w-full max-w-[1080px] mx-auto">
+      <div className="w-full max-w-[1080px] mx-auto relative">
         <div className="bg-white rounded-[28px] border border-[#E6EEF2]/60 shadow-[0_8px_40px_-12px_rgba(44,77,120,0.12)] overflow-hidden relative group hover:shadow-[0_12px_48px_-8px_rgba(44,77,120,0.16)] transition-shadow duration-500">
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#98D7C2]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+          {/* Fog overlay for recessed cards */}
+          <motion.div
+            className="absolute inset-0 z-10 rounded-[28px] bg-gradient-to-b from-[#F8FAFB]/80 via-[#F8FAFB]/40 to-[#F8FAFB]/90 pointer-events-none"
+            style={{ opacity: springOverlay }}
+          />
 
           <div className="grid lg:grid-cols-5 gap-0">
             <div
