@@ -227,7 +227,7 @@ export default function TeamShowcase() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-                className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+                className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch"
               >
                 {currentTeam.map((member, index) => (
                   <TeamCard key={`${activeTeam}-${member.name}`} member={member} index={index} />

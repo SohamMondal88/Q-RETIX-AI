@@ -8,8 +8,8 @@ import {
   ArrowUpRight,
   Mail,
   MapPin,
-  ExternalLink,
 } from "lucide-react";
+import SocialIcon from "./SocialIcon";
 
 const footerLinks = [
   {
@@ -51,13 +51,13 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/pharmaa-ai/", initial: "in" },
-  { label: "Instagram", href: "https://www.instagram.com/qretix_ai_official/", initial: "Ig" },
-  { label: "X", href: "https://x.com/QRETIXAIorg", initial: "X" },
-  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61590886726981", initial: "f" },
-  { label: "Substack", href: "https://substack.com/@qretixai", initial: "Ss" },
-  { label: "Medium", href: "https://medium.com/@qretix.ai2405", initial: "M" },
-  { label: "Reddit", href: "https://www.reddit.com/user/Q-RETIX_AI_official/", initial: "R" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/pharmaa-ai/", icon: "linkedin" as const },
+  { label: "Instagram", href: "https://www.instagram.com/qretix_ai_official/", icon: "instagram" as const },
+  { label: "X", href: "https://x.com/QRETIXAIorg", icon: "x" as const },
+  { label: "Facebook", href: "https://www.facebook.com/profile.php?id=61590886726981", icon: "facebook" as const },
+  { label: "Substack", href: "https://substack.com/@qretixai", icon: "substack" as const },
+  { label: "Medium", href: "https://medium.com/@qretix.ai2405", icon: "medium" as const },
+  { label: "Reddit", href: "https://www.reddit.com/user/Q-RETIX_AI_official/", icon: "reddit" as const },
 ];
 
 export default function Footer() {
@@ -103,7 +103,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Social links */}
+            {/* Social links with real icons */}
             <div className="flex flex-wrap items-center gap-2">
               {socialLinks.map((social) => (
                 <a
@@ -112,10 +112,10 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#98D7C2]/50 hover:bg-[#98D7C2]/10 transition-all text-[10px] font-bold"
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-[#98D7C2]/50 hover:bg-[#98D7C2]/10 transition-all"
                   title={social.label}
                 >
-                  {social.initial}
+                  <SocialIcon platform={social.icon} size={16} />
                 </a>
               ))}
             </div>

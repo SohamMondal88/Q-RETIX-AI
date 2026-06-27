@@ -4,8 +4,8 @@ import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
 import type { TeamMember } from "@/lib/teamData";
+import SocialIcon from "./SocialIcon";
 
 function GradientAvatar({ name, className = "" }: { name: string; className?: string }) {
   const initials = name
@@ -91,8 +91,7 @@ export default function TeamCard({ member, index }: { member: TeamMember; index:
         }}
       />
 
-      <div className="relative bg-white/90 backdrop-blur-xl rounded-[28px] border border-[#E6EEF2]/70 shadow-[0_8px_32px_-12px_rgba(44,77,120,0.1)] overflow-hidden"
-      >
+      <div className="relative bg-white/90 backdrop-blur-xl rounded-[28px] border border-[#E6EEF2]/70 shadow-[0_8px_32px_-12px_rgba(44,77,120,0.1)] overflow-hidden h-full flex flex-col">
         {/* Floating blobs */}
         <motion.div
           animate={{ y: [0, -6, 0], x: [0, 3, 0], rotate: [0, 3, 0] }}
@@ -156,7 +155,7 @@ export default function TeamCard({ member, index }: { member: TeamMember; index:
             </p>
 
             {/* Social links */}
-            <div className="flex items-center gap-2"
+            <div className="flex items-center gap-2 mt-auto"
             >
               {member.linkedin && (
                 <Link
@@ -165,7 +164,7 @@ export default function TeamCard({ member, index }: { member: TeamMember; index:
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-[#E6EEF2]/80 hover:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group/icon"
                 >
-                  <ExternalLink className="w-4 h-4 text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
+                  <SocialIcon platform="linkedin" size={16} className="text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
                 </Link>
               )}
               {member.instagram && (
@@ -175,7 +174,7 @@ export default function TeamCard({ member, index }: { member: TeamMember; index:
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-[#E6EEF2]/80 hover:bg-gradient-to-br hover:from-[#833AB4] hover:via-[#E1306C] hover:to-[#FCAF45] flex items-center justify-center transition-all duration-300 group/icon"
                 >
-                  <ExternalLink className="w-4 h-4 text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
+                  <SocialIcon platform="instagram" size={16} className="text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
                 </Link>
               )}
               {member.portfolio && (
@@ -185,7 +184,15 @@ export default function TeamCard({ member, index }: { member: TeamMember; index:
                   rel="noopener noreferrer"
                   className="w-9 h-9 rounded-full bg-[#E6EEF2]/80 hover:bg-[#1A6B5B] flex items-center justify-center transition-all duration-300 group/icon"
                 >
-                  <ExternalLink className="w-4 h-4 text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
+                  <SocialIcon platform="portfolio" size={16} className="text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
+                </Link>
+              )}
+              {member.email && (
+                <Link
+                  href={`mailto:${member.email}`}
+                  className="w-9 h-9 rounded-full bg-[#E6EEF2]/80 hover:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group/icon"
+                >
+                  <SocialIcon platform="email" size={16} className="text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
                 </Link>
               )}
             </div>

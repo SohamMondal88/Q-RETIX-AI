@@ -4,8 +4,8 @@ import React, { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
 import type { Leader } from "@/lib/teamData";
+import SocialIcon from "./SocialIcon";
 
 export default function LeadershipCard({ leader, index }: { leader: Leader; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -155,7 +155,7 @@ export default function LeadershipCard({ leader, index }: { leader: Leader; inde
               rel="noopener noreferrer"
               className="w-11 h-11 rounded-full bg-[#E6EEF2]/80 hover:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group/icon"
             >
-              <ExternalLink className="w-5 h-5 text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
+              <SocialIcon platform="linkedin" size={18} className="text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
             </Link>
             <Link
               href={leader.instagram}
@@ -163,7 +163,7 @@ export default function LeadershipCard({ leader, index }: { leader: Leader; inde
               rel="noopener noreferrer"
               className="w-11 h-11 rounded-full bg-[#E6EEF2]/80 hover:bg-gradient-to-br hover:from-[#833AB4] hover:via-[#E1306C] hover:to-[#FCAF45] flex items-center justify-center transition-all duration-300 group/icon"
             >
-              <ExternalLink className="w-5 h-5 text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
+              <SocialIcon platform="instagram" size={18} className="text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
             </Link>
           </div>
         </div>
