@@ -148,3 +148,15 @@
     background-clip: text;
   }
 }
+
+/* Animated gradient ring for leadership cards */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Instagram hover gradient utility */
+.instagram-hover:hover {
+  background: linear-gradient(135deg, #833AB4, #E1306C, #FCAF45) !important;
+}

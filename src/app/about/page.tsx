@@ -1,7 +1,8 @@
 import React from "react";
 import { Metadata } from "next";
-import { FlaskConical, ArrowRight, MapPin, Mail, Phone } from "lucide-react";
+import { ArrowRight, MapPin, Mail, Phone } from "lucide-react";
 import Link from "next/link";
+import TeamShowcase from "@/components/sections/TeamShowcase";
 
 export const metadata: Metadata = {
   title: "About Us | Q-RETIX AI",
@@ -117,6 +118,9 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* Leadership & Team Showcase (Client Component) */}
+      <TeamShowcase />
     </div>
   );
 }

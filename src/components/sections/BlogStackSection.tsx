@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useMemo } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight, Clock, User, Calendar } from "lucide-react";
 import Link from "next/link";
@@ -67,36 +67,67 @@ function BlogCard({
   totalCards: number;
   progress: ReturnType<typeof useSpring>;
 }) {
-  const step = 1 / totalCards;
+  const step = 1 / (2 * totalCards); // 0.125 for 4 cards
   const isFirst = index === 0;
+  const isLast = index === totalCards - 1;
 
-  const entryStart = index * step;
-  const entryEnd = entryStart + step * 0.30;
-  const shrinkStart = entryStart + step * 0.45;
-  const shrinkEnd = entryStart + step * 0.95;
+  // Lifecycle phases for each card
+  const entryStart = isFirst ? 0 : (2 * index - 1) * step;
+  const entryEnd = isFirst ? step : 2 * index * step;
+  const shrinkStart = isLast ? 1 : (2 * index + 1) * step;
+  const shrinkEnd = isLast ? 1 : (2 * index + 2) * step;
 
+  // Card Y position
   const cardY = useTransform(
     progress,
-    [entryStart, entryEnd, shrinkStart, shrinkEnd],
-    isFirst ? [0, 0, 0, -55] : [55, 0, 0, -55]
+    isFirst
+      ? [0, shrinkStart, shrinkEnd]
+      : isLast
+      ? [entryStart, entryEnd, shrinkStart]
+      : [entryStart, entryEnd, shrinkStart, shrinkEnd],
+    isFirst
+      ? [0, 0, -40]
+      : isLast
+      ? [50, 0, 0]
+      : [50, 0, 0, -40]
   );
 
+  // Card scale
   const cardScale = useTransform(
     progress,
-    [entryStart, entryEnd, shrinkStart, shrinkEnd],
-    isFirst ? [1, 1, 1, 0.86] : [0.90, 1, 1, 0.86]
+    isFirst
+      ? [0, shrinkStart, shrinkEnd]
+      : isLast
+      ? [entryStart, entryEnd, shrinkStart]
+      : [entryStart, entryEnd, shrinkStart, shrinkEnd],
+    isFirst
+      ? [1, 1, 0.88]
+      : isLast
+      ? [0.92, 1, 1]
+      : [0.92, 1, 1, 0.88]
   );
 
+  // Card opacity
+  const opacityEntryEnd = entryStart + (entryEnd - entryStart) * 0.5;
   const cardOpacity = useTransform(
     progress,
-    [entryStart, entryStart + step * 0.06, shrinkStart, shrinkEnd],
-    isFirst ? [1, 1, 1, 0.15] : [0, 1, 1, 0.15]
+    isFirst
+      ? [0, shrinkStart, shrinkEnd]
+      : isLast
+      ? [entryStart, opacityEntryEnd, entryEnd, shrinkStart]
+      : [entryStart, opacityEntryEnd, entryEnd, shrinkStart, shrinkEnd],
+    isFirst
+      ? [1, 1, 0.15]
+      : isLast
+      ? [0, 1, 1, 1]
+      : [0, 1, 1, 1, 0.15]
   );
 
+  // Fog overlay opacity (only during shrink phase)
   const overlayOpacity = useTransform(
     progress,
-    [shrinkStart, shrinkEnd],
-    [0, 0.75]
+    isLast ? [0, 1] : [shrinkStart, shrinkEnd],
+    isLast ? [0, 0] : [0, 0.72]
   );
 
   const springY = useSpring(cardY, { stiffness: 55, damping: 16, restDelta: 0.001 });
@@ -223,8 +254,8 @@ export default function BlogStackSection() {
   });
 
   const progress = useSpring(scrollYProgress, {
-    stiffness: 50,
-    damping: 18,
+    stiffness: 45,
+    damping: 16,
     restDelta: 0.001,
   });
 
@@ -292,7 +323,7 @@ export default function BlogStackSection() {
 
         {/* Scroll spacer */}
         <div
-          style={{ height: "180vh" }}
+          style={{ height: "200vh" }}
           className="relative z-0"
         />
       </div>
