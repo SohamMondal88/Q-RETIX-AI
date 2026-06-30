@@ -126,16 +126,16 @@ function BlogCard({
       }}
     >
       <div className="w-full max-w-[800px] mx-auto relative">
-        <div className="bg-white rounded-[28px] border border-[#E6EEF2]/60 shadow-[0_8px_40px_-12px_rgba(44,77,120,0.12)] overflow-hidden relative group hover:shadow-[0_12px_48px_-8px_rgba(44,77,120,0.16)] transition-shadow duration-500">
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#98D7C2]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="bg-white rounded-[24px] sm:rounded-[28px] border border-[#E6EEF2]/60 shadow-[0_8px_40px_-12px_rgba(44,77,120,0.12)] overflow-hidden relative group hover:shadow-[0_12px_48px_-8px_rgba(44,77,120,0.16)] transition-shadow duration-500 flex flex-col max-h-[90dvh]">
+          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#98D7C2]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
 
           <motion.div
-            className="absolute inset-0 z-10 rounded-[28px] bg-gradient-to-b from-[#F8FAFB]/80 via-[#F8FAFB]/40 to-[#F8FAFB]/90 pointer-events-none"
+            className="absolute inset-0 z-10 rounded-[24px] sm:rounded-[28px] bg-gradient-to-b from-[#F8FAFB]/80 via-[#F8FAFB]/40 to-[#F8FAFB]/90 pointer-events-none"
             style={{ opacity: springOverlay }}
           />
 
-          {/* Cover image — exact 800 x 643 aspect, rounded top corners */}
-          <div className="relative w-full aspect-[800/643] overflow-hidden rounded-t-[28px] bg-[#F8FAFB]">
+          {/* Cover image — squarish 4:3 aspect, viewport-capped, rounded top corners */}
+          <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] md:aspect-[4/3] max-h-[48vh] sm:max-h-[52vh] md:max-h-[56vh] overflow-hidden rounded-t-[24px] sm:rounded-t-[28px] bg-[#F8FAFB] shrink-0">
             <Image
               src={blog.image}
               alt={blog.title}
@@ -145,51 +145,51 @@ function BlogCard({
               priority={index === 0}
             />
             {/* Subtle bottom gradient for smooth transition into content */}
-            <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white/40 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 right-0 h-12 sm:h-16 bg-gradient-to-t from-white/40 to-transparent pointer-events-none" />
           </div>
 
-          {/* Content */}
-          <div className="p-5 sm:p-6 lg:p-7">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="px-2.5 py-1 rounded-full bg-[#2C4D78]/8 text-[11px] sm:text-[12px] font-bold text-[#2C4D78] tracking-wide">
+          {/* Content — compact and responsive */}
+          <div className="p-4 sm:p-5 md:p-6 lg:p-7 shrink-0">
+            <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#2C4D78]/8 text-[10px] sm:text-[11px] md:text-[12px] font-bold text-[#2C4D78] tracking-wide">
                 {blog.category}
               </span>
               <span className="w-1 h-1 rounded-full bg-[#D0E0E8]" />
-              <span className="text-[11px] sm:text-[12px] text-[#8A9BB0] font-medium">
+              <span className="text-[10px] sm:text-[11px] md:text-[12px] text-[#8A9BB0] font-medium">
                 {blog.readTime}
               </span>
             </div>
 
-            <h3 className="text-lg sm:text-xl lg:text-[22px] font-bold text-[#1a2942] leading-[1.3] mb-2 group-hover:text-[#2C4D78] transition-colors duration-300">
+            <h3 className="text-base sm:text-lg md:text-xl lg:text-[22px] font-bold text-[#1a2942] leading-[1.3] mb-1.5 sm:mb-2 group-hover:text-[#2C4D78] transition-colors duration-300">
               {blog.title}
             </h3>
 
-            <p className="text-[13px] sm:text-[14px] text-[#5A6B82] leading-[1.65] mb-5 line-clamp-2">
+            <p className="text-xs sm:text-[13px] md:text-[14px] text-[#5A6B82] leading-[1.6] sm:leading-[1.65] mb-3 sm:mb-4 md:mb-5 line-clamp-2">
               {blog.description}
             </p>
 
-            <div className="flex items-center justify-between pt-4 border-t border-[#E6EEF2]/40">
-              <div className="flex items-center gap-2.5 text-[11px] sm:text-[12px] text-[#8A9BB0]">
+            <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-[#E6EEF2]/40">
+              <div className="flex items-center gap-2 sm:gap-2.5 text-[10px] sm:text-[11px] md:text-[12px] text-[#8A9BB0]">
                 <div className="flex items-center gap-1">
-                  <User className="w-3 h-3" strokeWidth={2} />
+                  <User className="w-2.5 h-2.5 sm:w-3 sm:h-3" strokeWidth={2} />
                   <span className="font-medium">{blog.author}</span>
                 </div>
                 <span className="w-1 h-1 rounded-full bg-[#D0E0E8]" />
                 <div className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3" strokeWidth={2} />
+                  <Calendar className="w-2.5 h-2.5 sm:w-3 sm:h-3" strokeWidth={2} />
                   <span>{blog.date}</span>
                 </div>
               </div>
 
               <Link
                 href="/blog"
-                className="inline-flex items-center gap-2 text-[13px] font-semibold group/link"
+                className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[13px] font-semibold group/link"
               >
                 <span className="text-[#2C4D78] group-hover/link:text-[#1a2942] transition-colors">
                   Read Article
                 </span>
-                <div className="w-7 h-7 rounded-full bg-[#E6EEF2] group-hover/link:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group-hover/link:translate-x-0.5">
-                  <ArrowRight className="w-3.5 h-3.5 text-[#2C4D78] group-hover/link:text-white transition-colors" />
+                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#E6EEF2] group-hover/link:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group-hover/link:translate-x-0.5">
+                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#2C4D78] group-hover/link:text-white transition-colors" />
                 </div>
               </Link>
             </div>
@@ -252,7 +252,7 @@ export default function BlogStackSection() {
       </div>
 
       <div ref={spacerRef} className="relative">
-        <div className="sticky top-0 h-[100dvh] flex items-center justify-center z-10 overflow-hidden">
+        <div className="sticky top-0 h-[100dvh] flex items-center justify-center z-10 overflow-hidden p-4 sm:p-6 lg:p-8">
           {blogs.map((blog, index) => (
             <BlogCard
               key={blog.id}
