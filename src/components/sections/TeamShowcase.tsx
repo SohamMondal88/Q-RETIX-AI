@@ -71,7 +71,7 @@ export default function TeamShowcase() {
             </motion.p>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-8 lg:gap-12 max-w-[960px] mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10 max-w-[1200px] mx-auto">
             {leaders.map((leader, index) => (
               <LeadershipCard key={leader.name} leader={leader} index={index} />
             ))}

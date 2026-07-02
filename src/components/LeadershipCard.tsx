@@ -149,6 +149,14 @@ export default function LeadershipCard({ leader, index }: { leader: Leader; inde
           {/* Social Icons */}
           <div className="flex items-center gap-4"
           >
+            {leader.email && (
+              <Link
+                href={`mailto:${leader.email}`}
+                className="w-11 h-11 rounded-full bg-[#E6EEF2]/80 hover:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group/icon"
+              >
+                <SocialIcon platform="email" size={18} className="text-[#2C4D78] group-hover/icon:text-white transition-colors duration-300" />
+              </Link>
+            )}
             <Link
               href={leader.linkedin}
               target="_blank"
