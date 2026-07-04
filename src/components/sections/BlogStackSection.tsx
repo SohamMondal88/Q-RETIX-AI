@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
+import React from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import { ArrowRight, Clock, User, Calendar } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight, Clock, User, Calendar, BookOpen } from "lucide-react";
 import Link from "next/link";
 
 const blogs = [
@@ -11,132 +11,143 @@ const blogs = [
     id: 1,
     title: "Q-RETIX.AI: Unlocking the \"Undruggable\" AIM2 Inflammasome",
     description:
-      "How Structural AI Bypassed the Electrostatic Charge Trap to Reignite a Dormant Therapeutic Target. A deep dive into the AI-driven discovery of a first-in-class allosteric molecular wedge.",
+      "How Structural AI Bypassed the Electrostatic Charge Trap to Reignite a Dormant Therapeutic Target.",
     category: "Research",
     readTime: "15 min read",
     date: "July 4, 2026",
     author: "Q-RETIX Research Team",
-    image: "/images/blog/cover1.jpg",
+    image: "/images/blog/blog-1.jpg",
+    slug: "unlocking-undruggable-aim2-inflammasome",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Structural AI Discovery Matrix: Beyond Static Crystallography",
+    description:
+      "Why dynamic thermodynamic ensembles are the future of target identification and cryptic pocket discovery.",
+    category: "AI Research",
+    readTime: "12 min read",
+    date: "June 28, 2026",
+    author: "Q-RETIX Research Team",
+    image: "/images/blog/blog-2.jpg",
+    slug: null,
+    featured: false,
+  },
+  {
+    id: 3,
+    title: "Allosteric Modulation: The Next Frontier in Immunology",
+    description:
+      "Exploring how allosteric molecular wedges are reshaping autoimmune drug design and inflammasome inhibition.",
+    category: "Drug Discovery",
+    readTime: "10 min read",
+    date: "June 20, 2026",
+    author: "Q-RETIX Research Team",
+    image: "/images/blog/blog-3.jpg",
+    slug: null,
+    featured: false,
+  },
+  {
+    id: 4,
+    title: "From Charge Trap to Cure: The AIM2 Therapeutic Pipeline",
+    description:
+      "Mapping the multi-billion dollar market opportunity in SLE, psoriasis, and neurodegenerative disease.",
+    category: "Market Analysis",
+    readTime: "8 min read",
+    date: "June 15, 2026",
+    author: "Q-RETIX Research Team",
+    image: "/images/blog/blog-4.jpg",
+    slug: null,
+    featured: false,
   },
 ];
 
-function BlogCard({
-  blog,
-  index,
-  totalCards,
-  progress,
-}: {
-  blog: (typeof blogs)[0];
-  index: number;
-  totalCards: number;
-  progress: ReturnType<typeof useSpring>;
-}) {
-  const step = 1 / (2 * totalCards);
-  const isFirst = index === 0;
-  const isLast = index === totalCards - 1;
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.15,
+    },
+  },
+};
 
-  const entryStart = isFirst ? 0 : (2 * index - 1) * step;
-  const entryEnd = isFirst ? step : 2 * index * step;
-  const shrinkStart = isLast ? 1 : (2 * index + 1) * step;
-  const shrinkEnd = isLast ? 1 : (2 * index + 2) * step;
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.1, 0.25, 1] as const,
+    },
+  },
+};
 
-  const cardY = useTransform(
-    progress,
-    isFirst
-      ? [0, shrinkStart, shrinkEnd]
-      : isLast
-      ? [entryStart, entryEnd, shrinkStart]
-      : [entryStart, entryEnd, shrinkStart, shrinkEnd],
-    isFirst ? [0, 0, -40] : isLast ? [50, 0, 0] : [50, 0, 0, -40]
-  );
-
-  const cardScale = useTransform(
-    progress,
-    isFirst
-      ? [0, shrinkStart, shrinkEnd]
-      : isLast
-      ? [entryStart, entryEnd, shrinkStart]
-      : [entryStart, entryEnd, shrinkStart, shrinkEnd],
-    isFirst ? [1, 1, 0.88] : isLast ? [0.92, 1, 1] : [0.92, 1, 1, 0.88]
-  );
-
-  const opacityEntryEnd = entryStart + (entryEnd - entryStart) * 0.5;
-  const cardOpacity = useTransform(
-    progress,
-    isFirst
-      ? [0, shrinkStart, shrinkEnd]
-      : isLast
-      ? [entryStart, opacityEntryEnd, entryEnd, shrinkStart]
-      : [entryStart, opacityEntryEnd, entryEnd, shrinkStart, shrinkEnd],
-    isFirst ? [1, 1, 0.15] : isLast ? [0, 1, 1, 1] : [0, 1, 1, 1, 0.15]
-  );
-
-  const overlayOpacity = useTransform(
-    progress,
-    isLast ? [0, 1] : [shrinkStart, shrinkEnd],
-    isLast ? [0, 0] : [0, 0.72]
-  );
-
-  const springY = useSpring(cardY, { stiffness: 55, damping: 16, restDelta: 0.001 });
-  const springScale = useSpring(cardScale, { stiffness: 65, damping: 18, restDelta: 0.001 });
-  const springOpacity = useSpring(cardOpacity, { stiffness: 55, damping: 16, restDelta: 0.001 });
-  const springOverlay = useSpring(overlayOpacity, { stiffness: 55, damping: 16, restDelta: 0.001 });
+function BlogCard({ blog, index }: { blog: (typeof blogs)[0]; index: number }) {
+  const href = blog.slug ? `/blog/${blog.slug}` : "/blog";
 
   return (
-    <motion.div
-      className="absolute inset-0 flex items-center justify-center px-4 sm:px-6 lg:px-8"
-      style={{
-        y: springY,
-        scale: springScale,
-        opacity: springOpacity,
-        zIndex: index + 1,
-      }}
-    >
-      <div className="w-full max-w-[800px] mx-auto relative">
-        <div className="bg-white rounded-[24px] sm:rounded-[28px] border border-[#E6EEF2]/60 shadow-[0_8px_40px_-12px_rgba(44,77,120,0.12)] overflow-hidden relative group hover:shadow-[0_12px_48px_-8px_rgba(44,77,120,0.16)] transition-shadow duration-500 flex flex-col max-h-[90dvh]">
+    <motion.div variants={cardVariants}>
+      <Link href={href}>
+        <div
+          className="group relative bg-white rounded-[20px] sm:rounded-[24px] border border-[#E6EEF2]/80 overflow-hidden 
+          hover:shadow-[0_20px_60px_-12px_rgba(44,77,120,0.14)] hover:border-[#A8DADC]/50 
+          transition-all duration-500 cursor-pointer h-full flex flex-col"
+        >
+          {/* Top gradient accent line */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#98D7C2]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
 
-          <motion.div
-            className="absolute inset-0 z-10 rounded-[24px] sm:rounded-[28px] bg-gradient-to-b from-[#F8FAFB]/80 via-[#F8FAFB]/40 to-[#F8FAFB]/90 pointer-events-none"
-            style={{ opacity: springOverlay }}
-          />
-
-          {/* Cover image — squarish 4:3 aspect, viewport-capped, rounded top corners */}
-          <div className="relative w-full aspect-[4/3] sm:aspect-[3/2] md:aspect-[4/3] max-h-[48vh] sm:max-h-[52vh] md:max-h-[56vh] overflow-hidden rounded-t-[24px] sm:rounded-t-[28px] bg-[#F8FAFB] shrink-0">
+          {/* Image Container — perfectly responsive */}
+          <div className="relative w-full aspect-[16/10] overflow-hidden bg-[#F8FAFB] shrink-0">
             <Image
               src={blog.image}
               alt={blog.title}
               fill
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-              sizes="(max-width: 768px) 100vw, 800px"
-              priority={index === 0}
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              priority={index < 2}
             />
-            {/* Subtle bottom gradient for smooth transition into content */}
-            <div className="absolute bottom-0 left-0 right-0 h-12 sm:h-16 bg-gradient-to-t from-white/40 to-transparent pointer-events-none" />
-          </div>
+            {/* Subtle overlay on hover */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A2942]/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-          {/* Content — compact and responsive */}
-          <div className="p-4 sm:p-5 md:p-6 lg:p-7 shrink-0">
-            <div className="flex items-center gap-2 mb-2 sm:mb-3">
-              <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-[#2C4D78]/8 text-[10px] sm:text-[11px] md:text-[12px] font-bold text-[#2C4D78] tracking-wide">
+            {/* Category badge */}
+            <div className="absolute top-3 left-3 sm:top-4 sm:left-4">
+              <div className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-white/90 backdrop-blur-md border border-white/30 text-[10px] sm:text-[11px] font-bold text-[#2C4D78] tracking-wide shadow-sm">
                 {blog.category}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-[#D0E0E8]" />
-              <span className="text-[10px] sm:text-[11px] md:text-[12px] text-[#8A9BB0] font-medium">
-                {blog.readTime}
-              </span>
+              </div>
             </div>
 
-            <h3 className="text-base sm:text-lg md:text-xl lg:text-[22px] font-bold text-[#1a2942] leading-[1.3] mb-1.5 sm:mb-2 group-hover:text-[#2C4D78] transition-colors duration-300">
+            {/* Read time badge */}
+            <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
+              <div className="flex items-center gap-1 px-2 py-1 sm:px-2.5 rounded-full bg-white/90 backdrop-blur-md border border-white/30 text-[10px] sm:text-[11px] font-medium text-[#5A6B82] shadow-sm">
+                <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                {blog.readTime}
+              </div>
+            </div>
+
+            {/* Featured indicator */}
+            {blog.featured && (
+              <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+                <div className="px-2.5 py-1 rounded-full bg-[#2C4D78] text-[10px] sm:text-[11px] font-bold text-white tracking-wide shadow-md">
+                  Featured
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Content */}
+          <div className="p-4 sm:p-5 flex flex-col flex-1">
+            <h3 className="text-sm sm:text-base lg:text-[17px] font-bold text-[#1a2942] leading-[1.35] mb-1.5 sm:mb-2 group-hover:text-[#2C4D78] transition-colors duration-300 line-clamp-2">
               {blog.title}
             </h3>
 
-            <p className="text-xs sm:text-[13px] md:text-[14px] text-[#5A6B82] leading-[1.6] sm:leading-[1.65] mb-3 sm:mb-4 md:mb-5 line-clamp-2">
+            <p className="text-xs sm:text-[13px] text-[#5A6B82] leading-[1.65] mb-3 sm:mb-4 line-clamp-2 flex-1">
               {blog.description}
             </p>
 
-            <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-[#E6EEF2]/40">
-              <div className="flex items-center gap-2 sm:gap-2.5 text-[10px] sm:text-[11px] md:text-[12px] text-[#8A9BB0]">
+            <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-[#E6EEF2]/60">
+              <div className="flex items-center gap-2 text-[10px] sm:text-[11px] text-[#8A9BB0]">
                 <div className="flex items-center gap-1">
                   <User className="w-2.5 h-2.5 sm:w-3 sm:h-3" strokeWidth={2} />
                   <span className="font-medium">{blog.author}</span>
@@ -148,41 +159,21 @@ function BlogCard({
                 </div>
               </div>
 
-              <Link
-                href={`/blog/unlocking-undruggable-aim2-inflammasome`}
-                className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[13px] font-semibold group/link"
-              >
-                <span className="text-[#2C4D78] group-hover/link:text-[#1a2942] transition-colors">
-                  Read Article
-                </span>
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#E6EEF2] group-hover/link:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group-hover/link:translate-x-0.5">
-                  <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#2C4D78] group-hover/link:text-white transition-colors" />
-                </div>
-              </Link>
+              <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#E6EEF2] flex items-center justify-center group-hover:bg-[#2C4D78] transition-all duration-300 group-hover:translate-x-0.5">
+                <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#2C4D78] group-hover:text-white transition-colors" />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 }
 
 export default function BlogStackSection() {
-  const spacerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: spacerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const progress = useSpring(scrollYProgress, {
-    stiffness: 45,
-    damping: 16,
-    restDelta: 0.001,
-  });
-
   return (
     <section id="blog" className="relative bg-[#F8FAFB]">
+      {/* Background pattern */}
       <div className="absolute inset-0 opacity-[0.025] pointer-events-none">
         <div
           className="absolute inset-0"
@@ -209,32 +200,32 @@ export default function BlogStackSection() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1a2942] tracking-tight leading-[1.15] mb-4">
-            Latest Insights & Research
+            Latest Insights &amp; Research
           </h2>
 
           <p className="text-[15px] sm:text-base lg:text-[17px] text-[#5A6B82] leading-[1.7]">
-            Stay updated with breakthroughs in AI-powered healthcare, research, product updates, and medical innovation.
+            Stay updated with breakthroughs in AI-powered healthcare, structural drug discovery, and immunology research.
           </p>
         </motion.div>
       </div>
 
-      <div ref={spacerRef} className="relative">
-        <div className="sticky top-0 h-[100dvh] flex items-center justify-center z-10 overflow-hidden p-4 sm:p-6 lg:p-8">
+      {/* Blog Grid */}
+      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 pb-20 sm:pb-24 lg:pb-28">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6"
+        >
           {blogs.map((blog, index) => (
-            <BlogCard
-              key={blog.id}
-              blog={blog}
-              index={index}
-              totalCards={blogs.length}
-              progress={progress}
-            />
+            <BlogCard key={blog.id} blog={blog} index={index} />
           ))}
-        </div>
-
-        <div style={{ height: "200vh" }} className="relative z-0" />
+        </motion.div>
       </div>
 
-      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-28">
+      {/* CTA */}
+      <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 pb-20 sm:pb-24 lg:pb-28">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -251,7 +242,7 @@ export default function BlogStackSection() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/8 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
 
-              <span className="relative">Read More Articles</span>
+              <span className="relative">Read All Articles</span>
               <motion.div
                 className="relative w-5 h-5 rounded-full bg-white/10 flex items-center justify-center"
                 animate={{ x: [0, 3, 0] }}
