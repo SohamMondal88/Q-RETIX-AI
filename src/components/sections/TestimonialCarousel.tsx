@@ -19,90 +19,90 @@ type TestimonialItem = {
 const testimonials: TestimonialItem[] = [
   {
     id: 1,
-    name: "Dr. Sarah Chen",
-    role: "Chief Medical Officer",
-    org: "St. Jude Medical Center",
-    quote: "Q-RETIX AI has transformed our diagnostic pipeline. We've seen a 40% reduction in false negatives and our radiologists now trust AI-assisted screening as a first-line tool.",
+    name: "Structural Biology Team Lead",
+    role: "Computational Chemistry Director",
+    org: "European Pharma Consortium",
+    quote: "Q-RETIX's structural AI identified a cryptic pocket our crystallography team missed for two years. The allosteric hinge approach changed how we think about 'undruggable' inflammasomes entirely.",
     rating: 5,
     verified: true,
-    initials: "SC",
+    initials: "SB",
     color: "#2C4D78",
   },
   {
     id: 2,
-    name: "Dr. James Wilson",
-    role: "Head of Research",
-    org: "Novartis Institute",
-    quote: "The drug discovery acceleration is remarkable. What used to take our team 18 months for lead compound identification now happens in under 8 weeks with Q-RETIX's molecular analysis.",
+    name: "Immunology Research Head",
+    role: "Principal Investigator",
+    org: "Autoimmune Research Institute",
+    quote: "The electrostatic charge trap stalled our AIM2 program for 18 months. Q-RETIX bypassed it completely by mapping dynamic conformations—something traditional docking could never achieve.",
     rating: 5,
     verified: true,
-    initials: "JW",
+    initials: "IR",
     color: "#1A6B5B",
   },
   {
     id: 3,
-    name: "Dr. Maria Rodriguez",
-    role: "Clinical Trial Director",
-    org: "Johns Hopkins Medicine",
-    quote: "Patient stratification used to be our biggest bottleneck. Q-RETIX's AI models now identify optimal cohorts with 94% accuracy, saving us millions in trial costs.",
+    name: "Drug Discovery VP",
+    role: "VP of Discovery Biology",
+    org: "Clinical-stage Biotech",
+    quote: "We went from target validation to a first-in-class allosteric molecular wedge in 14 weeks. Q-RETIX's AI matrix doesn't just screen compounds—it engineers mechanisms.",
     rating: 5,
     verified: true,
-    initials: "MR",
+    initials: "DD",
     color: "#5A4D8A",
   },
   {
     id: 4,
-    name: "Prof. Alan Park",
-    role: "Director of AI Research",
-    org: "Stanford Medicine",
-    quote: "As an academic researcher, I need tools that are transparent and reproducible. Q-RETIX delivers explainable AI with full audit trails — essential for regulatory submissions.",
+    name: "CRO Partnership Director",
+    role: "Strategic Alliance Lead",
+    org: "Global CRO Network",
+    quote: "Our clients demand specificity. Q-RETIX delivered an AIM2 inhibitor with zero cGAS cross-reactivity—a level of selectivity we have never seen from an AI platform.",
     rating: 5,
     verified: true,
-    initials: "AP",
+    initials: "CP",
     color: "#2C4D78",
   },
   {
     id: 5,
-    name: "Dr. Emily Foster",
-    role: "Medical AI Specialist",
-    org: "Mayo Clinic",
-    quote: "The integration with our existing PACS system was seamless. Within 2 weeks, our pathologists were using Q-RETIX for automated tissue analysis daily.",
+    name: "Translational Medicine Lead",
+    role: "Head of Translational Science",
+    org: "University Medical Center",
+    quote: "The membrane permeability profile was validated in our cellular assays within days. An uncharged, lipophilic AIM2 modulator is exactly what the autoimmune field has been waiting for.",
     rating: 5,
     verified: true,
-    initials: "EF",
+    initials: "TM",
     color: "#1A6B5B",
   },
   {
     id: 6,
-    name: "Dr. Robert Kim",
-    role: "Pharmaceutical Consultant",
-    org: "McKinsey Health",
-    quote: "I've recommended Q-RETIX to three Fortune 500 pharma clients. The regulatory document generation alone saves their compliance teams 200+ hours per submission.",
+    name: "Biotech Founder",
+    role: "CEO & Co-Founder",
+    org: "Inflammasome Therapeutics",
+    quote: "We evaluated every AI drug discovery platform on the market. Q-RETIX is the only one that found a druggable site on AIM2. That first-mover advantage is now our entire Series A thesis.",
     rating: 5,
     verified: true,
-    initials: "RK",
+    initials: "BF",
     color: "#5A4D8A",
   },
   {
     id: 7,
-    name: "Dr. Lisa Thompson",
-    role: "Precision Medicine Lead",
-    org: "Memorial Sloan Kettering",
-    quote: "Personalized oncology is data-intensive. Q-RETIX's multi-omics integration lets us build comprehensive patient profiles that guide targeted therapy selection.",
+    name: "Regulatory Strategy Officer",
+    role: "Chief Regulatory Officer",
+    org: "Mid-size Pharma",
+    quote: "The mechanistic clarity of an allosteric hinge stabilizer makes regulatory conversations straightforward. We have a clear target engagement biomarker and a clean toxicity profile.",
     rating: 5,
     verified: true,
-    initials: "LT",
+    initials: "RS",
     color: "#2C4D78",
   },
   {
     id: 8,
-    name: "Dr. Michael Chang",
-    role: "Healthcare Startup Founder",
-    org: "MedVision AI",
-    quote: "Building our own AI models would have taken 2 years and $5M. Q-RETIX gave us production-ready medical vision APIs in 6 weeks. Game changer for our startup.",
+    name: "AI Research Scientist",
+    role: "Senior ML Engineer",
+    org: "Structural Genomics Consortium",
+    quote: "As someone who builds protein models, I was skeptical. But Q-RETIX's dynamic ensemble approach finds transient pockets that static AlphaFold structures completely miss.",
     rating: 5,
     verified: true,
-    initials: "MC",
+    initials: "AI",
     color: "#1A6B5B",
   },
 ];
@@ -162,14 +162,14 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
 
           {/* Quote */}
           <blockquote className="text-[15px] text-[#5A6B82] leading-relaxed mb-5">
-            "{testimonial.quote}"
+            &ldquo;{testimonial.quote}&rdquo;
           </blockquote>
 
           {/* Footer */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 text-[11px] text-[#8A9BB0]">
               <div className="w-1.5 h-1.5 rounded-full bg-[#98D7C2] animate-pulse" />
-              Verified Healthcare Professional
+              Verified Partner
             </div>
             <button className="w-8 h-8 rounded-lg bg-[#E6EEF2] flex items-center justify-center hover:bg-[#2C4D78] transition-colors group/icon">
               <ExternalLink className="w-3.5 h-3.5 text-[#5A6B82] group-hover/icon:text-white transition-colors" />
@@ -260,11 +260,11 @@ export default function TestimonialCarousel() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2C4D78] tracking-tight mb-5 leading-tight">
-            Trusted by Researchers, Doctors &amp; Healthcare Innovators
+            Trusted by Researchers &amp; Drug Discovery Teams
           </h2>
 
           <p className="text-base lg:text-lg text-[#5A6B82] leading-relaxed">
-            Discover why healthcare professionals choose Q-RETIX AI.
+            Hear from pharmaceutical scientists and biotech leaders using Q-RETIX structural AI.
           </p>
         </motion.div>
       </div>

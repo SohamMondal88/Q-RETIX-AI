@@ -10,19 +10,9 @@ export const metadata: Metadata = {
 
 const pressReleases = [
   {
-    date: "January 15, 2026",
-    title: "Q-RETIX AI Announces Series A Funding Round",
-    excerpt: "Company secures significant investment to expand AI-powered pharmaceutical research platform.",
-  },
-  {
-    date: "December 3, 2025",
-    title: "New AI Model Achieves Breakthrough in Drug Discovery",
-    excerpt: "Q-RETIX AI's latest model demonstrates 40% improvement in compound screening accuracy.",
-  },
-  {
-    date: "October 22, 2025",
-    title: "Partnership Announced with Leading Research Institution",
-    excerpt: "Strategic collaboration to accelerate clinical trial analysis and regulatory compliance.",
+    date: "July 4, 2026",
+    title: "Q-RETIX.AI Publishes Breakthrough Research on AIM2 Inflammasome Inhibition",
+    excerpt: "Structural AI bypasses the Electrostatic Charge Trap to computationally design a first-in-class allosteric molecular wedge for the previously 'undruggable' AIM2 target.",
   },
 ];
 

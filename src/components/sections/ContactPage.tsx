@@ -161,7 +161,7 @@ export default function ContactPage() {
                         type="text"
                         required
                         className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
-                        placeholder="Jane"
+                        placeholder="First name"
                       />
                     </div>
                     <div>
@@ -172,7 +172,7 @@ export default function ContactPage() {
                         type="text"
                         required
                         className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
-                        placeholder="Smith"
+                        placeholder="Last name"
                       />
                     </div>
                   </div>
@@ -185,7 +185,7 @@ export default function ContactPage() {
                       type="email"
                       required
                       className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
-                      placeholder="jane@institution.com"
+                      placeholder="name@organization.com"
                     />
                   </div>
 
@@ -196,7 +196,7 @@ export default function ContactPage() {
                     <input
                       type="text"
                       className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
-                      placeholder="Pharma Corp"
+                      placeholder="Organization name"
                     />
                   </div>
 
@@ -208,7 +208,7 @@ export default function ContactPage() {
                       rows={4}
                       required
                       className="w-full rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all resize-none"
-                      placeholder="How can we help you?"
+                      placeholder="How can we help you? (e.g., collaboration, platform inquiry, media)"
                     />
                   </div>
 

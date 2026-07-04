@@ -184,7 +184,7 @@ export default function BlogPost() {
                   </li>
                 </ol>
 
-                {/* Blog Image 1 placeholder */}
+                {/* Blog Image 1 */}
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
                   <Image
                     src="/images/blog/1blog1.jpg"
@@ -248,7 +248,7 @@ export default function BlogPost() {
                   Figure 2: The Electrostatic Charge Trap vs. The Q-RETIX.AI Approach. By abandoning the highly charged DNA binding site in favor of an AI-identified neutral pocket, Q-RETIX enables high-specificity, high-permeability therapeutics.
                 </p>
 
-                {/* Blog Image 2 placeholder */}
+                {/* Blog Image 2 */}
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
                   <Image
                     src="/images/blog/1blog2.jpg"
@@ -367,7 +367,7 @@ export default function BlogPost() {
                   (Note: While AIM2 acts as a tumor suppressor in certain cancers—giving rise to its namesake &quot;Absent in Melanoma 2&quot;—Q-RETIX&apos;s precise, titratable allosteric inhibition allows for the careful management of the immune response, focusing exclusively on autoimmune overactivity without permanently ablating baseline function.)
                 </p>
 
-                {/* Blog Image 3 placeholder */}
+                {/* Blog Image 3 */}
                 <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
                   <Image
                     src="/images/blog/1blog3.jpg"

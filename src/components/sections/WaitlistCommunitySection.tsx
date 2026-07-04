@@ -84,7 +84,7 @@ export default function WaitlistCommunitySection() {
                     <Input
                       type="email"
                       required
-                      placeholder="you@institution.com"
+                      placeholder="you@organization.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="h-10 sm:h-12 border-[#D0E0E8] focus:border-[#2C4D78] focus:ring-[#2C4D78]/20 bg-[#F8FAFB] text-sm"
@@ -96,7 +96,7 @@ export default function WaitlistCommunitySection() {
                     </label>
                     <Input
                       type="text"
-                      placeholder="Dr. Jane Smith"
+                      placeholder="Your full name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="h-10 sm:h-12 border-[#D0E0E8] focus:border-[#2C4D78] focus:ring-[#2C4D78]/20 bg-[#F8FAFB] text-sm"
