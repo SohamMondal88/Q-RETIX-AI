@@ -149,7 +149,7 @@ function BlogCard({
               </div>
 
               <Link
-                href="/blog"
+                href={`/blog/unlocking-undruggable-aim2-inflammasome`}
                 className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-[13px] font-semibold group/link"
               >
                 <span className="text-[#2C4D78] group-hover/link:text-[#1a2942] transition-colors">

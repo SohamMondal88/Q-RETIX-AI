@@ -204,6 +204,7 @@
 /* Smooth scroll for the whole page */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 120px;
 }
 
 /* Reduced motion preference */
