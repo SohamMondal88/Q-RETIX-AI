@@ -8,42 +8,42 @@ const faqs = [
   {
     question: "What if drug discovery could run itself?",
     answer:
-      "Q-RETIX.AI deploys autonomous structural AI agents that screen targets, identify cryptic pockets, and optimize lead compounds without human intervention at every step — dramatically compressing discovery timelines from years to weeks.",
-  },
-  {
-    question: "Is this just another large language model?",
-    answer:
-      "No. Q-RETIX is a specialized Structural AI Discovery Matrix built on protein thermodynamics, molecular dynamics ensembles, and geometric deep learning — not text prediction. It understands 3D protein conformational space, not language patterns.",
+      "Our vision is an autonomous drug discovery engine where AI continuously learns, designs, evaluates, optimizes, and improves therapeutic candidates with minimal human intervention, dramatically accelerating innovation.",
   },
   {
     question: "Why is your platform revolutionary?",
     answer:
-      "Traditional drug discovery relies on static crystal structures and high-throughput brute force. Q-RETIX maps dynamic, moving protein landscapes to find hidden druggable sites that crystallography and docking completely miss — like the AIM2 interdomain hinge.",
-  },
-  {
-    question: "Could reduce the cost and time of bringing medicines to market?",
-    answer:
-      "Absolutely. By identifying first-in-class mechanisms computationally before wet-lab validation, we eliminate costly late-stage failures. Our allosteric approach bypasses the need for toxic, charged compounds — reducing synthesis and safety screening costs by orders of magnitude.",
+      "Instead of connecting isolated AI tools, we've built an AI scientist that orchestrates every stage of pharmaceutical R&D, creating a seamless closed-loop system from biological target discovery to delivery optimization.",
   },
   {
     question: "Can your AI invent drugs that have never existed before?",
     answer:
-      "Yes. The Q-RETIX generative engine designs novel molecular scaffolds de novo, optimized for a specific cryptic pocket's geometry. These are not derivatives of known drugs — they are entirely new chemical entities with bespoke mechanisms of action.",
-  },
-  {
-    question: "What is the long term vision?",
-    answer:
-      "A fully autonomous pharmaceutical discovery engine where AI identifies targets, designs molecules, predicts clinical outcomes, and optimizes manufacturing — all within a single, integrated platform. We are building the infrastructure for medicine at the speed of software.",
+      "Yes. Using generative chemistry, our platform explores vast regions of chemical space beyond existing databases, proposing novel molecular structures optimized for therapeutic potential.",
   },
   {
     question: "How does the platform become smarter over time?",
     answer:
-      "Every simulation, every binding prediction, and every experimental validation feeds back into our graph neural network. The platform continuously learns protein folding patterns, pocket dynamics, and ligand behavior — improving accuracy with each deployment.",
+      "Every simulation, prediction, and experimental outcome feeds back into the system, allowing the AI to continuously refine its scientific understanding and improve future drug designs.",
+  },
+  {
+    question: "Is this just another large language model?",
+    answer:
+      "No. Large language models are only one component. Our platform combines multimodal AI, generative chemistry, molecular simulations, predictive biology, and optimization engines into a unified pharmaceutical intelligence system.",
+  },
+  {
+    question: "Could this reduce the cost and time of bringing medicines to market?",
+    answer:
+      "That's our mission. By automating repetitive scientific workflows, prioritizing the highest-potential candidates, and reducing unnecessary experiments, we aim to help researchers develop better medicines faster. Laboratory testing, regulatory review, and clinical trials remain essential before any treatment reaches patients.",
+  },
+  {
+    question: "What is the long-term vision?",
+    answer:
+      "To build the world's first autonomous pharmaceutical R&D operating system, where AI acts as a collaborative scientist capable of generating, validating, and optimizing therapeutic innovations at unprecedented speed and scale.",
   },
   {
     question: "What makes your technology difficult to replicate?",
     answer:
-      "Three moats: (1) Proprietary thermodynamic ensemble data that is expensive to generate, (2) A geometric deep learning architecture trained on proprietary structural datasets, and (3) Our allosteric discovery methodology that requires years of biological and computational expertise to implement correctly.",
+      "Our advantage comes from integrating generative AI, generative chemistry, predictive biology, formulation optimization, and autonomous decision-making into one continuously learning platform, rather than relying on isolated models or point solutions.",
   },
 ];
 
