@@ -3,6 +3,7 @@ import FeatureCards from "@/components/sections/FeatureCards";
 import ResearchTimeline from "@/components/sections/ResearchTimeline";
 import BlogStackSection from "@/components/sections/BlogStackSection";
 import TestimonialCarousel from "@/components/sections/TestimonialCarousel";
+import FAQSection from "@/components/sections/FAQSection";
 import WaitlistCommunitySection from "@/components/sections/WaitlistCommunitySection";
 
 export default function HomePage() {
@@ -14,6 +15,7 @@ export default function HomePage() {
       <BlogStackSection />
       <TestimonialCarousel />
       <WaitlistCommunitySection />
+      <FAQSection />
     </>
   );
 }

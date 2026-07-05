@@ -5,58 +5,43 @@ import Link from "next/link";
 
 const footerLinks = [
   {
-    title: "Q-RETIX AI",
+    title: "Conn",
     isBrand: true,
     links: [
-      { label: "Home", href: "/" },
       { label: "About", href: "/about" },
-      { label: "Blog", href: "/blog" },
-      { label: "Careers", href: "/careers" },
+      { label: "Home", href: "/" },
+      { label: "Blogs", href: "/blog" },
+      { label: "Career", href: "/careers" },
     ],
   },
   {
-    title: "Platform",
+    title: "Help",
     links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "Delivery Details", href: "/delivery" },
-      { label: "Contact & Support", href: "/contact" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
+      { label: "Terms \u0026 Conditions", href: "/legal/terms" },
       { label: "Privacy Policy", href: "/legal/privacy" },
-      { label: "Terms & Conditions", href: "/legal/terms" },
-      { label: "Cookie Policy", href: "/legal/cookies" },
-      { label: "GDPR", href: "/legal/gdpr" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Blog", href: "/blog" },
+      { label: "Pipeline", href: "/#research" },
     ],
   },
 ];
 
+const bottomTextLinks = [
+  { label: "Privacy Policy", href: "/legal/privacy" },
+  { label: "Terms \u0026 Conditions", href: "/legal/terms" },
+  { label: "Support", href: "/contact" },
+];
+
 const socialIcons = [
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/company/qretix-ai/",
-    svg: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/qretix_ai_official/",
-    svg: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-      </svg>
-    ),
-  },
-  {
-    label: "X",
+    label: "Twitter",
     href: "https://x.com/QRETIXAIorg",
     svg: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
       </svg>
     ),
@@ -65,35 +50,26 @@ const socialIcons = [
     label: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61590886726981",
     svg: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
       </svg>
     ),
   },
   {
-    label: "Reddit",
-    href: "https://www.reddit.com/user/Q-RETIX_AI_official/",
+    label: "Instagram",
+    href: "https://www.instagram.com/qretix_ai_official/",
     svg: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 01-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 01.042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 014.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 00-.14-.02.352.352 0 00-.238.112L14.73 6.52a2.373 2.373 0 00-.592-.17 2.61 2.61 0 00-2.147.995l-.022.033c-.42.609-.68 1.367-.68 2.184 0 1.478.857 2.597 2.073 2.597.822 0 1.55-.52 1.78-1.265.106-.42.47-.753.913-.753a.96.96 0 01.96.96c0 .564-.49 1.032-1.08 1.032-.564 0-1.032-.49-1.032-1.08 0-.564.49-1.032 1.08-1.032.54 0 .988.404 1.032.93.035-.035.07-.07.105-.105a.96.96 0 00.228-.614c0-.53-.435-.96-.96-.96-.564 0-1.032.49-1.032 1.08 0 .564.49 1.032 1.08 1.032.54 0 .988-.404 1.032-.93z" />
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
       </svg>
     ),
   },
   {
-    label: "Medium",
-    href: "https://medium.com/@qretix.ai2405",
+    label: "GitHub",
+    href: "https://github.com/qretix",
     svg: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42zM24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z" />
-      </svg>
-    ),
-  },
-  {
-    label: "Substack",
-    href: "https://substack.com/@qretixai",
-    svg: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.929 7.14h-7.654v2.105h7.654V7.14zm-7.654 3.15h7.654v2.105h-7.654v-2.104zm-1.312 2.104H2.071V9.246h9.892V8.19H2.071V6.085h9.892V5.028H2.071v14.895L6.517 17l4.446 2.923V14.393h5.502v-2.104V9.246V8.19h-7.654v2.104z" />
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
       </svg>
     ),
   },
@@ -101,26 +77,27 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1a2942] text-white">
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-12 lg:px-20 pt-20 pb-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 lg:gap-16">
+    <footer className="bg-[#FFFBF5] text-[#1a1a1a]">
+      <div className="mx-auto max-w-[1200px] px-6 sm:px-12 lg:px-20 pt-20 pb-10">
+        {/* Main 4-column grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-16">
           {footerLinks.map((group) => (
             <div key={group.title}>
               <h4
-                className={`text-white mb-8 ${
+                className={`mb-8 ${
                   group.isBrand
-                    ? "text-[24px] sm:text-[28px] font-bold leading-tight"
-                    : "text-sm font-semibold uppercase tracking-wider text-[#8A9BB0]"
+                    ? "text-[32px] font-bold leading-tight text-[#1a1a1a]"
+                    : "text-[15px] font-medium text-[#1a1a1a]"
                 }`}
               >
                 {group.title}
               </h4>
-              <ul className="space-y-4">
+              <ul className="space-y-5">
                 {group.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-[14px] sm:text-[15px] text-[#A8B5C5] hover:text-white transition-colors"
+                      className="text-[15px] text-[#1a1a1a] hover:opacity-70 transition-opacity"
                     >
                       {link.label}
                     </Link>
@@ -129,11 +106,27 @@ export default function Footer() {
               </ul>
             </div>
           ))}
+
+          {/* Join us column */}
+          <div>
+            <h4 className="text-[15px] font-medium text-[#1a1a1a] mb-8">
+              Join us
+            </h4>
+            <div className="relative">
+              <input
+                type="email"
+                placeholder="Enter your email....."
+                className="w-full h-11 px-4 rounded-full bg-[#FFF8EB] border border-[#F0E6D3] text-[13px] text-[#1a1a1a] placeholder-[#9a8e7e] outline-none focus:border-[#d4c9b8] transition-colors"
+              />
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-16 pt-8 border-t border-white/10">
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-            <div className="flex items-center gap-4">
+        {/* Bottom bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-24 pt-8 border-t border-[#1a1a1a]/10">
+          <div className="flex items-center gap-8">
+            {/* Social icons */}
+            <div className="flex items-center gap-5">
               {socialIcons.map((social) => (
                 <a
                   key={social.label}
@@ -141,16 +134,29 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  className="text-[#1a1a1a] hover:opacity-70 transition-opacity"
                 >
                   {social.svg}
                 </a>
               ))}
             </div>
+
+            {/* Bottom text links */}
+            <div className="flex items-center gap-8">
+              {bottomTextLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-[15px] text-[#1a1a1a] hover:opacity-70 transition-opacity"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          <p className="text-[13px] sm:text-[14px] text-[#8A9BB0]">
-            © 2026 Q-RETIX AI. All rights reserved.
+          <p className="text-[15px] text-[#1a1a1a]">
+            © Copyright 2026, All Rights Reserved
           </p>
         </div>
       </div>

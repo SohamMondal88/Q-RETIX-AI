@@ -18,6 +18,7 @@ import {
   Filter,
 } from "lucide-react";
 import Link from "next/link";
+import { useBlogStats } from "@/hooks/useBlogStats";
 
 const categories = [
   "All",
@@ -41,20 +42,25 @@ const posts = [
     readTime: "15 min read",
     author: "Q-RETIX Research Team",
     featured: true,
+    tags: ["Research", "AI", "Drug Discovery"],
   },
 ];
 
-const stats = [
-  { label: "Articles", value: "50+", icon: BookOpen },
-  { label: "Research", value: "120+", icon: TrendingUp },
-  { label: "Readers", value: "10K+", icon: Sparkles },
-  { label: "Updates", value: "Weekly", icon: Calendar },
-];
+function useBlogPageStats() {
+  const { formattedStats } = useBlogStats(posts);
+  return [
+    { label: "Articles", value: formattedStats.articles, icon: BookOpen },
+    { label: "Research", value: formattedStats.research, icon: TrendingUp },
+    { label: "Readers", value: formattedStats.readers, icon: Sparkles },
+    { label: "Updates", value: formattedStats.updates, icon: Calendar },
+  ];
+}
 
 export default function BlogPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const stats = useBlogPageStats();
 
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
