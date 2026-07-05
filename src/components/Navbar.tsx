@@ -21,15 +21,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
-  const handleWaitlist = () => {
-    if (pathname === "/") {
-      const el = document.getElementById("waitlist");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      router.push("/#waitlist");
-    }
-    setMobileOpen(false);
-  };
+
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-7">
