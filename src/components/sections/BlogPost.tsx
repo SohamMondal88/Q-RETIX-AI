@@ -14,8 +14,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import WaitlistCommunitySection from "./WaitlistCommunitySection";
+import { useBlogStats } from "@/hooks/useBlogStats";
 
 const post = {
+  slug: "unlocking-undruggable-aim2-inflammasome",
   title: 'Q-RETIX.AI: Unlocking the "Undruggable" AIM2 Inflammasome',
   excerpt:
     "How Structural AI Bypassed the Electrostatic Charge Trap to Reignite a Dormant Therapeutic Target",
@@ -24,6 +26,8 @@ const post = {
   readTime: "15 min read",
   author: "Q-RETIX Research Team",
   authorRole: "Structural AI Drug Discovery, Q-RETIX.AI",
+  featured: true,
+  tags: ["Research", "AI", "Drug Discovery"],
 };
 
 const tocSections = [
@@ -61,6 +65,12 @@ const relatedPosts: { slug: string; title: string; category: string; readTime: s
 
 export default function BlogPost() {
   const [activeSection, setActiveSection] = useState<string>("");
+  const { recordView, viewCountFor } = useBlogStats([post]);
+
+  // Track blog view on mount (once per session per day)
+  useEffect(() => {
+    recordView(post.slug);
+  }, [recordView]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -138,6 +148,10 @@ export default function BlogPost() {
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
                   {post.readTime}
+                </div>
+                <div className="flex items-center gap-1 text-[#2C4D78] font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#98D7C2] animate-pulse" />
+                  {viewCountFor(post.slug)} views
                 </div>
               </div>
             </motion.div>
