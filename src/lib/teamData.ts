@@ -87,6 +87,14 @@ export const designTeam: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/ahsan-dogar?utm_source=share_via&utm_content=profile&utm_medium=member_android",
     portfolio: "https://github.com/Ahsan-Dogar",
   },
+  {
+    name: "Rakib Hasan",
+    role: "UI/UX Designer",
+    image: "/images/team/Rakib Hasan.jpg",
+    email: "rakib257265@gmail.com",
+    linkedin: "https://www.linkedin.com/in/rakib-hasan25",
+    instagram: "https://www.instagram.com/ashen_oath_",
+  },
 ];
 
 export const techTeam: TeamMember[] = [
