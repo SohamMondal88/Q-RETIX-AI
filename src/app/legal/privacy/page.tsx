@@ -37,7 +37,7 @@ export default function PrivacyPolicyPage() {
                   <div>
                     <h2 className="text-2xl font-bold text-[#2C4D78] mb-4">1. Introduction</h2>
                     <p className="text-[15px] text-[#5A6B82] leading-relaxed">
-                      Q-RETIX AI (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform and services.
+                      Q-RETIX AI ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform and services.
                     </p>
                   </div>
 

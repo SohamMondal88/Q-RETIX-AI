@@ -204,7 +204,7 @@ function MarqueeRow({
 
   useAnimationFrame((_, delta) => {
     if (width === 0) return;
-    const moveBy = baseVelocity * (delta / 1000);
+    let moveBy = baseVelocity * (delta / 1000);
     let newX = baseX.get() + moveBy;
 
     if (direction === "left" && newX <= -width) {
