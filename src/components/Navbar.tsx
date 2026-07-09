@@ -21,16 +21,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
-  const handleWaitlist = () => {
-    if (pathname === "/") {
-      const el = document.getElementById("waitlist");
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    } else {
-      router.push("/#waitlist");
-    }
-    setMobileOpen(false);
-  };
-
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-7">
       <div className={`mx-auto flex h-14 max-w-[1360px] items-center justify-between rounded-2xl border px-5 transition-all ${scrolled ? "border-white/80 bg-white/80 shadow-[0_8px_28px_rgba(40,93,145,.10)] backdrop-blur-xl" : "border-white/25 bg-white/10 backdrop-blur-sm"}`}>

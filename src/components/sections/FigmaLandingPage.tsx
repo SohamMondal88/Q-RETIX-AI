@@ -17,28 +17,63 @@ import styles from "./FigmaLandingPage.module.css";
 import FeaturedArticleStack from "./FeaturedArticleStack";
 
 const faqs = [
-  "What AI drug discovery model was built?",
-  "Is this just another large language model?",
-  "Why is your platform revolutionary?",
-  "Could reduce the cost and time of bringing medicines to market?",
-  "Can your AI invent drugs that have never existed before?",
-  "What is the long-term vision?",
-  "How does the platform become smarter over time?",
-  "What makes your technology difficult to replicate?",
+  {
+    q: "What if drug discovery could run itself?",
+    a: "Our vision is an autonomous drug discovery engine where AI continuously learns, designs, evaluates, optimizes, and improves therapeutic candidates with minimal human intervention, dramatically accelerating innovation.",
+  },
+  {
+    q: "Why is your platform revolutionary?",
+    a: "Instead of connecting isolated AI tools, we've built an AI scientist that orchestrates every stage of pharmaceutical R&D, creating a seamless closed-loop system from biological target discovery to delivery optimization.",
+  },
+  {
+    q: "Can your AI invent drugs that have never existed before?",
+    a: "Yes. Using generative chemistry, our platform explores vast regions of chemical space beyond existing databases, proposing novel molecular structures optimized for therapeutic potential.",
+  },
+  {
+    q: "How does the platform become smarter over time?",
+    a: "Every simulation, prediction, and experimental outcome feeds back into the system, allowing the AI to continuously refine its scientific understanding and improve future drug designs.",
+  },
+  {
+    q: "Is this just another large language model?",
+    a: "No. Large language models are only one component. Our platform combines multimodal AI, generative chemistry, molecular simulations, predictive biology, and optimization engines into a unified pharmaceutical intelligence system.",
+  },
+  {
+    q: "Could this reduce the cost and time of bringing medicines to market?",
+    a: "That's our mission. By automating repetitive scientific workflows, prioritizing the highest-potential candidates, and reducing unnecessary experiments, we aim to help researchers develop better medicines faster. Laboratory testing, regulatory review, and clinical trials remain essential before any treatment reaches patients.",
+  },
+  {
+    q: "What is the long-term vision?",
+    a: "To build the world's first autonomous pharmaceutical R&D operating system, where AI acts as a collaborative scientist capable of generating, validating, and optimizing therapeutic innovations at unprecedented speed and scale.",
+  },
+  {
+    q: "What makes your technology difficult to replicate?",
+    a: "Our advantage comes from integrating generative AI, generative chemistry, predictive biology, formulation optimization, and autonomous decision-making into one continuously learning platform, rather than relying on isolated models or point solutions.",
+  },
 ];
 
-function MoleculePanel({ side }: { side: "left" | "right" }) {
+function CubePanel({ side }: { side: "left" | "right" }) {
+  const src = side === "left" ? "/hero-cube-left.png" : "/hero-cube-right.png";
   return (
-    <div className={`${styles.moleculePanel} ${styles[side]}`} aria-hidden="true">
-      <div className={styles.panelTop} />
-      <div className={styles.energyCloud} />
-      <span className={styles.atomOne} />
-      <span className={styles.atomTwo} />
-      <span className={styles.atomThree} />
-      <span className={styles.atomFour} />
-      <i className={styles.bondOne} />
-      <i className={styles.bondTwo} />
-      <i className={styles.bondThree} />
+    <div
+      className={`${styles.moleculePanel} ${styles[side]}`}
+      aria-hidden="true"
+      style={{
+        background: "none",
+        border: "none",
+        boxShadow: "none",
+        overflow: "visible",
+      }}
+    >
+      <Image
+        src={src}
+        alt="3D Glass Cube"
+        fill
+        className="object-contain"
+        style={{
+          filter: "drop-shadow(0 28px 34px rgba(7,81,188,0.24))",
+        }}
+        priority
+      />
     </div>
   );
 }
@@ -147,8 +182,8 @@ export default function FigmaLandingPage() {
       <section className={styles.hero}>
         <div className={styles.pixelField} aria-hidden="true" />
         <p className={styles.announcement}>We are accepting early waitlist now, <a href="#waitlist">join Q-RETIX AI</a></p>
-        <MoleculePanel side="left" />
-        <MoleculePanel side="right" />
+        <CubePanel side="left" />
+        <CubePanel side="right" />
         <div className={styles.heroCopy}>
           <h1>Q-RETIX AI</h1>
           <p className={styles.heroLead}>from module to medicine in seconds</p>
@@ -213,7 +248,12 @@ export default function FigmaLandingPage() {
         <h2>Answers to Your Most<br /><em>Common</em> Questions</h2>
         <p>Everything you need to know about getting started, using the<br />platform, and unlocking its full potential.</p>
         <div className={styles.faqGrid}>
-          {faqs.map((faq) => <details key={faq}><summary>{faq}<ChevronDown size={15} /></summary><p>Q-RETIX AI combines research intelligence, workflow automation, and domain-focused models to help teams move from evidence to action faster.</p></details>)}
+          {faqs.map((faq) => (
+            <details key={faq.q}>
+              <summary>{faq.q}<ChevronDown size={15} /></summary>
+              <p>{faq.a}</p>
+            </details>
+          ))}
         </div>
       </section>
 
