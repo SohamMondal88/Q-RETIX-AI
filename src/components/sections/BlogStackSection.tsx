@@ -9,7 +9,7 @@ import Link from "next/link";
 const blogs = [
   {
     id: 1,
-    title: "Q-RETIX.AI: Unlocking the \"Undruggable\" AIM2 Inflammasome",
+    title: 'Q-RETIX.AI: Unlocking the "Undruggable" AIM2 Inflammasome',
     description:
       "How Structural AI Bypassed the Electrostatic Charge Trap to Reignite a Dormant Therapeutic Target.",
     category: "Research",
@@ -22,6 +22,19 @@ const blogs = [
   },
   {
     id: 2,
+    title: "Decoding Diabetes: AI's Breakthrough in Gene Discovery",
+    description:
+      "How Q-RETIX AI Identified SREBF1 as a Systems-Level Therapeutic Target for Type 2 Diabetes.",
+    category: "Research",
+    readTime: "12 min read",
+    date: "July 19, 2026",
+    author: "Q-RETIX Research Team",
+    image: "/images/blog/blog-2.jpg",
+    slug: "decoding-diabetes-srebf1-gene-discovery",
+    featured: false,
+  },
+  {
+    id: 3,
     title: "Structural AI Discovery Matrix: Beyond Static Crystallography",
     description:
       "Why dynamic thermodynamic ensembles are the future of target identification and cryptic pocket discovery.",
@@ -29,12 +42,12 @@ const blogs = [
     readTime: "12 min read",
     date: "June 28, 2026",
     author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-2.jpg",
+    image: "/images/blog/blog-3.jpg",
     slug: null,
     featured: false,
   },
   {
-    id: 3,
+    id: 4,
     title: "Allosteric Modulation: The Next Frontier in Immunology",
     description:
       "Exploring how allosteric molecular wedges are reshaping autoimmune drug design and inflammasome inhibition.",
@@ -42,12 +55,12 @@ const blogs = [
     readTime: "10 min read",
     date: "June 20, 2026",
     author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-3.jpg",
+    image: "/images/blog/blog-4.jpg",
     slug: null,
     featured: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "From Charge Trap to Cure: The AIM2 Therapeutic Pipeline",
     description:
       "Mapping the multi-billion dollar market opportunity in SLE, psoriasis, and neurodegenerative disease.",
@@ -55,7 +68,7 @@ const blogs = [
     readTime: "8 min read",
     date: "June 15, 2026",
     author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-4.jpg",
+    image: "/images/blog/blog-5.jpg",
     slug: null,
     featured: false,
   },

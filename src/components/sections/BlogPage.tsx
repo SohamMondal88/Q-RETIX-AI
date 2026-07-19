@@ -34,13 +34,23 @@ const tags = ["AI", "Machine Learning", "Clinical", "Research", "Drug Discovery"
 const posts = [
   {
     slug: "unlocking-undruggable-aim2-inflammasome",
-    title: "Q-RETIX.AI: Unlocking the \"Undruggable\" AIM2 Inflammasome",
+    title: 'Q-RETIX.AI: Unlocking the "Undruggable" AIM2 Inflammasome',
     excerpt: "How Structural AI Bypassed the Electrostatic Charge Trap to Reignite a Dormant Therapeutic Target",
     category: "Research",
     date: "July 4, 2026",
     readTime: "15 min read",
     author: "Q-RETIX Research Team",
     featured: true,
+  },
+  {
+    slug: "decoding-diabetes-srebf1-gene-discovery",
+    title: "Decoding Diabetes: AI's Breakthrough in Gene Discovery",
+    excerpt: "How Q-RETIX AI Identified SREBF1 as a Systems-Level Therapeutic Target for Type 2 Diabetes",
+    category: "Research",
+    date: "July 19, 2026",
+    readTime: "12 min read",
+    author: "Q-RETIX Research Team",
+    featured: false,
   },
 ];
 
