@@ -28,6 +28,7 @@ const posts: Record<
     author: string;
     authorRole: string;
     cover: string;
+    coverAspect: string;
     tocSections: { label: string; id: string }[];
     body: React.ReactNode;
   }
@@ -42,6 +43,7 @@ const posts: Record<
     author: "Q-RETIX Research Team",
     authorRole: "Structural AI Drug Discovery, Q-RETIX.AI",
     cover: "/images/blog/cover1.jpg",
+    coverAspect: "aspect-[21/9] sm:aspect-[3/1] lg:aspect-[4/1]",
     tocSections: [
       { label: "Executive Summary", id: "executive-summary" },
       { label: "The AIM2 Paradox: A Critical Node in Innate Immunity", id: "the-aim2-paradox" },
@@ -347,6 +349,7 @@ const posts: Record<
     author: "Q-RETIX Research Team",
     authorRole: "Metabolic AI Drug Discovery, Q-RETIX.AI",
     cover: "/images/blog/cover2.jpg",
+    coverAspect: "aspect-[16/9] sm:aspect-[2/1] lg:aspect-[21/9]",
     tocSections: [
       { label: "Executive Summary", id: "executive-summary" },
       { label: "The Diabetes Paradox", id: "the-diabetes-paradox" },
@@ -412,12 +415,12 @@ const posts: Record<
         </p>
 
         {/* ── Image 1 ── */}
-        <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
+        <div className="relative w-full aspect-[15/7] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
           <Image
             src="/images/blog/2blog1.jpg"
             alt="SREBF1 Pathological Activation"
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 1024px) 100vw, 800px"
           />
         </div>
@@ -489,12 +492,12 @@ const posts: Record<
         </p>
 
         {/* ── Image 2 ── */}
-        <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
+        <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
           <Image
             src="/images/blog/2blog2.jpg"
             alt="SREBF1 Systems-Level Influence"
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 1024px) 100vw, 800px"
           />
         </div>
@@ -607,12 +610,12 @@ const posts: Record<
         </ul>
 
         {/* ── Image 3 ── */}
-        <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
+        <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden bg-[#F8FAFB] border border-[#E6EEF2] mb-8">
           <Image
             src="/images/blog/2blog3.jpg"
             alt="Therapeutic Implications of SREBF1 Modulation"
             fill
-            className="object-cover"
+            className="object-contain"
             sizes="(max-width: 1024px) 100vw, 800px"
           />
         </div>
@@ -757,7 +760,7 @@ export default function BlogPost({ slug }: { slug: string }) {
       </section>
 
       {/* Cover Image - full width, perfectly fitted */}
-      <div className="relative w-full aspect-[21/9] sm:aspect-[3/1] lg:aspect-[4/1] overflow-hidden">
+      <div className={`relative w-full ${post.coverAspect} overflow-hidden`}>
         <Image
           src={post.cover}
           alt={post.title}
