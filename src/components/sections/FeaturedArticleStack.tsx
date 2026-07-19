@@ -265,7 +265,7 @@ export default function FeaturedArticleStack() {
                   data-index={index}
                   style={{ zIndex: articles.length - index }}
                 >
-                  <Link href={href}>
+                  <Link href={href} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-[22px]">
                     <div className="bg-white rounded-[18px] sm:rounded-[22px] border border-[#E6EEF2]/60 shadow-[0_8px_32px_-12px_rgba(44,77,120,0.12)] overflow-hidden relative group hover:shadow-[0_16px_48px_-12px_rgba(44,77,120,0.18)] transition-shadow duration-700 flex flex-col cursor-pointer"
                     >
                       <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#98D7C2]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-20" />
@@ -307,7 +307,7 @@ export default function FeaturedArticleStack() {
                       >
                         <div className="flex items-center gap-2 mb-1.5"
                         >
-                          <span className="text-[10px] sm:text-[11px] text-[#8A9BB0] font-medium flex items-center gap-1"
+                          <span className="text-[10px] sm:text-[11px] text-[#5A6B82] font-medium flex items-center gap-1"
                           >
                             <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                             {article.readTime}
@@ -326,7 +326,7 @@ export default function FeaturedArticleStack() {
 
                         <div className="flex items-center justify-between pt-2 sm:pt-2.5 border-t border-[#E6EEF2]/50"
                         >
-                          <div className="flex items-center gap-2 sm:gap-2.5 text-[10px] sm:text-[11px] text-[#8A9BB0]"
+                          <div className="flex items-center gap-2 sm:gap-2.5 text-[10px] sm:text-[11px] text-[#5A6B82]"
                           >
                             <div className="flex items-center gap-1"
                             >

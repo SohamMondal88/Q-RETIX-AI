@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
@@ -82,7 +82,7 @@ export default function HeroSection() {
             >
               <Link
                 href="#waitlist"
-                className="gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#2C4D78]/25 font-semibold px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-[15px] rounded-xl inline-flex items-center gap-2 h-11 sm:h-12 shadow-lg shadow-[#2C4D78]/15"
+                className="gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-xl hover:shadow-[#2C4D78]/25 font-semibold px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-[15px] rounded-xl inline-flex items-center gap-2 h-11 sm:h-12 shadow-lg shadow-[#2C4D78]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
               >
                 Join Waitlist
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -103,6 +103,7 @@ export default function HeroSection() {
                 alt="Molecular Structure"
                 fill
                 className="object-contain"
+                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 50vw, 540px"
                 priority
               />
               <div className="absolute -bottom-4 sm:-bottom-8 left-1/2 -translate-x-1/2 w-[70%] h-6 sm:h-8 bg-[#2C4D78]/5 rounded-[100%] blur-xl" />
@@ -117,26 +118,55 @@ export default function HeroSection() {
 }
 
 function FloatingParticles() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Pre-compute stable random values on client mount to avoid hydration mismatch
+  const particles = useMemo(() => {
+    return [...Array(12)].map((_, i) => ({
+      key: i,
+      x: `${(i * 7.3 + 11) % 100}%`,
+      y: `${(i * 13.7 + 23) % 100}%`,
+      duration: 8 + ((i * 2.1 + 3) % 10),
+      delay: (i * 1.3 + 1) % 5,
+    }));
+  }, []);
+
+  if (!mounted) {
+    // Render static placeholder on SSR, no random values
+    return (
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(12)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#98D7C2]/30"
+            style={{ left: `${(i * 7.3 + 11) % 100}%`, top: `${(i * 13.7 + 23) % 100}%` }}
+          />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {[...Array(12)].map((_, i) => (
+      {particles.map((p) => (
         <motion.div
-          key={i}
+          key={p.key}
           className="absolute w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#98D7C2]/30"
-          initial={{
-            x: `${Math.random() * 100}%`,
-            y: `${Math.random() * 100}%`,
-          }}
+          initial={{ x: p.x, y: p.y }}
           animate={{
             y: [null, -80, 80],
             x: [null, 40, -40],
             opacity: [0.2, 0.5, 0.2],
           }}
           transition={{
-            duration: 8 + Math.random() * 10,
+            duration: p.duration,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: Math.random() * 5,
+            delay: p.delay,
           }}
         />
       ))}

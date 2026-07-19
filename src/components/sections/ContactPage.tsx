@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Mail,
@@ -12,7 +11,6 @@ import {
   FlaskConical,
   MessageSquare,
   BookOpen,
-  Clock,
   HelpCircle,
   ChevronDown,
 } from "lucide-react";
@@ -36,6 +34,7 @@ const supportOptions = [
     description: "Get a response within 24 hours from our dedicated support team.",
     action: "Email Us",
     href: "mailto:hello@qretix.ai",
+    external: true,
   },
   {
     icon: MessageSquare,
@@ -43,6 +42,7 @@ const supportOptions = [
     description: "Real-time assistance from our product experts during business hours.",
     action: "Coming Soon",
     href: "#",
+    disabled: true,
   },
   {
     icon: BookOpen,
@@ -50,6 +50,7 @@ const supportOptions = [
     description: "Browse articles, tutorials, and FAQs to find answers quickly.",
     action: "Browse Articles",
     href: "/blog",
+    external: false,
   },
 ];
 
@@ -87,7 +88,8 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     <div className="bg-white rounded-xl border border-[#E6EEF2] hover:border-[#A8DADC] hover:shadow-sm transition-all">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 sm:p-6 text-left"
+        className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-xl"
+        aria-expanded={open}
       >
         <h3 className="text-base sm:text-lg font-semibold text-[#2C4D78] pr-4">{question}</h3>
         <div className={`w-8 h-8 rounded-full bg-[#E6EEF2] flex items-center justify-center shrink-0 transition-all ${open ? "bg-[#2C4D78] rotate-180" : ""}`}>
@@ -109,11 +111,35 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 }
 
 export default function ContactPage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [organization, setOrganization] = useState("");
+  const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
+    setError("");
+    if (!firstName || !lastName || !email || !message) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+    if (!email.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setSent(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -169,7 +195,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-xs sm:text-sm font-medium text-[#33415C]">Email</p>
-                      <a href="mailto:hello@qretix.ai" className="text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] transition-colors">
+                      <a href="mailto:hello@qretix.ai" className="text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                         hello@qretix.ai
                       </a>
                     </div>
@@ -181,7 +207,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-xs sm:text-sm font-medium text-[#33415C]">Phone</p>
-                      <a href="tel:+14155551234" className="text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] transition-colors">
+                      <a href="tel:+14155551234" className="text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                         +1 (415) 555-1234
                       </a>
                     </div>
@@ -215,7 +241,7 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={s.label}
-                      className="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-white border border-[#D0E0E8] text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] hover:border-[#2C4D78] transition-all"
+                      className="flex items-center gap-1.5 sm:gap-2 px-2.5 py-1.5 sm:px-3 sm:py-2 rounded-xl bg-white border border-[#D0E0E8] text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] hover:border-[#2C4D78] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                     >
                       <SocialIcon platform={s.platform} size={14} className="text-[#5A6B82]" />
                       <span className="hidden sm:inline">{s.label}</span>
@@ -231,66 +257,84 @@ export default function ContactPage() {
               className="bg-white rounded-2xl border border-[#D0E0E8] p-5 sm:p-6 md:p-8 shadow-lg shadow-[#2C4D78]/3"
             >
               {!sent ? (
-                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5" noValidate>
                   <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
+                      <label htmlFor="contact-first" className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
                         First name
                       </label>
                       <input
+                        id="contact-first"
                         type="text"
                         required
-                        className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#5A6B82] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
                         placeholder="First name"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
+                      <label htmlFor="contact-last" className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
                         Last name
                       </label>
                       <input
+                        id="contact-last"
                         type="text"
                         required
-                        className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#5A6B82] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
                         placeholder="Last name"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">Email</label>
+                    <label htmlFor="contact-email" className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">Email</label>
                     <input
+                      id="contact-email"
                       type="email"
                       required
-                      className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#5A6B82] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
                       placeholder="name@organization.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">Organization</label>
+                    <label htmlFor="contact-org" className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">Organization</label>
                     <input
+                      id="contact-org"
                       type="text"
-                      className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
+                      value={organization}
+                      onChange={(e) => setOrganization(e.target.value)}
+                      className="w-full h-10 sm:h-11 rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 text-sm text-[#33415C] placeholder:text-[#5A6B82] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all"
                       placeholder="Organization name"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">Message</label>
+                    <label htmlFor="contact-message" className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">Message</label>
                     <textarea
+                      id="contact-message"
                       rows={4}
                       required
-                      className="w-full rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all resize-none"
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      className="w-full rounded-xl border border-[#D0E0E8] bg-[#F8FAFB] px-3 sm:px-4 py-2.5 sm:py-3 text-sm text-[#33415C] placeholder:text-[#5A6B82] focus:outline-none focus:border-[#2C4D78] focus:ring-2 focus:ring-[#2C4D78]/10 transition-all resize-none"
                       placeholder="How can we help you? (e.g., collaboration, platform inquiry, media)"
                     />
                   </div>
 
+                  {error && <p className="text-sm text-red-600">{error}</p>}
+
                   <button
                     type="submit"
-                    className="w-full gradient-brand text-white hover:opacity-90 transition-all hover:scale-[1.02] hover:shadow-xl font-semibold h-11 sm:h-12 rounded-xl inline-flex items-center justify-center gap-2 text-sm sm:text-[15px]"
+                    disabled={submitting}
+                    className="w-full gradient-brand text-white hover:opacity-90 transition-all hover:scale-[1.02] hover:shadow-xl font-semibold h-11 sm:h-12 rounded-xl inline-flex items-center justify-center gap-2 text-sm sm:text-[15px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Send message
+                    {submitting ? "Sending..." : "Send message"}
                     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
                 </form>
@@ -327,27 +371,36 @@ export default function ContactPage() {
           </motion.div>
 
           <div className="grid sm:grid-cols-3 gap-6">
-            {supportOptions.map((option) => (
-              <motion.div
-                key={option.title}
-                {...fadeUp(0.1)}
-                className="group bg-white rounded-2xl border border-[#E6EEF2] p-6 sm:p-8 hover:border-[#A8DADC] hover:shadow-xl transition-all"
-              >
-                <div className="w-12 h-12 rounded-xl bg-[#E6EEF2] flex items-center justify-center mb-6 group-hover:bg-[#2C4D78] transition-colors"
+            {supportOptions.map((option) => {
+              const isDisabled = option.disabled;
+
+              return (
+                <motion.div
+                  key={option.title}
+                  {...fadeUp(0.1)}
+                  className={`group bg-white rounded-2xl border border-[#E6EEF2] p-6 sm:p-8 hover:border-[#A8DADC] hover:shadow-xl transition-all ${isDisabled ? "opacity-70" : ""}`}
                 >
-                  <option.icon className="w-5 h-5 text-[#2C4D78] group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold text-[#2C4D78] mb-2">{option.title}</h3>
-                <p className="text-[14px] sm:text-[15px] text-[#5A6B82] mb-6">{option.description}</p>
-                <Link
-                  href={option.href}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#2C4D78] hover:text-[#98D7C2] transition-colors"
-                >
-                  {option.action}
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </motion.div>
-            ))}
+                  <div className="w-12 h-12 rounded-xl bg-[#E6EEF2] flex items-center justify-center mb-6 group-hover:bg-[#2C4D78] transition-colors"
+                  >
+                    <option.icon className="w-5 h-5 text-[#2C4D78] group-hover:text-white transition-colors" />
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#2C4D78] mb-2">{option.title}</h3>
+                  <p className="text-[14px] sm:text-[15px] text-[#5A6B82] mb-6">{option.description}</p>
+                  {isDisabled ? (
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#5A6B82]">
+                      {option.action}
+                    </span>
+                  ) : (
+                    <Link href={option.href!} className="block">
+                      <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#2C4D78] hover:text-[#98D7C2] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
+                        {option.action}
+                        <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </Link>
+                  )}
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

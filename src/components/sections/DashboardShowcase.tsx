@@ -117,7 +117,7 @@ export default function DashboardShowcase() {
                       key={stat.label}
                       className="bg-white rounded-xl border border-[#D0E0E8]/60 p-4 hover:shadow-md transition-shadow"
                     >
-                      <p className="text-[11px] text-[#8A9BB0] uppercase tracking-wider mb-1">{stat.label}</p>
+                      <p className="text-[11px] text-[#5A6B82] uppercase tracking-wider mb-1">{stat.label}</p>
                       <div className="flex items-end justify-between">
                         <span className="text-xl font-bold text-[#33415C]">
                           {stat.value}
@@ -159,7 +159,7 @@ export default function DashboardShowcase() {
                               }}
                             />
                           </div>
-                          <span className="text-[9px] text-[#8A9BB0]">
+                          <span className="text-[9px] text-[#5A6B82]">
                             {["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"][i]}
                           </span>
                         </div>
@@ -205,7 +205,7 @@ export default function DashboardShowcase() {
                   <div className="bg-white rounded-xl border border-[#D0E0E8]/60 p-4">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-[13px] font-semibold text-[#33415C]">Accurate result</span>
-                      <ChevronRight className="w-4 h-4 text-[#8A9BB0]" />
+                      <ChevronRight className="w-4 h-4 text-[#5A6B82]" />
                     </div>
                     <div className="space-y-2">
                       {tasks.map((t) => (
@@ -238,21 +238,21 @@ export default function DashboardShowcase() {
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center gap-3">
-                        <div className="w-16 text-[10px] text-[#8A9BB0]">100%</div>
+                        <div className="w-16 text-[10px] text-[#5A6B82]">100%</div>
                         <div className="flex-1 h-2 bg-[#F5F9FB] rounded-full overflow-hidden">
                           <div className="h-full bg-[#2C4D78] rounded-full" style={{ width: "100%" }} />
                         </div>
                         <span className="text-[10px] text-[#33415C]">Work done</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-16 text-[10px] text-[#8A9BB0]">80%</div>
+                        <div className="w-16 text-[10px] text-[#5A6B82]">80%</div>
                         <div className="flex-1 h-2 bg-[#F5F9FB] rounded-full overflow-hidden">
                           <div className="h-full bg-[#A8DADC] rounded-full" style={{ width: "80%" }} />
                         </div>
                         <span className="text-[10px] text-[#33415C]">Digital Lab Environment</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="w-16 text-[10px] text-[#8A9BB0]">40%</div>
+                        <div className="w-16 text-[10px] text-[#5A6B82]">40%</div>
                         <div className="flex-1 h-2 bg-[#F5F9FB] rounded-full overflow-hidden">
                           <div className="h-full bg-[#98D7C2] rounded-full" style={{ width: "40%" }} />
                         </div>
@@ -264,7 +264,7 @@ export default function DashboardShowcase() {
                   <div className="bg-white rounded-xl border border-[#D0E0E8]/60 p-4">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-[13px] font-semibold text-[#33415C]">AI-Powered Lab</span>
-                      <ChevronRight className="w-4 h-4 text-[#8A9BB0]" />
+                      <ChevronRight className="w-4 h-4 text-[#5A6B82]" />
                     </div>
                     <div className="space-y-2">
                       {[
@@ -278,7 +278,7 @@ export default function DashboardShowcase() {
                           </div>
                           <div>
                             <div className="text-xs font-medium text-[#33415C]">{item.label}</div>
-                            <div className="text-[10px] text-[#8A9BB0]">{item.desc}</div>
+                            <div className="text-[10px] text-[#5A6B82]">{item.desc}</div>
                           </div>
                         </div>
                       ))}

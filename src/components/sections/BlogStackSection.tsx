@@ -149,7 +149,7 @@ function BlogCard({
       }}
     >
       <div className="w-full max-w-[800px] mx-auto relative">
-        <Link href={href}>
+        <Link href={href} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-[28px]">
           <div className="bg-white rounded-[24px] sm:rounded-[28px] border border-[#E6EEF2]/60 shadow-[0_8px_40px_-12px_rgba(44,77,120,0.12)] overflow-hidden relative group hover:shadow-[0_12px_48px_-8px_rgba(44,77,120,0.16)] transition-shadow duration-500 flex flex-col max-h-[90dvh]">
             <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#98D7C2]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20" />
 
@@ -190,7 +190,7 @@ function BlogCard({
             {/* Content */}
             <div className="p-5 sm:p-6 lg:p-7 shrink-0">
               <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                <span className="text-[11px] sm:text-[12px] text-[#8A9BB0] font-medium flex items-center gap-1">
+                <span className="text-[11px] sm:text-[12px] text-[#5A6B82] font-medium flex items-center gap-1">
                   <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   {blog.readTime}
                 </span>
@@ -205,7 +205,7 @@ function BlogCard({
               </p>
 
               <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-[#E6EEF2]/40">
-                <div className="flex items-center gap-2 sm:gap-2.5 text-[10px] sm:text-[11px] md:text-[12px] text-[#8A9BB0]">
+                <div className="flex items-center gap-2 sm:gap-2.5 text-[10px] sm:text-[11px] md:text-[12px] text-[#5A6B82]">
                   <div className="flex items-center gap-1">
                     <User className="w-2.5 h-2.5 sm:w-3 sm:h-3" strokeWidth={2} />
                     <span className="font-medium">{blog.author}</span>

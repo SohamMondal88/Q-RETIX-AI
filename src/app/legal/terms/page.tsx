@@ -82,17 +82,17 @@ export default function TermsPage() {
                 <h3 className="text-lg font-bold text-[#2C4D78] mb-4">Quick Links</h3>
                 <ul className="space-y-3">
                   <li>
-                    <Link href="/legal/privacy" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors">
+                    <Link href="/legal/privacy" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                       <Shield className="w-4 h-4" /> Privacy Policy
                     </Link>
                   </li>
                   <li>
-                    <Link href="/legal/cookies" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors">
+                    <Link href="/legal/cookies" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                       <AlertCircle className="w-4 h-4" /> Cookie Policy
                     </Link>
                   </li>
                   <li>
-                    <Link href="/legal/gdpr" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors">
+                    <Link href="/legal/gdpr" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                       <Scale className="w-4 h-4" /> GDPR
                     </Link>
                   </li>

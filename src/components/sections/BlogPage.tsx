@@ -73,9 +73,10 @@ export default function BlogPage() {
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
-      return matchesSearch && matchesCategory;
+      const matchesTag = !selectedTag || post.category.toLowerCase().includes(selectedTag.toLowerCase());
+      return matchesSearch && matchesCategory && matchesTag;
     });
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, selectedTag]);
 
   const featuredPost = posts.find((p) => p.featured) || posts[0];
   const otherPosts = filteredPosts.filter((p) => p.slug !== featuredPost.slug);
@@ -127,7 +128,7 @@ export default function BlogPage() {
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
                     className="bg-white/60 backdrop-blur-sm rounded-2xl border border-[#D0E0E8]/40 p-4 text-center"
                   >
-                    <stat.icon className="w-5 h-5 text-[#A8DADC] mx-auto mb-2" />
+                    <stat.icon className="w-5 h-5 text-[#2C4D78] mx-auto mb-2" />
                     <div className="text-2xl font-bold text-[#2C4D78]">{stat.value}</div>
                     <div className="text-[11px] font-medium text-[#5A6B82] uppercase tracking-wider">{stat.label}</div>
                   </motion.div>
@@ -143,7 +144,7 @@ export default function BlogPage() {
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <div className="relative flex-1 w-full sm:max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#8A9BB0]" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#5A6B82]" />
               <input
                 type="text"
                 placeholder="Search articles..."
@@ -154,12 +155,12 @@ export default function BlogPage() {
             </div>
 
             <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 no-scrollbar">
-              <Filter className="w-4 h-4 text-[#8A9BB0] shrink-0" />
+              <Filter className="w-4 h-4 text-[#5A6B82] shrink-0" />
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all ${
+                  className={`shrink-0 px-3 py-1.5 rounded-full text-[12px] font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 ${
                     selectedCategory === cat
                       ? "bg-[#2C4D78] text-white shadow-md shadow-[#2C4D78]/15"
                       : "bg-[#F8FAFB] text-[#5A6B82] border border-[#E6EEF2] hover:border-[#2C4D78]/30"
@@ -177,10 +178,10 @@ export default function BlogPage() {
               <button
                 key={tag}
                 onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                className={`shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all ${
+                className={`shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 ${
                   selectedTag === tag
                     ? "bg-[#A8DADC]/20 text-[#2C4D78] border border-[#A8DADC]"
-                    : "text-[#8A9BB0] hover:text-[#5A6B82]"
+                    : "text-[#5A6B82] hover:text-[#5A6B82]"
                 }`}
               >
                 #{tag}
@@ -228,7 +229,7 @@ export default function BlogPage() {
                   </div>
 
                   <div className="p-8 lg:p-12 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-4 text-[13px] text-[#8A9BB0]">
+                    <div className="flex items-center gap-3 mb-4 text-[13px] text-[#5A6B82]">
                       <div className="flex items-center gap-1.5">
                         <User className="w-3.5 h-3.5" />
                         {featuredPost.author}
@@ -307,11 +308,11 @@ export default function BlogPage() {
 
                           <div className="absolute top-3 right-3 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity"
                           >
-                            <button className="w-8 h-8 rounded-lg bg-white/80 backdrop-blur border border-[#D0E0E8] flex items-center justify-center hover:bg-[#2C4D78] hover:text-white transition-colors"
+                            <button className="w-8 h-8 rounded-lg bg-white/80 backdrop-blur border border-[#D0E0E8] flex items-center justify-center hover:bg-[#2C4D78] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                             >
                               <Bookmark className="w-3.5 h-3.5" />
                             </button>
-                            <button className="w-8 h-8 rounded-lg bg-white/80 backdrop-blur border border-[#D0E0E8] flex items-center justify-center hover:bg-[#2C4D78] hover:text-white transition-colors"
+                            <button className="w-8 h-8 rounded-lg bg-white/80 backdrop-blur border border-[#D0E0E8] flex items-center justify-center hover:bg-[#2C4D78] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                             >
                               <Share2 className="w-3.5 h-3.5" />
                             </button>
@@ -324,7 +325,7 @@ export default function BlogPage() {
                             >
                               {post.category}
                             </div>
-                            <div className="flex items-center gap-1 text-[11px] text-[#8A9BB0]"
+                            <div className="flex items-center gap-1 text-[11px] text-[#5A6B82]"
                             >
                               <Clock className="w-3 h-3" />
                               {post.readTime}
@@ -342,7 +343,7 @@ export default function BlogPage() {
                           </p>
 
                           <div className="flex items-center justify-between pt-4 border-t border-[#E6EEF2]">
-                            <div className="flex items-center gap-2 text-[12px] text-[#8A9BB0]">
+                            <div className="flex items-center gap-2 text-[12px] text-[#5A6B82]">
                               <div className="w-6 h-6 rounded-full bg-[#E6EEF2] flex items-center justify-center text-[10px] font-bold text-[#2C4D78]">
                                 {post.author.split(" ").map((n) => n[0]).join("")}
                               </div>

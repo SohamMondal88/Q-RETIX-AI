@@ -78,21 +78,21 @@ export default function AboutPage() {
                 <h3 className="text-lg font-bold text-[#2C4D78] mb-6">Company Details</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-[#A8DADC] mt-0.5 shrink-0" />
+                    <MapPin className="w-5 h-5 text-[#2C4D78] mt-0.5 shrink-0" />
                     <div>
                       <p className="text-[13px] font-semibold text-[#33415C]">Headquarters</p>
                       <p className="text-[13px] text-[#5A6B82]">San Francisco, CA</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Mail className="w-5 h-5 text-[#A8DADC] mt-0.5 shrink-0" />
+                    <Mail className="w-5 h-5 text-[#2C4D78] mt-0.5 shrink-0" />
                     <div>
                       <p className="text-[13px] font-semibold text-[#33415C]">Email</p>
                       <p className="text-[13px] text-[#5A6B82]">hello@qretix.ai</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <Phone className="w-5 h-5 text-[#A8DADC] mt-0.5 shrink-0" />
+                    <Phone className="w-5 h-5 text-[#2C4D78] mt-0.5 shrink-0" />
                     <div>
                       <p className="text-[13px] font-semibold text-[#33415C]">Founded</p>
                       <p className="text-[13px] text-[#5A6B82]">2024</p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
                 </p>
                 <Link
                   href="/careers"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#98D7C2] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#98D7C2] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded"
                 >
                   View Open Positions
                   <ArrowRight className="w-4 h-4" />

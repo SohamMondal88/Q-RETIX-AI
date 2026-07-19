@@ -61,7 +61,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 sm:p-6 text-left gap-4"
+        className="w-full flex items-center justify-between p-5 sm:p-6 text-left gap-4 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]/50"
       >
         <span className="text-[15px] sm:text-[16px] font-medium text-[#1a1a2e] leading-snug">
           {question}

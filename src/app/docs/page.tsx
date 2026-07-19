@@ -71,7 +71,7 @@ export default function DocumentationPage() {
                 <ul className="space-y-1.5 sm:space-y-2">
                   {section.links.map((link) => (
                     <li key={link}>
-                      <button className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors">
+                      <button className="inline-flex items-center gap-2 text-xs sm:text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                         <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                         {link}
                       </button>

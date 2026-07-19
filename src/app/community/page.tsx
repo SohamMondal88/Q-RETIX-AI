@@ -99,7 +99,7 @@ export default function CommunityPage() {
                       <p className="text-xs sm:text-[13px] font-semibold text-[#33415C] truncate">{event.title}</p>
                       <p className="text-[11px] sm:text-[12px] text-[#5A6B82]">{event.date} &bull; {event.type}</p>
                     </div>
-                    <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#8A9BB0] shrink-0" />
+                     <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#5A6B82] shrink-0" />
                   </div>
                 ))}
               </div>
@@ -119,7 +119,7 @@ export default function CommunityPage() {
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
                     <div className="text-xl sm:text-2xl font-bold text-[#98D7C2] mb-1">{stat.value}</div>
-                    <div className="text-[11px] sm:text-[13px] text-white/60">{stat.label}</div>
+                    <div className="text-[11px] sm:text-[13px] text-white/90">{stat.label}</div>
                   </div>
                 ))}
               </div>

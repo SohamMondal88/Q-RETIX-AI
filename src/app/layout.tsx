@@ -12,7 +12,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Q-RETIX AI - AI-Powered Pharmaceutical Intelligence",
+  metadataBase: new URL("https://qretix.ai"),
+  title: {
+    default: "Q-RETIX AI - AI-Powered Pharmaceutical Intelligence",
+    template: "%s | Q-RETIX AI",
+  },
   description:
     "Transforming Pharmaceutical Research Through Artificial Intelligence. Empowering drug discovery, clinical research, and healthcare intelligence.",
   keywords: [
@@ -28,7 +32,48 @@ export const metadata: Metadata = {
     description:
       "Transforming Pharmaceutical Research Through Artificial Intelligence.",
     type: "website",
+    url: "https://qretix.ai",
+    siteName: "Q-RETIX AI",
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/blog/cover1.jpg",
+        width: 1600,
+        height: 941,
+        alt: "Q-RETIX AI - Pharmaceutical Intelligence",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Q-RETIX AI - AI-Powered Pharmaceutical Intelligence",
+    description:
+      "Transforming Pharmaceutical Research Through Artificial Intelligence.",
+    images: ["/images/blog/cover1.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://qretix.ai",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#2C4D78",
 };
 
 export default function RootLayout({

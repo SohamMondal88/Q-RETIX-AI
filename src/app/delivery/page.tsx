@@ -99,7 +99,7 @@ export default function DeliveryDetailsPage() {
                           <h3 className="text-lg font-bold text-[#2C4D78]">{step.title}</h3>
                         </div>
                         <p className="text-[15px] text-[#5A6B82] leading-relaxed mb-2">{step.description}</p>
-                        <div className="flex items-center gap-1.5 text-[13px] text-[#8A9BB0]">
+                        <div className="flex items-center gap-1.5 text-[13px] text-[#5A6B82]">
                           <Clock className="w-3.5 h-3.5" />
                           {step.timeline}
                         </div>
@@ -157,7 +157,7 @@ export default function DeliveryDetailsPage() {
                 <h3 className="text-lg font-bold text-[#2C4D78] mb-4">Quick Links</h3>
                 <ul className="space-y-3">
                   <li>
-                    <Link href="/legal/terms" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors">
+                    <Link href="/legal/terms" className="inline-flex items-center gap-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                       <FileCheck className="w-4 h-4" /> Terms &amp; Conditions
                     </Link>
                   </li>

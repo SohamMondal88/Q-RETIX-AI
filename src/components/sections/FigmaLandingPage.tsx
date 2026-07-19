@@ -73,6 +73,7 @@ function CubePanel({ side }: { side: "left" | "right" }) {
           filter: "drop-shadow(0 28px 34px rgba(7,81,188,0.24))",
         }}
         priority
+        sizes="(max-width: 768px) 100vw, 33vw"
       />
     </div>
   );

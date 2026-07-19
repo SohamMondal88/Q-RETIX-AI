@@ -55,14 +55,14 @@ export default function PressPage() {
                     className="group bg-white rounded-xl border border-[#E6EEF2] p-4 sm:p-6 hover:border-[#A8DADC] hover:shadow-lg transition-all"
                   >
                     <div className="flex items-center gap-2 text-xs sm:text-[13px] text-[#5A6B82] mb-2 sm:mb-3">
-                      <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#A8DADC]" />
+                      <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2C4D78]" />
                       {release.date}
                     </div>
                     <h3 className="text-base sm:text-xl font-semibold text-[#2C4D78] mb-1 sm:mb-2 group-hover:text-[#1a3a5c] transition-colors">
                       {release.title}
                     </h3>
                     <p className="text-sm sm:text-[15px] text-[#5A6B82] mb-3 sm:mb-4">{release.excerpt}</p>
-                    <button className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2C4D78] hover:text-[#98D7C2] transition-colors">
+                    <button className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#2C4D78] hover:text-[#98D7C2] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
                       Read more
                       <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </button>
@@ -78,13 +78,13 @@ export default function PressPage() {
                   {mediaKit.map((item) => (
                     <button
                       key={item.label}
-                      className="w-full flex items-center justify-between p-3 sm:p-4 rounded-xl bg-white border border-[#E6EEF2] hover:border-[#A8DADC] hover:shadow-sm transition-all"
+                      className="w-full flex items-center justify-between p-3 sm:p-4 rounded-xl bg-white border border-[#E6EEF2] hover:border-[#A8DADC] hover:shadow-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                     >
                       <div className="flex items-center gap-2 sm:gap-3">
                         <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2C4D78]" />
                         <span className="text-xs sm:text-[13px] font-medium text-[#33415C]">{item.label}</span>
                       </div>
-                      <span className="text-[10px] sm:text-[11px] text-[#8A9BB0]">{item.size}</span>
+                      <span className="text-[10px] sm:text-[11px] text-[#5A6B82]">{item.size}</span>
                     </button>
                   ))}
                 </div>

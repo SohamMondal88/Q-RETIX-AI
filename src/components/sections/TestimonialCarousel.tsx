@@ -147,7 +147,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
                     <BadgeCheck className="w-4 h-4 text-[#98D7C2]" />
                   )}
                 </div>
-                <p className="text-[12px] text-[#8A9BB0]">
+                <p className="text-[12px] text-[#5A6B82]">
                   {testimonial.role} &bull; {testimonial.org}
                 </p>
               </div>
@@ -155,7 +155,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
 
             <div className="flex items-center gap-0.5">
               {[...Array(testimonial.rating)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-[#E8B923] text-[#E8B923]" />
+                <Star key={`star-${i}`} className="w-3.5 h-3.5 fill-[#E8B923] text-[#E8B923]" />
               ))}
             </div>
           </div>
@@ -167,11 +167,11 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialItem }) {
 
           {/* Footer */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-[11px] text-[#8A9BB0]">
+            <div className="flex items-center gap-2 text-[11px] text-[#5A6B82]">
               <div className="w-1.5 h-1.5 rounded-full bg-[#98D7C2] animate-pulse" />
               Verified Partner
             </div>
-            <button className="w-8 h-8 rounded-lg bg-[#E6EEF2] flex items-center justify-center hover:bg-[#2C4D78] transition-colors group/icon">
+            <button className="w-8 h-8 rounded-lg bg-[#E6EEF2] flex items-center justify-center hover:bg-[#2C4D78] transition-colors group/icon focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50">
               <ExternalLink className="w-3.5 h-3.5 text-[#5A6B82] group-hover/icon:text-white transition-colors" />
             </button>
           </div>

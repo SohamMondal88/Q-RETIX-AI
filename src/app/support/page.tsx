@@ -86,7 +86,7 @@ export default function SupportPage() {
                 <p className="text-[15px] text-[#5A6B82] mb-6">{option.description}</p>
                 <Link
                   href={option.href}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#2C4D78] hover:text-[#98D7C2] transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#2C4D78] hover:text-[#98D7C2] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded"
                 >
                   {option.action}
                   <ArrowRight className="w-4 h-4" />

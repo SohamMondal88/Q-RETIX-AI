@@ -86,7 +86,7 @@ export default function Navbar() {
           }`}
         >
           <div className="flex h-[60px] items-center justify-between px-5">
-            <Link href="/" className="flex items-center gap-2.5 group">
+            <Link href="/" className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-lg">
               <div className="relative w-8 h-8 rounded-lg gradient-brand flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
                 <FlaskConical className="w-4 h-4 text-white" />
               </div>
@@ -100,7 +100,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="relative px-3 py-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors rounded-lg hover:bg-[#E6EEF2]/50"
+                  className="relative px-3 py-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors rounded-lg hover:bg-[#E6EEF2]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                 >
                   {link.label}
                 </Link>
@@ -109,12 +109,12 @@ export default function Navbar() {
 
             <div className="hidden lg:flex items-center gap-3">
               <JoinWaitlistButton
-                className="gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#2C4D78]/20 font-semibold px-5 inline-flex items-center gap-1.5 h-9 rounded-xl text-[13px]"
+                className="gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#2C4D78]/20 font-semibold px-5 inline-flex items-center gap-1.5 h-9 rounded-xl text-[13px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
               />
             </div>
 
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-[#E6EEF2]/50 text-[#33415C]"
+              className="lg:hidden p-2 rounded-lg hover:bg-[#E6EEF2]/50 text-[#33415C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -143,7 +143,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="px-4 py-3 text-sm font-medium text-[#5A6B82] hover:text-[#2C4D78] hover:bg-[#E6EEF2]/50 rounded-xl transition-colors"
+                  className="px-4 py-3 text-sm font-medium text-[#5A6B82] hover:text-[#2C4D78] hover:bg-[#E6EEF2]/50 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                 >
                   {link.label}
                 </Link>
@@ -151,7 +151,7 @@ export default function Navbar() {
               <JoinWaitlistButton
                 mobile
                 onClick={() => setMobileOpen(false)}
-                className="gradient-brand text-white mt-2 font-semibold inline-flex items-center justify-center gap-2 h-10 rounded-xl text-sm px-4 py-2"
+                className="gradient-brand text-white mt-2 font-semibold inline-flex items-center justify-center gap-2 h-10 rounded-xl text-sm px-4 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
               />
             </div>
           </motion.div>

@@ -128,7 +128,7 @@ const statusConfig = {
   pending: {
     label: "Planned",
     bgColor: "bg-white",
-    textColor: "text-[#8A9BB0]",
+    textColor: "text-[#5A6B82]",
     borderColor: "border-[#D0E0E8]/80",
     dotColor: "bg-[#D0E0E8]",
     progressColor: "from-[#D0E0E8] to-[#D0E0E8]",
@@ -222,8 +222,8 @@ function PhaseCard({
                     ? "bg-[#2C4D78] text-white"
                     : data.status === "active"
                       ? "bg-[#A8DADC]/20 text-[#2C4D78] border border-[#A8DADC]"
-                      : "bg-[#E6EEF2] text-[#8A9BB0]"
-                }`}
+                      : "bg-[#E6EEF2] text-[#5A6B82]"
+                  }`}
               >
                 <span
                   className={`w-1.5 h-1.5 rounded-full ${
@@ -277,14 +277,14 @@ function PhaseCard({
 
           {/* Timeline info */}
           <div className="flex items-center gap-2 mb-3 text-[12px] text-[#5A6B82]">
-            <Calendar className="w-3.5 h-3.5 text-[#A8DADC]" />
+            <Calendar className="w-3.5 h-3.5 text-[#2C4D78]" />
             <span className="font-medium">{data.timeline}</span>
           </div>
 
           {/* Title */}
           <h3
             className={`text-lg font-bold mb-3 ${
-              data.status === "pending" ? "text-[#8A9BB0]" : "text-[#2C4D78]"
+              data.status === "pending" ? "text-[#5A6B82]" : "text-[#2C4D78]"
             }`}
           >
             {data.title}
@@ -324,9 +324,9 @@ function PhaseCard({
           {data.status === "active" && (
             <div className="mt-4 pt-4 border-t border-[#E6EEF2]">
               <div className="flex items-center gap-2 text-[12px] font-semibold text-[#2C4D78]">
-                <Clock className="w-3.5 h-3.5 text-[#A8DADC]" />
+                <Clock className="w-3.5 h-3.5 text-[#2C4D78]" />
                 <span>Currently enrolling patients</span>
-                <ChevronRight className="w-3.5 h-3.5 text-[#A8DADC] ml-auto" />
+                <ChevronRight className="w-3.5 h-3.5 text-[#2C4D78] ml-auto" />
               </div>
             </div>
           )}
@@ -413,7 +413,7 @@ export default function ResearchTimeline() {
                 <span className="text-2xl lg:text-3xl font-bold text-[#2C4D78]">
                   {stat.value}
                 </span>
-                <span className="text-[13px] font-medium text-[#8A9BB0]">
+                <span className="text-[13px] font-medium text-[#5A6B82]">
                   {stat.sub}
                 </span>
               </div>
