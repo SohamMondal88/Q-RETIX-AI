@@ -110,7 +110,7 @@ export default function Footer() {
                 className={`text-white mb-8 ${
                   group.isBrand
                     ? "text-[24px] sm:text-[28px] font-bold leading-tight"
-                    : "text-sm font-semibold uppercase tracking-wider text-[#8A9BB0]"
+                    : "text-sm font-semibold uppercase tracking-wider text-[#5A6B82]"
                 }`}
               >
                 {group.title}
@@ -118,10 +118,10 @@ export default function Footer() {
               <ul className="space-y-4">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[14px] sm:text-[15px] text-[#A8B5C5] hover:text-white transition-colors"
-                    >
+                <Link
+                  href={link.href}
+                  className="text-[14px] sm:text-[15px] text-[#A8B5C5] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded"
+                >
                       {link.label}
                     </Link>
                   </li>
@@ -135,21 +135,21 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
             <div className="flex items-center gap-4">
               {socialIcons.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
-                >
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                  >
                   {social.svg}
                 </a>
               ))}
             </div>
           </div>
 
-          <p className="text-[13px] sm:text-[14px] text-[#8A9BB0]">
+              <p className="text-[13px] sm:text-[14px] text-[#5A6B82]">
             © 2026 Q-RETIX AI. All rights reserved.
           </p>
         </div>

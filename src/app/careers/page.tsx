@@ -95,7 +95,7 @@ export default function CareersPage() {
                           </span>
                         </div>
                       </div>
-                      <button className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#E6EEF2] group-hover:bg-[#2C4D78] flex items-center justify-center transition-colors">
+                      <button className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#E6EEF2] group-hover:bg-[#2C4D78] flex items-center justify-center transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50">
                         <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#2C4D78] group-hover:text-white transition-colors" />
                       </button>
                     </div>

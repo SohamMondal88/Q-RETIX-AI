@@ -23,7 +23,7 @@ export default function TeamTabs({
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          className={`relative px-5 sm:px-7 py-2.5 rounded-full text-[13px] sm:text-[14px] font-semibold transition-colors duration-300 z-10 ${
+          className={`relative px-5 sm:px-7 py-2.5 rounded-full text-[13px] sm:text-[14px] font-semibold transition-colors duration-300 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 ${
             activeTab === tab.id
               ? "text-white"
               : "text-[#5A6B82] hover:text-[#2C4D78]"

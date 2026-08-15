@@ -30,10 +30,29 @@ export default function WaitlistCommunitySection() {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    setError("");
+    if (!email || !email.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleJoinCommunity = () => {
+    window.open("https://discord.gg/qretix", "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -75,13 +94,15 @@ export default function WaitlistCommunitySection() {
               <form
                 onSubmit={handleSubmit}
                 className="bg-white rounded-2xl border border-[#D0E0E8] p-5 sm:p-6 md:p-8 shadow-xl shadow-[#2C4D78]/5"
+                noValidate
               >
                 <div className="grid sm:grid-cols-2 gap-3 sm:gap-4 mb-3 sm:mb-4">
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
+                    <label htmlFor="waitlist-email" className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
                       Email Address *
                     </label>
                     <Input
+                      id="waitlist-email"
                       type="email"
                       required
                       placeholder="you@organization.com"
@@ -91,10 +112,11 @@ export default function WaitlistCommunitySection() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
+                    <label htmlFor="waitlist-name" className="block text-xs sm:text-sm font-medium text-[#33415C] mb-1.5 sm:mb-2">
                       Full Name (Optional)
                     </label>
                     <Input
+                      id="waitlist-name"
                       type="text"
                       placeholder="Your full name"
                       value={name}
@@ -104,25 +126,31 @@ export default function WaitlistCommunitySection() {
                   </div>
                 </div>
 
+                {error && (
+                  <p className="text-sm text-red-600 mb-3">{error}</p>
+                )}
+
                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                   <button
                     type="submit"
-                    className="flex-1 gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-xl font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl inline-flex items-center justify-center gap-2 h-10 sm:h-12"
+                    disabled={submitting}
+                    className="flex-1 gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-xl font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl inline-flex items-center justify-center gap-2 h-10 sm:h-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Join Waitlist
+                    {submitting ? "Submitting..." : "Join Waitlist"}
                     <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
 
                   <button
                     type="button"
-                    className="flex-1 border border-[#D0E0E8] text-[#33415C] hover:bg-[#E6EEF2] font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl transition-all hover:scale-105 inline-flex items-center justify-center gap-2 h-10 sm:h-12 bg-white"
+                    onClick={handleJoinCommunity}
+                    className="flex-1 border border-[#D0E0E8] text-[#33415C] hover:bg-[#E6EEF2] font-semibold px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base rounded-xl transition-all hover:scale-105 inline-flex items-center justify-center gap-2 h-10 sm:h-12 bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                   >
                     <Users className="w-4 h-4 sm:w-5 sm:h-5" />
                     Join Community
                   </button>
                 </div>
 
-                <p className="text-[10px] sm:text-xs text-[#8A9BB0] mt-3 sm:mt-4 text-center flex items-center justify-center gap-1">
+                <p className="text-[10px] sm:text-xs text-[#5A6B82] mt-3 sm:mt-4 text-center flex items-center justify-center gap-1">
                   <Lock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                   No spam. Unsubscribe anytime. We respect your privacy.
                 </p>

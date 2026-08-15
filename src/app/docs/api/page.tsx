@@ -74,12 +74,12 @@ export default function APIReferencePage() {
                     <Terminal className="w-4 h-4 text-[#98D7C2]" />
                     <span className="text-sm font-medium text-white">Example Request</span>
                   </div>
-                  <button className="flex items-center gap-1.5 text-[11px] text-[#5A6B82] hover:text-white transition-colors">
+                  <button className="flex items-center gap-1.5 text-[11px] text-[#5A6B82] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded">
                     <Copy className="w-3 h-3" />
                     Copy
                   </button>
                 </div>
-                <pre className="text-[13px] text-[#A8DADC] overflow-x-auto">
+                <pre className="text-[13px] text-[#D0E0E8] overflow-x-auto">
                   <code>{codeExample}</code>
                 </pre>
               </div>
@@ -136,7 +136,7 @@ export default function APIReferencePage() {
                 </p>
                 <a
                   href="mailto:api@qretix.ai"
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#98D7C2] hover:text-white transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-[#98D7C2] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded"
                 >
                   Contact Developer Support
                   <ArrowRight className="w-4 h-4" />
