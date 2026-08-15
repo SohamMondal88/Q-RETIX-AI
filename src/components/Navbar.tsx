@@ -14,8 +14,8 @@ import { usePathname, useRouter } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
-  { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -63,6 +63,7 @@ function JoinWaitlistButton({
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -96,15 +97,25 @@ export default function Navbar() {
             </Link>
 
             <nav className="hidden lg:flex items-center gap-0.5">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="relative px-3 py-2 text-[13px] font-medium text-[#5A6B82] hover:text-[#2C4D78] transition-colors rounded-lg hover:bg-[#E6EEF2]/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive =
+                  pathname === link.href ||
+                  (link.href !== "/" && pathname.startsWith(link.href));
+
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className={`relative px-3 py-2 text-[13px] font-medium transition-colors rounded-lg ${
+                      isActive
+                        ? "text-[#2C4D78] bg-[#E6EEF2]/70"
+                        : "text-[#5A6B82] hover:text-[#2C4D78] hover:bg-[#E6EEF2]/50"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="hidden lg:flex items-center gap-3">
@@ -138,16 +149,26 @@ export default function Navbar() {
             className="fixed top-[84px] left-4 right-4 z-40 bg-white/95 backdrop-blur-xl border border-[#D0E0E8] rounded-2xl lg:hidden overflow-hidden shadow-xl shadow-[#2C4D78]/5"
           >
             <div className="px-4 py-5 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="px-4 py-3 text-sm font-medium text-[#5A6B82] hover:text-[#2C4D78] hover:bg-[#E6EEF2]/50 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                const isActive =
+                  pathname === link.href ||
+                  (link.href !== "/" && pathname.startsWith(link.href));
+
+                return (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`px-4 py-3 text-sm font-medium rounded-xl transition-colors ${
+                      isActive
+                        ? "text-[#2C4D78] bg-[#E6EEF2]/70"
+                        : "text-[#5A6B82] hover:text-[#2C4D78] hover:bg-[#E6EEF2]/50"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
               <JoinWaitlistButton
                 mobile
                 onClick={() => setMobileOpen(false)}

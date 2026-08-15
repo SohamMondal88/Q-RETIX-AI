@@ -5,74 +5,20 @@ import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight, Clock, User, Calendar } from "lucide-react";
 import Link from "next/link";
+import { allPosts } from "@/lib/blogData";
 
-const blogs = [
-  {
-    id: 1,
-    title: 'Q-RETIX.AI: Unlocking the "Undruggable" AIM2 Inflammasome',
-    description:
-      "How Structural AI Bypassed the Electrostatic Charge Trap to Reignite a Dormant Therapeutic Target.",
-    category: "Research",
-    readTime: "15 min read",
-    date: "July 4, 2026",
-    author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-1.jpg",
-    slug: "unlocking-undruggable-aim2-inflammasome",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: "Decoding Diabetes: AI's Breakthrough in Gene Discovery",
-    description:
-      "How Q-RETIX AI Identified SREBF1 as a Systems-Level Therapeutic Target for Type 2 Diabetes.",
-    category: "Research",
-    readTime: "12 min read",
-    date: "July 19, 2026",
-    author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-2.jpg",
-    slug: "decoding-diabetes-srebf1-gene-discovery",
-    featured: false,
-  },
-  {
-    id: 3,
-    title: "Structural AI Discovery Matrix: Beyond Static Crystallography",
-    description:
-      "Why dynamic thermodynamic ensembles are the future of target identification and cryptic pocket discovery.",
-    category: "AI Research",
-    readTime: "12 min read",
-    date: "June 28, 2026",
-    author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-3.jpg",
-    slug: null,
-    featured: false,
-  },
-  {
-    id: 4,
-    title: "Allosteric Modulation: The Next Frontier in Immunology",
-    description:
-      "Exploring how allosteric molecular wedges are reshaping autoimmune drug design and inflammasome inhibition.",
-    category: "Drug Discovery",
-    readTime: "10 min read",
-    date: "June 20, 2026",
-    author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-4.jpg",
-    slug: null,
-    featured: false,
-  },
-  {
-    id: 5,
-    title: "From Charge Trap to Cure: The AIM2 Therapeutic Pipeline",
-    description:
-      "Mapping the multi-billion dollar market opportunity in SLE, psoriasis, and neurodegenerative disease.",
-    category: "Market Analysis",
-    readTime: "8 min read",
-    date: "June 15, 2026",
-    author: "Q-RETIX Research Team",
-    image: "/images/blog/blog-5.jpg",
-    slug: null,
-    featured: false,
-  },
-];
+const blogs = allPosts.slice(0, 4).map((p) => ({
+  id: p.slug,
+  title: p.title,
+  description: p.description,
+  category: p.category,
+  readTime: p.readTime,
+  date: p.date,
+  author: p.author,
+  image: p.image,
+  slug: p.slug,
+  featured: p.featured,
+}));
 
 function BlogCard({
   blog,
@@ -136,7 +82,7 @@ function BlogCard({
   const springOpacity = useSpring(cardOpacity, { stiffness: 55, damping: 16, restDelta: 0.001 });
   const springOverlay = useSpring(overlayOpacity, { stiffness: 55, damping: 16, restDelta: 0.001 });
 
-  const href = blog.slug ? `/blog/${blog.slug}` : "/blog";
+  const href = `/blog/${blog.slug}`;
 
   return (
     <motion.div
@@ -158,7 +104,6 @@ function BlogCard({
               style={{ opacity: springOverlay }}
             />
 
-            {/* Cover image — 16:10 aspect, perfectly responsive */}
             <div className="relative w-full aspect-[16/10] overflow-hidden rounded-t-[24px] sm:rounded-t-[28px] bg-[#F8FAFB] shrink-0">
               <Image
                 src={blog.image}
@@ -170,14 +115,12 @@ function BlogCard({
               />
               <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 bg-gradient-to-t from-white/50 to-transparent pointer-events-none" />
 
-              {/* Category badge */}
               <div className="absolute top-4 left-4 sm:top-5 sm:left-5">
                 <div className="px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-white text-[11px] sm:text-[12px] font-semibold shadow-sm">
                   {blog.category}
                 </div>
               </div>
 
-              {/* Featured indicator */}
               {blog.featured && (
                 <div className="absolute top-4 right-4 sm:top-5 sm:right-5">
                   <div className="px-3 py-1.5 rounded-full bg-[#2C4D78] text-[11px] sm:text-[12px] font-bold text-white shadow-md">
@@ -187,7 +130,6 @@ function BlogCard({
               )}
             </div>
 
-            {/* Content */}
             <div className="p-5 sm:p-6 lg:p-7 shrink-0">
               <div className="flex items-center gap-2 mb-2 sm:mb-3">
                 <span className="text-[11px] sm:text-[12px] text-[#5A6B82] font-medium flex items-center gap-1">
@@ -217,13 +159,11 @@ function BlogCard({
                   </div>
                 </div>
 
-                <div className="inline-flex items-center gap-2 text-[11px] sm:text-[13px] font-semibold group/link"
-                >
+                <div className="inline-flex items-center gap-2 text-[11px] sm:text-[13px] font-semibold group/link">
                   <span className="text-[#2C4D78] group-hover/link:text-[#1a2942] transition-colors">
                     Read
                   </span>
-                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#E6EEF2] group-hover/link:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group-hover/link:translate-x-0.5"
-                  >
+                  <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#E6EEF2] group-hover/link:bg-[#2C4D78] flex items-center justify-center transition-all duration-300 group-hover/link:translate-x-0.5">
                     <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#2C4D78] group-hover/link:text-white transition-colors" />
                   </div>
                 </div>
