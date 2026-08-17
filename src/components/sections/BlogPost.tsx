@@ -33,10 +33,12 @@ export default function BlogPost({ slug }: { slug: string }) {
       { rootMargin: "-20% 0px -60% 0px" }
     );
 
-    post.tocSections.forEach((section) => {
-      const el = document.getElementById(section.id);
-      if (el) observer.observe(el);
-    });
+    if (post.tocSections) {
+      post.tocSections.forEach((section) => {
+        const el = document.getElementById(section.id);
+        if (el) observer.observe(el);
+      });
+    }
 
     return () => observer.disconnect();
   }, [slug, post]);
@@ -157,25 +159,27 @@ export default function BlogPost({ slug }: { slug: string }) {
 
             <div className="hidden lg:block">
               <div className="sticky top-24 space-y-6">
-                <div className="bg-white rounded-2xl border border-[#D0E0E8] p-6">
-                  <h4 className="text-sm font-semibold text-[#33415C] mb-4">Table of Contents</h4>
-                  <nav className="space-y-1">
-                    {post.tocSections.map((section) => (
-                      <a
-                        key={section.id}
-                        href={`#${section.id}`}
-                        onClick={(e) => handleTocClick(e, section.id)}
-                        className={`block text-sm py-1.5 px-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 ${
-                          activeSection === section.id
-                            ? "text-[#2C4D78] font-medium bg-[#E6EEF2]"
-                            : "text-[#5A6B82] hover:text-[#2C4D78] hover:bg-[#F8FAFB]"
-                        }`}
-                      >
-                        {section.label}
+                {post.tocSections && (
+                  <div className="bg-white rounded-2xl border border-[#D0E0E8] p-6">
+                    <h4 className="text-sm font-semibold text-[#33415C] mb-4">Table of Contents</h4>
+                    <nav className="space-y-1">
+                      {post.tocSections.map((section) => (
+                        <a
+                          key={section.id}
+                          href={`#${section.id}`}
+                          onClick={(e) => handleTocClick(e, section.id)}
+                          className={`block text-sm py-1.5 px-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 ${
+                            activeSection === section.id
+                              ? "text-[#2C4D78] font-medium bg-[#E6EEF2]"
+                              : "text-[#5A6B82] hover:text-[#2C4D78] hover:bg-[#F8FAFB]"
+                          }`}
+                        >
+                        {section.title}
                       </a>
-                    ))}
-                  </nav>
-                </div>
+                      ))}
+                    </nav>
+                  </div>
+                )}
 
                 <div className="bg-gradient-to-br from-[#2C4D78] to-[#3D5F8A] rounded-2xl p-6 text-white">
                   <h4 className="text-sm font-semibold mb-2">Stay Updated</h4>
