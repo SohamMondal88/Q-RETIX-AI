@@ -82,3 +82,8 @@ export function searchPosts(query: string): BlogPostData[] {
       .includes(q)
   );
 }
+
+// Backwards-compatible aliases: some files or older commits import `blogPosts`
+// or expect a default export. Export both to avoid build errors on CI.
+export const blogPosts = allPosts;
+export default allPosts;
