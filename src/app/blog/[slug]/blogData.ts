@@ -1,5 +1,3 @@
-import { validSlugs } from "./validSlugs";
-
 export interface BlogPostMeta {
   slug: string;
   title: string;
@@ -15,6 +13,28 @@ export interface BlogPostMeta {
 }
 
 export const blogPostsMeta: BlogPostMeta[] = [
+  {
+    slug: "generative-biology-dark-proteome-pgc1a-copd",
+    title:
+      "Leveraging Generative Biology to Navigate the Dark Proteome: PGC1A as a Therapeutic Node in COPD",
+    excerpt:
+      "An LLM-driven exploration of underexamined COPD biology prioritizes PGC1A and a mitochondrial-resilience strategy for experimental validation.",
+    category: "Generative Biology",
+    date: "September 15, 2026",
+    readTime: "14 min read",
+    author: "Q-RETIX Research Team",
+    authorRole: "Generative Biology, Q-RETIX.AI",
+    cover: "/images/blog/generative-biology-pgc1a-copd.jpg",
+    coverAspect: "aspect-[16/9]",
+    tocSections: [
+      { label: "Abstract", id: "abstract" },
+      { label: "Theoretical Framework", id: "theoretical-framework" },
+      { label: "In Silico Methodology", id: "methodology" },
+      { label: "Results", id: "results" },
+      { label: "Top-Tier Candidates", id: "top-tier-candidates" },
+      { label: "Future Directions", id: "future-directions" },
+    ],
+  },
   {
     slug: "unlocking-undruggable-aim2-inflammasome",
     title: 'Q-RETIX.AI: Unlocking the "Undruggable" AIM2 Inflammasome',

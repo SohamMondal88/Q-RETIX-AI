@@ -108,12 +108,12 @@ export default function BlogPost({ slug }: { slug: string }) {
         </div>
       </section>
 
-      <div className={`relative w-full ${post.coverAspect} overflow-hidden`}>
+      <div className={`relative w-full ${post.coverAspect} overflow-hidden bg-[#F3E4C3]`}>
         <Image
           src={post.cover}
           alt={post.title}
           fill
-          className="object-cover"
+          className={post.coverFit === "contain" ? "object-contain" : "object-cover"}
           sizes="100vw"
           priority
         />
