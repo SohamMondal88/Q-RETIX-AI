@@ -16,6 +16,7 @@ export type BlogPostData = {
   image: string;
   cover: string;
   coverAspect?: string;
+  coverFit?: "cover" | "contain";
   featured: boolean;
   tocSections?: Array<{ id: string; title: string }>;
   content?: string;
@@ -24,6 +25,249 @@ export type BlogPostData = {
 
 // Main Blog Posts Array - Primary Export
 export const allPosts: BlogPostData[] = [
+  {
+    slug: "generative-biology-dark-proteome-pgc1a-copd",
+    title:
+      "Leveraging Generative Biology to Navigate the Dark Proteome: PGC1A as a Therapeutic Node in COPD",
+    description:
+      "How an LLM-driven target-prioritization pipeline surfaced PGC1A as a biologically plausible, disease-modifying research hypothesis for COPD.",
+    excerpt:
+      "An LLM-driven exploration of underexamined COPD biology prioritizes PGC1A and a mitochondrial-resilience strategy for experimental validation.",
+    category: "Generative Biology",
+    readTime: "14 min read",
+    date: "September 15, 2026",
+    author: "Q-RETIX Research Team",
+    authorRole: "Generative Biology, Q-RETIX.AI",
+    image: "/images/blog/generative-biology-pgc1a-copd.jpg",
+    cover: "/images/blog/generative-biology-pgc1a-copd.jpg",
+    coverAspect: "aspect-[16/9]",
+    coverFit: "contain",
+    featured: true,
+    tocSections: [
+      { title: "Abstract", id: "abstract" },
+      { title: "Theoretical Framework", id: "theoretical-framework" },
+      { title: "In Silico Methodology", id: "methodology" },
+      { title: "Results", id: "results" },
+      { title: "Top-Tier Candidates", id: "top-tier-candidates" },
+      { title: "Future Directions", id: "future-directions" },
+    ],
+    body: (
+      <>
+        <div className="rounded-2xl border border-[#D0E0E8] bg-[#F8FAFB] p-5 sm:p-6 mb-8">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-[#2C4D78] mb-3">
+            Study context
+          </p>
+          <dl className="grid gap-3 sm:grid-cols-2 text-sm text-[#5A6B82]">
+            <div>
+              <dt className="font-semibold text-[#33415C]">Model architecture</dt>
+              <dd>PLATYTARGET</dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-[#33415C]">Dataset reference</dt>
+              <dd>target_descr.ipynb</dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-[#33415C]">Execution environment</dt>
+              <dd>Google Colab</dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-[#33415C]">Evidence status</dt>
+              <dd>In silico research hypothesis</dd>
+            </div>
+          </dl>
+        </div>
+
+        <p className="text-sm text-[#5A6B82] leading-relaxed border-l-4 border-[#2C4D78] pl-4 mb-10">
+          <strong>Research note:</strong> The prioritization described here is computational and hypothesis-generating. PGC1A and the other candidates require independent literature review, target-engagement studies, and experimental validation before any therapeutic conclusions can be drawn.
+        </p>
+
+        <h2 id="abstract" className="text-2xl font-bold text-[#33415C] mt-12 mb-4 scroll-mt-32">
+          Abstract
+        </h2>
+        <p className="text-lg text-[#5A6B82] leading-relaxed mb-6">
+          Chronic Obstructive Pulmonary Disease (COPD) research has traditionally concentrated on familiar inflammatory pathways. That focus has produced important symptom-management options, but relatively few strategies designed to modify the biological processes that drive disease progression. To explore less-charted multi-omic space, we evaluated potential respiratory targets with a fine-tuned large language model acting as an in silico molecular-biology research assistant.
+        </p>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          The model operated within explicit guardrails intended to reduce hallucination, pathway conflation, and the inappropriate treatment of broad biological pathways as drug targets. Candidates passed through a multi-stage filtration process balancing novelty, biological plausibility, upstream influence, and potential druggability. Within this computational ranking, <strong>PGC1A (PPARGC1A/PGC-1&alpha;)</strong> emerged as the leading candidate, with a novelty score of 8.0.
+        </p>
+        <p className="text-[#5A6B82] leading-relaxed mb-8">
+          Instead of centering another downstream inflammatory mediator, this result points toward mitochondrial biogenesis, cellular-energy homeostasis, and epithelial resilience. It therefore frames PGC1A as a promising disease-modification hypothesis: one that may address metabolic deterioration in lung tissue rather than only relieving symptoms.
+        </p>
+
+        <h2 id="theoretical-framework" className="text-2xl font-bold text-[#33415C] mt-12 mb-4 scroll-mt-32">
+          1. Introduction &amp; Theoretical Framework
+        </h2>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          COPD is characterized by persistent respiratory symptoms and progressive airflow limitation associated with small-airway disease, emphysema, airway remodeling, and chronic inflammation. Bronchodilators and anti-inflammatory agents remain central to care, yet the need for therapies that can slow or reverse underlying tissue damage persists.
+        </p>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          Target discovery can also be constrained by the <strong>streetlight effect</strong>: the tendency to search repeatedly where mechanisms, assays, and datasets are already familiar. Our working hypothesis was that a domain-specific LLM could connect concepts across multi-omic layers and help expose underexplored relationships relevant to COPD biology.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          1.1 Understanding COPD Pathophysiology
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          COPD arises from a complex interaction of genetic susceptibility and environmental exposure, particularly cigarette smoke and airborne pollutants. Persistent inflammation, oxidative stress, protease-antiprotease imbalance, mitochondrial dysfunction, and cellular senescence can converge on alveolar destruction and airway remodeling. This interconnected biology makes the disease a compelling setting for systems-level target prioritization.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          1.2 Generative Biology in Drug Discovery
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-8">
+          Generative biology combines advanced computational models with biological datasets to explore relationships that may be difficult to surface through conventional searches alone. When grounded in multi-omic evidence and paired with transparent constraints, these systems can propose testable connections among genes, proteins, phenotypes, and disease mechanisms. Their value is not to replace experimental biology, but to focus it on higher-value hypotheses.
+        </p>
+
+        <h2 id="methodology" className="text-2xl font-bold text-[#33415C] mt-12 mb-4 scroll-mt-32">
+          2. In Silico Methodology &amp; Algorithmic Architecture
+        </h2>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          2.1 Model Ingestion and Environment Setup
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          The computational framework was initialized in Google Colab with PyTorch and Hugging Face Transformers. PEFT, Accelerate, BitsAndBytes, and Datasets supported parameter-efficient execution and accelerated tensor processing. PLATYTARGET was loaded through causal-language-modeling classes for inference on a CUDA-enabled GPU.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          2.2 Algorithmic Guardrails and System Prompting
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-4">
+          The system prompt defined the model as an AI research assistant specializing in therapeutic-target discovery. It was instructed to:
+        </p>
+        <ul className="list-disc pl-5 space-y-3 text-[#5A6B82] mb-6">
+          <li>Differentiate pathways, genes, proteins, cytokines, and tractable drug targets.</li>
+          <li>Avoid presenting broad pathways as individual therapeutic targets.</li>
+          <li>Prefer upstream regulators, druggable proteins, and underexplored mechanisms.</li>
+          <li>Return <em>insufficient evidence</em> when the available basis was inconclusive.</li>
+          <li>Label evidence as Known, Supported Inference, or Hypothesis.</li>
+        </ul>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          2.3 Multi-Stage Prioritization Pipeline
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          Candidates were filtered for biological relevance, causal proximity to COPD drivers, novelty, research saturation, and plausible intervention value. During novelty review, historically crowded targets such as ALOX5 and NLRP3 were deprioritized relative to less-saturated nodes. Final prioritization emphasized connections to oxidative stress, mitochondrial dysfunction, epithelial injury, ferroptosis, immunometabolism, and cellular senescence.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          2.4 Robustness and Validation Layers
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-8">
+          Model outputs were cross-referenced against existing databases and literature to screen for unsupported associations and obvious artifacts. This process strengthens hypothesis quality, but it does not constitute biological validation. Reproducible evidence retrieval, sensitivity analysis, and wet-lab testing remain necessary next steps.
+        </p>
+
+        <h2 id="results" className="text-2xl font-bold text-[#33415C] mt-12 mb-4 scroll-mt-32">
+          3. Results and Target Stratification
+        </h2>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          The pipeline generated a hierarchical ranking based on a composite assessment of novelty and biological plausibility. PGC1A secured the top position, followed by ACSL4, SIRT1, and ACACA. More heavily studied inflammatory targets ranked lower because of reduced novelty and greater research saturation.
+        </p>
+
+        <div className="overflow-x-auto mb-8 rounded-2xl border border-[#E6EEF2]">
+          <table className="w-full min-w-[620px] text-sm border-collapse">
+            <thead>
+              <tr className="bg-[#2C4D78] text-white">
+                <th className="text-left px-4 py-3 font-semibold">Rank</th>
+                <th className="text-left px-4 py-3 font-semibold">Target</th>
+                <th className="text-left px-4 py-3 font-semibold">Novelty score</th>
+                <th className="text-left px-4 py-3 font-semibold">Mechanistic focus</th>
+              </tr>
+            </thead>
+            <tbody className="text-[#5A6B82]">
+              {[
+                ["1", "PGC1A", "8.0", "Mitochondrial biogenesis and energy homeostasis"],
+                ["2", "ACSL4", "7.5", "Lipid metabolism and ferroptosis"],
+                ["3", "SIRT1", "7.5", "Senescence and oxidative-stress adaptation"],
+                ["4", "ACACA", "7.0", "Immunometabolism"],
+              ].map(([rank, target, score, focus], index) => (
+                <tr key={target} className={`border-b last:border-b-0 border-[#E6EEF2] ${index % 2 === 0 ? "bg-white" : "bg-[#F8FAFB]"}`}>
+                  <td className="px-4 py-3 font-medium text-[#33415C]">{rank}</td>
+                  <td className="px-4 py-3 font-semibold text-[#33415C]">{target}</td>
+                  <td className="px-4 py-3">{score}</td>
+                  <td className="px-4 py-3">{focus}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          3.1 Interpreting the Evaluation Metrics
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-8">
+          The scores synthesize publication density, known biological function, mechanistic relevance, and potential intervention value. They are prioritization signals rather than measures of clinical efficacy. Their purpose is to help researchers decide which hypotheses merit deeper evidence review and experimental resources.
+        </p>
+
+        <h2 id="top-tier-candidates" className="text-2xl font-bold text-[#33415C] mt-12 mb-4 scroll-mt-32">
+          4. Discussion: Deep Dive into the Top-Tier Candidates
+        </h2>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          4.1 PGC1A: A Mitochondrial-Resilience Hypothesis
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          PGC1A was the leading computational candidate, with a novelty score of 8.0. As a major regulator of mitochondrial biogenesis and energy homeostasis, it offers a route into the metabolic deterioration of injured lung tissue. The model-generated hypothesis is that restoring PGC1A-associated activity could improve cellular resilience, support epithelial-barrier function, and reduce processes that contribute to airway remodeling. This shifts the therapeutic lens from downstream inflammation toward tissue maintenance and repair.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          4.2 ACSL4: Lipid Metabolism and Ferroptosis
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          ACSL4 scored 7.5 and links lipid metabolism to ferroptosis, an iron-dependent, non-apoptotic form of cell death. Its prioritization directs attention toward epithelial-cell survival mechanisms that sit outside the most saturated inflammatory networks.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          4.3 SIRT1: Senescence and Stress Adaptation
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          SIRT1 also scored 7.5. It is associated with cellular senescence, metabolic regulation, and adaptation to oxidative stress, and it interacts functionally with PGC1A. The pair suggests a potentially protective metabolic loop worthy of focused mechanistic study.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          4.4 ACACA: An Immunometabolic Control Point
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          ACACA received a novelty score of 7.0. Its role in fatty-acid metabolism places it at an intersection between cellular energy use and immune-state regulation. Modulating this node may reveal ways to alter the metabolic conditions that sustain chronic inflammation.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          4.5 Integrating the Findings
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-8">
+          Taken together, the ranked candidates highlight the interconnected nature of mitochondrial function, lipid metabolism, cell-death programs, senescence, and inflammation in COPD. This systems view may support multi-faceted strategies, but combination hypotheses must be tested carefully for directionality, safety, and tissue-specific effects.
+        </p>
+
+        <h2 id="future-directions" className="text-2xl font-bold text-[#33415C] mt-12 mb-4 scroll-mt-32">
+          5. Conclusion &amp; Future Directions
+        </h2>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          This study illustrates how a fine-tuned LLM can support structured biological reasoning beyond basic literature retrieval. Within the defined pipeline, PGC1A emerged as the strongest research hypothesis and focused attention on mitochondrial biogenesis and cellular resilience as potential disease-modifying directions in COPD.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          5.1 Bridging In Silico and In Vitro Research
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          The immediate next step is experimental validation. Proposed work includes assessing PGC1A modulation in human airway epithelial cells exposed to cigarette-smoke stress, measuring mitochondrial function, oxidative injury, barrier integrity, cell viability, and relevant remodeling markers. Appropriate positive and negative controls, dose-response testing, orthogonal assays, and target-engagement evidence will be essential.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          5.2 Long-Term Implications for COPD Treatment
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-6">
+          If supported experimentally, metabolic-resilience targets could complement established bronchodilator and anti-inflammatory approaches. Integrating computational prioritization with traditional disease biology may help identify interventions that address upstream tissue dysfunction while maintaining a clear boundary between model-generated hypotheses and validated therapeutic evidence.
+        </p>
+
+        <h3 className="text-xl font-semibold text-[#33415C] mt-8 mb-3">
+          5.3 Expanding the Scope of Generative Biology
+        </h3>
+        <p className="text-[#5A6B82] leading-relaxed mb-8">
+          The broader opportunity is a repeatable discovery workflow: use generative models to navigate underexplored biology, enforce evidence-aware guardrails, rank transparent hypotheses, and hand the strongest candidates to experimental teams. Applied across complex diseases, that workflow could widen the searchable therapeutic landscape while keeping scientific validation at its center.
+        </p>
+      </>
+    ),
+  },
   {
     slug: "unlocking-undruggable-aim2-inflammasome",
     title: "Q-RETIX.AI: Unlocking the \"Undruggable\" AIM2 Inflammasome",
