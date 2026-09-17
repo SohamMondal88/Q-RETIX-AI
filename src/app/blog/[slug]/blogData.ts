@@ -24,7 +24,7 @@ export const blogPostsMeta: BlogPostMeta[] = [
     readTime: "14 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Generative Biology, Q-RETIX.AI",
-    cover: "/images/blog/generative-biology-pgc1a-copd.jpg",
+    cover: "/images/blog/COVER-3.jpg",
     coverAspect: "aspect-[16/9]",
     tocSections: [
       { label: "Abstract", id: "abstract" },
@@ -45,8 +45,8 @@ export const blogPostsMeta: BlogPostMeta[] = [
     readTime: "15 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Structural AI Drug Discovery, Q-RETIX.AI",
-    cover: "/images/blog/blog-1.jpg",
-    coverAspect: "aspect-video",
+    cover: "/images/blog/COVER-1.jpg",
+    coverAspect: "aspect-[16/9]",
     tocSections: [
       { label: "Executive Summary", id: "executive-summary" },
       { label: "The AIM2 Paradox", id: "the-aim2-paradox" },
@@ -67,7 +67,7 @@ export const blogPostsMeta: BlogPostMeta[] = [
     readTime: "12 min read",
     author: "Q-RETIX Research Team",
     authorRole: "AI Research, Q-RETIX.AI",
-    cover: "/images/blog/blog-2.jpg",
+    cover: "/images/blog/COVER-2.jpg",
     coverAspect: "aspect-video",
     tocSections: [
       { label: "Introduction", id: "introduction" },
@@ -126,8 +126,8 @@ export const blogPostsMeta: BlogPostMeta[] = [
     readTime: "12 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Metabolic AI Drug Discovery, Q-RETIX.AI",
-    cover: "/images/blog/blog-2.jpg",
-    coverAspect: "aspect-video",
+    cover: "/images/blog/COVER-2.jpg",
+    coverAspect: "aspect-[16/9]",
     tocSections: [
       { label: "Executive Summary", id: "executive-summary" },
       { label: "The Diabetes Paradox", id: "the-diabetes-paradox" },
