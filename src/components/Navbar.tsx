@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
-  FlaskConical,
   ChevronRight,
   ArrowUpRight,
 } from "lucide-react";
@@ -87,9 +87,16 @@ export default function Navbar() {
           }`}
         >
           <div className="flex h-[60px] items-center justify-between px-5">
-            <Link href="/" className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-lg">
-              <div className="relative w-8 h-8 rounded-lg gradient-brand flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
-                <FlaskConical className="w-4 h-4 text-white" />
+            <Link href="/" aria-label="Q-RETIX AI home" className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-lg">
+              <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-[#D0E0E8] bg-white p-0.5 shadow-md transition-all group-hover:scale-105 group-hover:border-[#A8DADC] group-hover:shadow-lg">
+                <Image
+                  src="/q-retix-logo.png"
+                  alt="Q-RETIX AI logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 object-contain"
+                  priority
+                />
               </div>
               <span className="text-[15px] font-bold text-[#2C4D78] tracking-tight">
                 Q-RETIX AI
