@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/blog/cover1.jpg",
+        url: "/images/blog/COVER-1.jpg",
         width: 1600,
         height: 941,
         alt: "Q-RETIX AI Blog",
