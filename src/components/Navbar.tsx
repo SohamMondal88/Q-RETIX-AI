@@ -87,7 +87,7 @@ export default function Navbar() {
           }`}
         >
           <div className="flex h-[60px] items-center justify-between px-5">
-            <Link href="/" className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-lg">
+            <Link href="/" aria-label="Q-RETIX AI home" className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded-lg">
               <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-[#D0E0E8] bg-white p-0.5 shadow-md transition-all group-hover:scale-105 group-hover:border-[#A8DADC] group-hover:shadow-lg">
                 <Image
                   src="/q-retix-logo.png"
