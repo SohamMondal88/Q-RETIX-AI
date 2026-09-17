@@ -1,34 +1,34 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import { ArrowUpRight, Mail } from "lucide-react";
 
 const footerLinks = [
   {
-    title: "Q-RETIX AI",
+    title: "Q-RETIX",
     isBrand: true,
     links: [
-      { label: "Home", href: "/" },
       { label: "About", href: "/about" },
+      { label: "Home", href: "/" },
       { label: "Blog", href: "/blog" },
       { label: "Careers", href: "/careers" },
     ],
   },
   {
-    title: "Platform",
+    title: "Help",
     links: [
-      { label: "Documentation", href: "/docs" },
-      { label: "Delivery Details", href: "/delivery" },
-      { label: "Contact & Support", href: "/contact" },
+      { label: "Terms & Conditions", href: "/legal/terms" },
+      { label: "Privacy Policy", href: "/legal/privacy" },
+      { label: "Support", href: "/support" },
     ],
   },
   {
-    title: "Legal",
+    title: "Resources",
     links: [
-      { label: "Privacy Policy", href: "/legal/privacy" },
-      { label: "Terms & Conditions", href: "/legal/terms" },
-      { label: "Cookie Policy", href: "/legal/cookies" },
-      { label: "GDPR", href: "/legal/gdpr" },
+      { label: "Blog", href: "/blog" },
+      { label: "Pipeline", href: "/delivery" },
+      { label: "Documentation", href: "/docs" },
     ],
   },
 ];
@@ -100,17 +100,29 @@ const socialIcons = [
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleJoin = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const subject = encodeURIComponent("Join the Q-RETIX community");
+    const body = encodeURIComponent(
+      `Please add ${email} to the Q-RETIX community updates list.`
+    );
+    window.location.href = `mailto:contact@qretix.ai?subject=${subject}&body=${body}`;
+  };
+
   return (
-    <footer className="bg-[#1a2942] text-white">
-      <div className="mx-auto max-w-[1400px] px-6 sm:px-12 lg:px-20 pt-20 pb-10">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 lg:gap-16">
+    <footer id="site-footer" className="relative overflow-hidden rounded-t-[32px] sm:rounded-t-[44px] border-t border-[#D0E0E8] bg-[#F3F7FA] text-[#33415C]">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#98D7C2] to-transparent" />
+      <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-20">
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-[1.05fr_1.1fr_0.85fr_1.25fr] lg:gap-16">
           {footerLinks.map((group) => (
             <div key={group.title}>
               <h4
-                className={`text-white mb-8 ${
+                className={`mb-6 text-[#1A2942] ${
                   group.isBrand
-                    ? "text-[24px] sm:text-[28px] font-bold leading-tight"
-                    : "text-sm font-semibold uppercase tracking-wider text-[#5A6B82]"
+                    ? "text-[24px] font-extrabold leading-tight tracking-[-0.04em] sm:text-[28px]"
+                    : "text-[15px] font-bold tracking-[-0.02em] sm:text-base"
                 }`}
               >
                 {group.title}
@@ -118,22 +130,55 @@ export default function Footer() {
               <ul className="space-y-4">
                 {group.links.map((link) => (
                   <li key={link.label}>
-                <Link
-                  href={link.href}
-                  className="text-[14px] sm:text-[15px] text-[#A8B5C5] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 rounded"
-                >
+                    <Link
+                      href={link.href}
+                      className="group/link inline-flex items-center gap-1 text-[14px] text-[#5A6B82] transition-colors hover:text-[#2C4D78] focus-visible:rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/40 sm:text-[15px]"
+                    >
                       {link.label}
+                      <ArrowUpRight className="h-3.5 w-3.5 -translate-x-1 translate-y-1 opacity-0 transition-all group-hover/link:translate-x-0 group-hover/link:translate-y-0 group-hover/link:opacity-100" />
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
           ))}
+
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
+            <h4 className="mb-3 text-[15px] font-bold tracking-[-0.02em] text-[#1A2942] sm:text-base">
+              Join us
+            </h4>
+            <p className="mb-5 max-w-sm text-sm leading-6 text-[#5A6B82]">
+              Receive new research, platform updates, and community news.
+            </p>
+            <form onSubmit={handleJoin} className="group relative max-w-md">
+              <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#5A6B82]" />
+              <label htmlFor="footer-email" className="sr-only">
+                Email address
+              </label>
+              <input
+                id="footer-email"
+                type="email"
+                required
+                autoComplete="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="Enter your email..."
+                className="h-14 w-full rounded-2xl border border-[#D0E0E8] bg-white/80 pl-11 pr-14 text-sm text-[#33415C] shadow-sm outline-none transition-all placeholder:text-[#718096] focus:border-[#2C4D78] focus:ring-4 focus:ring-[#2C4D78]/10"
+              />
+              <button
+                type="submit"
+                aria-label="Join Q-RETIX community updates"
+                className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl bg-[#2C4D78] text-white shadow-md transition-all hover:-translate-y-[55%] hover:bg-[#1A3A5C] hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78] focus-visible:ring-offset-2"
+              >
+                <ArrowUpRight className="h-4 w-4" />
+              </button>
+            </form>
+          </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-16 pt-8 border-t border-white/10">
-          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
-            <div className="flex items-center gap-4">
+        <div className="mt-14 flex flex-col gap-7 border-t border-[#D0E0E8] pt-7 lg:mt-20 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-8">
+            <div className="flex flex-wrap items-center gap-2.5">
               {socialIcons.map((social) => (
                   <a
                     key={social.label}
@@ -141,16 +186,21 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[#D0E0E8] bg-white text-[#33415C] shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#2C4D78] hover:bg-[#2C4D78] hover:text-white hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
                   >
                   {social.svg}
                 </a>
               ))}
             </div>
+            <nav aria-label="Footer legal links" className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <Link href="/legal/privacy" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Privacy Policy</Link>
+              <Link href="/legal/terms" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Terms &amp; Conditions</Link>
+              <Link href="/support" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Support</Link>
+            </nav>
           </div>
 
-              <p className="text-[13px] sm:text-[14px] text-[#5A6B82]">
-            © 2026 Q-RETIX AI. All rights reserved.
+          <p className="text-xs text-[#5A6B82] sm:text-right sm:text-sm">
+            © 2026 Q-RETIX AI. All Rights Reserved.
           </p>
         </div>
       </div>
