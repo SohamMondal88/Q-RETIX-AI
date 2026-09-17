@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 export interface BlogPostData {
   slug: string;
@@ -55,12 +55,10 @@ function savePersisted(stats: PersistedStats) {
 }
 
 export function useBlogStats(posts: BlogPostData[]) {
-  const [persisted, setPersisted] = useState<PersistedStats>(loadPersisted);
-  const [hydrated, setHydrated] = useState(false);
-
-  useEffect(() => {
-    setHydrated(true);
-  }, []);
+  const [persisted, setPersisted] = useState<PersistedStats>(() => ({
+    viewCounts: {},
+    lastResetWeek: getWeekKey(),
+  }));
 
   const recordView = useCallback((slug: string) => {
     if (typeof window === "undefined") return;
@@ -92,14 +90,19 @@ export function useBlogStats(posts: BlogPostData[]) {
       (p.tags || []).some((t) => t.toLowerCase() === "research")
     ).length;
     const totalViews = Object.values(persisted.viewCounts).reduce((a, b) => a + b, 0);
-    // Weekly updates = number of articles published in current week (demo: fallback to min 1 if articles exist)
-    const currentWeek = getWeekKey();
-    const weekly = currentWeek === persisted.lastResetWeek ? Math.max(1, posts.length > 0 ? 1 : 0) : 0;
+    const now = new Date();
+    const startOfWeek = new Date(now);
+    startOfWeek.setHours(0, 0, 0, 0);
+    startOfWeek.setDate(now.getDate() - now.getDay());
+    const weekly = posts.filter((post) => {
+      const published = new Date(post.date);
+      return !Number.isNaN(published.getTime()) && published >= startOfWeek && published <= now;
+    }).length;
 
     return {
       articles: articleCount,
       researchCount,
-      totalViews: Math.max(totalViews, 100), // floor so it doesn't look empty
+      totalViews,
       weeklyUpdates: weekly,
     };
   }, [posts, persisted]);
@@ -108,10 +111,10 @@ export function useBlogStats(posts: BlogPostData[]) {
     () => ({
       articles: `${stats.articles}+`,
       research: `${stats.researchCount}+`,
-      readers: hydrated ? `${Math.max(stats.totalViews, 100)}+` : "10K+",
-      updates: stats.weeklyUpdates > 0 ? "Weekly" : "Updates",
+      readers: `${stats.totalViews}`,
+      updates: `${stats.weeklyUpdates}`,
     }),
-    [stats, hydrated]
+    [stats]
   );
 
   return {

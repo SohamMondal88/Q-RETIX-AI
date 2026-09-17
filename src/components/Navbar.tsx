@@ -71,6 +71,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   return (
     <>
       <motion.header
@@ -95,7 +104,7 @@ export default function Navbar() {
                   width={32}
                   height={32}
                   className="h-8 w-8 object-contain"
-                  priority
+                  preload
                 />
               </div>
               <span className="text-[15px] font-bold text-[#2C4D78] tracking-tight">
@@ -134,7 +143,9 @@ export default function Navbar() {
             <button
               className="lg:hidden p-2 rounded-lg hover:bg-[#E6EEF2]/50 text-[#33415C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Toggle menu"
+              aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
             >
               {mobileOpen ? (
                 <X className="w-5 h-5" />
@@ -149,6 +160,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}

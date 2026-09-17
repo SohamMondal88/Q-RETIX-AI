@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/", "/404"],
       },
     ],
-    sitemap: "https://qretix.ai/sitemap.xml",
-    host: "https://qretix.ai",
+    sitemap: "https://www.q-retix.app/sitemap.xml",
+    host: "https://www.q-retix.app",
   };
 }
