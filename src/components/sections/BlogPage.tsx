@@ -8,6 +8,11 @@ import Link from "next/link";
 import { allPosts, searchPosts } from "@/lib/blogData";
 
 const POSTS_PER_PAGE = 6;
+const HIDDEN_BLOG_SLUGS = new Set([
+  "aim2-therapeutic-pipeline",
+  "allosteric-modulation-immunology",
+  "structural-ai-discovery-matrix",
+]);
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -15,16 +20,23 @@ export default function BlogPage() {
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const activeCategories = useMemo(
-    () => ["All", ...new Set(allPosts.map((post) => post.category))],
+  const listedPosts = useMemo(
+    () => allPosts.filter((post) => !HIDDEN_BLOG_SLUGS.has(post.slug)),
     []
   );
 
+  const activeCategories = useMemo(
+    () => ["All", ...new Set(listedPosts.map((post) => post.category))],
+    [listedPosts]
+  );
+
   const filteredPosts = searchQuery
-    ? searchPosts(searchQuery)
+    ? searchPosts(searchQuery).filter(
+        (post) => !HIDDEN_BLOG_SLUGS.has(post.slug)
+      )
     : selectedCategory === "All"
-      ? allPosts
-      : allPosts.filter((p) => p.category === selectedCategory);
+      ? listedPosts
+      : listedPosts.filter((post) => post.category === selectedCategory);
 
   const visiblePosts = filteredPosts.slice(0, visibleCount);
   const hasMore = visibleCount < filteredPosts.length;
