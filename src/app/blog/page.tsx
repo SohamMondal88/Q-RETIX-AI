@@ -6,19 +6,19 @@ export const metadata: Metadata = {
   description:
     "Explore breakthroughs in AI-powered healthcare, pharmaceutical research, and medical innovation from Q-RETIX AI.",
   alternates: {
-    canonical: "https://qretix.ai/blog",
+    canonical: "https://www.q-retix.app/blog",
   },
   openGraph: {
     title: "Q-RETIX AI Blog - Research & Insights",
     description:
       "Explore breakthroughs in AI-powered healthcare, pharmaceutical research, and medical innovation.",
-    url: "https://qretix.ai/blog",
+    url: "https://www.q-retix.app/blog",
     type: "website",
     images: [
       {
-        url: "/images/blog/COVER-1.jpg",
+        url: "https://www.q-retix.app/images/blog/cover-1.jpg",
         width: 1600,
-        height: 900,
+        height: 941,
         alt: "Q-RETIX AI Blog",
       },
     ],

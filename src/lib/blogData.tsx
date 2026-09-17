@@ -18,6 +18,7 @@ export type BlogPostData = {
   coverAspect?: string;
   coverFit?: "cover" | "contain";
   featured: boolean;
+  listed?: boolean;
   tocSections?: Array<{ id: string; title: string }>;
   content?: string;
   body?: ReactNode;
@@ -38,8 +39,8 @@ export const allPosts: BlogPostData[] = [
     date: "September 15, 2026",
     author: "Q-RETIX Research Team",
     authorRole: "Generative Biology, Q-RETIX.AI",
-    image: "/images/blog/generative-biology-pgc1a-copd.jpg",
-    cover: "/images/blog/generative-biology-pgc1a-copd.jpg",
+    image: "/images/blog/cover-3.jpg",
+    cover: "/images/blog/cover-3.jpg",
     coverAspect: "aspect-[16/9]",
     coverFit: "contain",
     featured: true,
@@ -280,9 +281,10 @@ export const allPosts: BlogPostData[] = [
     date: "July 4, 2026",
     author: "Q-RETIX Research Team",
     authorRole: "AI Research",
-    image: "/images/blog/blog-1.jpg",
-    cover: "/images/blog/blog-1.jpg",
+    image: "/images/blog/cover-1.jpg",
+    cover: "/images/blog/cover-1.jpg",
     coverAspect: "aspect-video",
+    coverFit: "contain",
     featured: true,
     tocSections: [
       { title: "Executive Summary", id: "executive-summary" },
@@ -588,6 +590,7 @@ export const allPosts: BlogPostData[] = [
     cover: "/images/blog/blog-2.jpg",
     coverAspect: "aspect-video",
     featured: false,
+    listed: false,
     tocSections: [
       { title: "Introduction", id: "introduction" },
       { title: "Traditional Methods", id: "traditional-methods" },
@@ -612,6 +615,7 @@ export const allPosts: BlogPostData[] = [
     cover: "/images/blog/blog-3.jpg",
     coverAspect: "aspect-video",
     featured: false,
+    listed: false,
     tocSections: [
       { title: "Overview", id: "overview" },
       { title: "Allosteric Mechanisms", id: "allosteric-mechanisms" },
@@ -635,6 +639,7 @@ export const allPosts: BlogPostData[] = [
     cover: "/images/blog/blog-4.jpg",
     coverAspect: "aspect-video",
     featured: false,
+    listed: false,
     tocSections: [
       { title: "Market Overview", id: "market-overview" },
       { title: "SLE Market", id: "sle-market" },
@@ -655,9 +660,10 @@ export const allPosts: BlogPostData[] = [
     date: "July 19, 2026",
     author: "Q-RETIX Research Team",
     authorRole: "Metabolic AI Drug Discovery, Q-RETIX.AI",
-    image: "/images/blog/blog-2.jpg",
-    cover: "/images/blog/blog-2.jpg",
+    image: "/images/blog/cover-2.jpg",
+    cover: "/images/blog/cover-2.jpg",
     coverAspect: "aspect-video",
+    coverFit: "contain",
     featured: false,
     tocSections: [
       { title: "Executive Summary", id: "executive-summary" },
@@ -973,14 +979,19 @@ export const allPosts: BlogPostData[] = [
   },
 ];
 
-// Categories List - Derived from Posts
-export const categories = ["All", ...new Set(allPosts.map((p) => p.category))];
+// Public discovery list. Unlisted posts remain routable for existing external links.
+export const listedPosts = allPosts
+  .filter((post) => post.listed !== false)
+  .sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
+
+// Categories List - Derived from discoverable posts only.
+export const categories = ["All", ...new Set(listedPosts.map((p) => p.category))];
 
 // Search Utility Function
 export function searchPosts(query: string): BlogPostData[] {
   const q = query.trim().toLowerCase();
-  if (!q) return allPosts;
-  return allPosts.filter((post) =>
+  if (!q) return listedPosts;
+  return listedPosts.filter((post) =>
     [post.title, post.description, post.excerpt ?? "", post.category, post.author]
       .join(" ")
       .toLowerCase()
