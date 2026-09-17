@@ -72,7 +72,12 @@ export const metadata: Metadata = {
     canonical: "https://qretix.ai",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/icon.png", type: "image/png", sizes: "500x500" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 

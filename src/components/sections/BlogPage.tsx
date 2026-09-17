@@ -1,25 +1,24 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Search, X } from "lucide-react";
+import { ArrowRight, Search, Sparkles, X } from "lucide-react";
 import Link from "next/link";
-import { allPosts, categories, searchPosts } from "@/lib/blogData";
-import type { BlogPostData } from "@/lib/blogData";
+import { allPosts, searchPosts } from "@/lib/blogData";
 
 const POSTS_PER_PAGE = 6;
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [hoveredTab, setHoveredTab] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
-  const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
-  const [underlineStyle, setUnderlineStyle] = useState({ left: 0, width: 0 });
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const activeCategories = ["All", ...new Set(allPosts.map((p) => p.category))];
+  const activeCategories = useMemo(
+    () => ["All", ...new Set(allPosts.map((post) => post.category))],
+    []
+  );
 
   const filteredPosts = searchQuery
     ? searchPosts(searchQuery)
@@ -30,41 +29,44 @@ export default function BlogPage() {
   const visiblePosts = filteredPosts.slice(0, visibleCount);
   const hasMore = visibleCount < filteredPosts.length;
 
-  useEffect(() => {
-    const idx = activeCategories.findIndex((c) => c === selectedCategory);
-    const el = tabsRef.current[idx];
-    if (el) {
-      setUnderlineStyle({
-        left: el.offsetLeft,
-        width: el.offsetWidth,
-      });
-    }
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    setVisibleCount(POSTS_PER_PAGE);
-  }, [selectedCategory, searchQuery]);
-
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
     setSelectedCategory("All");
+    setVisibleCount(POSTS_PER_PAGE);
   };
 
   const clearSearch = () => {
     setSearchQuery("");
+    setVisibleCount(POSTS_PER_PAGE);
     searchInputRef.current?.focus();
+  };
+
+  const selectCategory = (category: string) => {
+    setSelectedCategory(category);
+    setSearchQuery("");
+    setVisibleCount(POSTS_PER_PAGE);
   };
 
   return (
     <div className="min-h-screen bg-[#F8FAFF]">
-      <section className="pt-32 pb-24">
+      <section className="relative overflow-hidden pt-32 pb-24">
+        <div className="pointer-events-none absolute inset-x-0 top-24 mx-auto h-72 max-w-5xl rounded-full bg-[#98D7C2]/10 blur-3xl" />
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          <h1 className="text-[40px] sm:text-[44px] font-bold text-[#111827] text-center mb-4">
+          <h1 className="relative text-[40px] sm:text-[44px] font-bold text-[#111827] text-center mb-4">
             Explore our Blogs
           </h1>
-          <p className="text-center text-[#6B7280] mb-10 max-w-2xl mx-auto">
+          <p className="relative text-center text-[#5A6B82] mb-8 max-w-2xl mx-auto">
             Discover the latest insights in AI-powered drug discovery, structural biology, and precision medicine.
           </p>
+
+          <div className="mx-auto mb-10 flex max-w-3xl items-center gap-4" aria-hidden="true">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-[#A8DADC]" />
+            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#2C4D78]">
+              <Sparkles className="h-3.5 w-3.5 text-[#5EA990]" />
+              Research journal
+            </div>
+            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-[#A8DADC]" />
+          </div>
 
           {/* Search Bar */}
           <div className="max-w-md mx-auto mb-12">
@@ -76,12 +78,14 @@ export default function BlogPage() {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={handleSearch}
-                className="w-full h-12 pl-11 pr-10 rounded-full border border-[#D0E0E8] bg-white text-sm text-[#33415C] placeholder:text-[#8A9BB0] focus:outline-none focus:ring-2 focus:ring-[#2C4D78]/20 focus:border-[#2C4D78] transition-all"
+                aria-label="Search blog articles"
+                className="w-full h-12 pl-11 pr-10 rounded-full border border-[#D0E0E8] bg-white text-sm text-[#33415C] shadow-[0_8px_28px_-18px_rgba(44,77,120,0.45)] placeholder:text-[#718096] focus:outline-none focus:ring-4 focus:ring-[#2C4D78]/10 focus:border-[#2C4D78] transition-all"
               />
               {searchQuery && (
                 <button
                   onClick={clearSearch}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A9BB0] hover:text-[#33415C] transition-colors"
+                  aria-label="Clear blog search"
+                  className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full text-[#718096] transition-all hover:bg-[#E6EEF2] hover:text-[#2C4D78] active:scale-90"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -90,34 +94,25 @@ export default function BlogPage() {
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex items-center justify-center gap-10 mb-16 relative overflow-x-auto pb-2">
-            {activeCategories.map((cat, i) => (
+          <div className="relative mb-16">
+            <div className="absolute left-0 right-0 top-1/2 hidden h-px bg-gradient-to-r from-transparent via-[#D0E0E8] to-transparent md:block" aria-hidden="true" />
+            <div className="no-scrollbar relative mx-auto flex w-fit max-w-full items-center gap-2 overflow-x-auto rounded-2xl border border-[#D0E0E8] bg-white/90 p-1.5 shadow-sm backdrop-blur-md">
+            {activeCategories.map((cat) => (
               <button
                 key={cat}
-                ref={(el) => { tabsRef.current[i] = el; }}
-                onClick={() => { setSelectedCategory(cat); setSearchQuery(""); }}
-                onMouseEnter={() => setHoveredTab(cat)}
-                onMouseLeave={() => setHoveredTab(null)}
-                className={`relative text-lg font-medium transition-colors duration-200 pb-1 whitespace-nowrap ${
+                type="button"
+                onClick={() => selectCategory(cat)}
+                aria-pressed={selectedCategory === cat}
+                className={`relative min-h-10 whitespace-nowrap rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/40 ${
                   selectedCategory === cat
-                    ? "text-[#22C55E]"
-                    : hoveredTab === cat
-                      ? "text-black"
-                      : "text-[#6B7280]"
+                    ? "bg-[#2C4D78] text-white shadow-md shadow-[#2C4D78]/20"
+                    : "text-[#5A6B82] hover:bg-[#E6EEF2] hover:text-[#2C4D78]"
                 }`}
               >
                 {cat}
               </button>
             ))}
-            <motion.div
-              className="absolute bottom-0 h-0.5 bg-[#22C55E] rounded-full"
-              layout
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              style={{
-                left: underlineStyle.left,
-                width: underlineStyle.width,
-              }}
-            />
+            </div>
           </div>
 
           {/* Results Info */}
@@ -138,14 +133,14 @@ export default function BlogPage() {
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12"
             >
               {visiblePosts.map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex">
+                <Link key={post.slug} href={`/blog/${post.slug}`} className="group flex rounded-[26px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 focus-visible:ring-offset-4">
                   <motion.article
                     layout
-                    className="flex flex-col w-full"
-                    whileHover={{ y: -4 }}
+                    className="flex w-full flex-col rounded-[26px] border border-transparent p-2 transition-[border-color,background-color,box-shadow] duration-300 group-hover:border-[#D0E0E8] group-hover:bg-white group-hover:shadow-[0_20px_55px_-30px_rgba(44,77,120,0.5)]"
+                    whileHover={{ y: -6 }}
                     transition={{ duration: 0.25, ease: "easeInOut" }}
                   >
-                    <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[24px]">
+                    <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[20px] bg-[#E6EEF2]">
                       <Image
                         src={post.image}
                         alt={post.title}
@@ -180,9 +175,12 @@ export default function BlogPage() {
                     )}
 
                     <div className="mt-auto pt-5">
-                      <div className="flex items-center justify-center gap-2 w-full h-[50px] rounded-full bg-[#111827] text-white font-bold text-sm shadow-sm transition-all duration-200 group-hover:bg-[#262626]">
+                      <div className="relative flex h-[50px] w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[#1A2942] text-sm font-bold text-white shadow-md transition-all duration-300 group-hover:bg-[#2C4D78] group-hover:shadow-lg group-hover:shadow-[#2C4D78]/20 group-active:scale-[0.98]">
+                        <span className="absolute inset-y-0 -left-1/3 w-1/3 skew-x-[-18deg] bg-white/15 transition-transform duration-700 group-hover:translate-x-[430%]" aria-hidden="true" />
                         <span>Read Article</span>
-                        <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+                        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/10 transition-all group-hover:translate-x-1 group-hover:bg-white group-hover:text-[#2C4D78]">
+                          <ArrowRight className="w-4 h-4" />
+                        </span>
                       </div>
                     </div>
                   </motion.article>
@@ -197,7 +195,7 @@ export default function BlogPage() {
               {searchQuery && (
                 <button
                   onClick={clearSearch}
-                  className="mt-4 text-[#2C4D78] underline text-sm"
+                  className="mt-5 rounded-full border border-[#2C4D78] px-5 py-2.5 text-sm font-semibold text-[#2C4D78] transition-all hover:bg-[#2C4D78] hover:text-white active:scale-95"
                 >
                   Clear search
                 </button>
@@ -210,10 +208,12 @@ export default function BlogPage() {
             <div className="text-center mt-16">
               <button
                 onClick={() => setVisibleCount((prev) => prev + POSTS_PER_PAGE)}
-                className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-white border border-[#D0E0E8] text-[#33415C] font-semibold text-sm hover:bg-[#F8FAFB] hover:border-[#2C4D78] transition-all duration-200"
+                className="group/load inline-flex items-center gap-3 rounded-full border border-[#D0E0E8] bg-white px-8 py-3.5 text-sm font-semibold text-[#33415C] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-[#2C4D78] hover:shadow-lg active:translate-y-0 active:scale-95"
               >
                 Load More Articles
-                <ArrowRight className="w-4 h-4" />
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#E6EEF2] text-[#2C4D78] transition-all group-hover/load:translate-x-1 group-hover/load:bg-[#2C4D78] group-hover/load:text-white">
+                  <ArrowRight className="w-4 h-4" />
+                </span>
               </button>
             </div>
           )}
