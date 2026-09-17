@@ -8,6 +8,7 @@ import Link from "next/link";
 import { allPosts, searchPosts } from "@/lib/blogData";
 
 const POSTS_PER_PAGE = 6;
+// Keep these articles routable for existing links while removing their cards from discovery.
 const HIDDEN_BLOG_SLUGS = new Set([
   "aim2-therapeutic-pipeline",
   "allosteric-modulation-immunology",
