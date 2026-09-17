@@ -4,10 +4,13 @@ export interface BlogPostMeta {
   excerpt: string;
   category: string;
   date: string;
+  publishedAt: string;
   readTime: string;
   author: string;
   authorRole: string;
   cover: string;
+  coverWidth: number;
+  coverHeight: number;
   coverAspect: string;
   tocSections: { label: string; id: string }[];
 }
@@ -21,10 +24,13 @@ export const blogPostsMeta: BlogPostMeta[] = [
       "An LLM-driven exploration of underexamined COPD biology prioritizes PGC1A and a mitochondrial-resilience strategy for experimental validation.",
     category: "Generative Biology",
     date: "September 15, 2026",
+    publishedAt: "2026-09-15T00:00:00.000Z",
     readTime: "14 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Generative Biology, Q-RETIX.AI",
-    cover: "/images/blog/generative-biology-pgc1a-copd.jpg",
+    cover: "/images/blog/cover-3.jpg",
+    coverWidth: 1312,
+    coverHeight: 1199,
     coverAspect: "aspect-[16/9]",
     tocSections: [
       { label: "Abstract", id: "abstract" },
@@ -42,10 +48,13 @@ export const blogPostsMeta: BlogPostMeta[] = [
       "How Structural AI Bypassed the Electrostatic Charge Trap to Reignite a Dormant Therapeutic Target.",
     category: "Research",
     date: "July 4, 2026",
+    publishedAt: "2026-07-04T00:00:00.000Z",
     readTime: "15 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Structural AI Drug Discovery, Q-RETIX.AI",
-    cover: "/images/blog/blog-1.jpg",
+    cover: "/images/blog/cover-1.jpg",
+    coverWidth: 1600,
+    coverHeight: 941,
     coverAspect: "aspect-video",
     tocSections: [
       { label: "Executive Summary", id: "executive-summary" },
@@ -64,10 +73,13 @@ export const blogPostsMeta: BlogPostMeta[] = [
       "Why dynamic thermodynamic ensembles are the future of target identification and cryptic pocket discovery.",
     category: "AI Research",
     date: "June 28, 2026",
+    publishedAt: "2026-06-28T00:00:00.000Z",
     readTime: "12 min read",
     author: "Q-RETIX Research Team",
     authorRole: "AI Research, Q-RETIX.AI",
     cover: "/images/blog/blog-2.jpg",
+    coverWidth: 800,
+    coverHeight: 643,
     coverAspect: "aspect-video",
     tocSections: [
       { label: "Introduction", id: "introduction" },
@@ -84,10 +96,13 @@ export const blogPostsMeta: BlogPostMeta[] = [
       "Exploring how allosteric molecular wedges are reshaping autoimmune drug design and inflammasome inhibition.",
     category: "Drug Discovery",
     date: "June 20, 2026",
+    publishedAt: "2026-06-20T00:00:00.000Z",
     readTime: "10 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Drug Discovery, Q-RETIX.AI",
     cover: "/images/blog/blog-3.jpg",
+    coverWidth: 800,
+    coverHeight: 643,
     coverAspect: "aspect-video",
     tocSections: [
       { label: "Overview", id: "overview" },
@@ -103,10 +118,13 @@ export const blogPostsMeta: BlogPostMeta[] = [
       "Mapping the multi-billion dollar market opportunity in SLE, psoriasis, and neurodegenerative disease.",
     category: "Market Analysis",
     date: "June 15, 2026",
+    publishedAt: "2026-06-15T00:00:00.000Z",
     readTime: "8 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Market Analysis, Q-RETIX.AI",
     cover: "/images/blog/blog-4.jpg",
+    coverWidth: 800,
+    coverHeight: 643,
     coverAspect: "aspect-video",
     tocSections: [
       { label: "Market Overview", id: "market-overview" },
@@ -123,10 +141,13 @@ export const blogPostsMeta: BlogPostMeta[] = [
       "How Q-RETIX AI Identified SREBF1 as a Systems-Level Therapeutic Target for Type 2 Diabetes",
     category: "Research",
     date: "July 19, 2026",
+    publishedAt: "2026-07-19T00:00:00.000Z",
     readTime: "12 min read",
     author: "Q-RETIX Research Team",
     authorRole: "Metabolic AI Drug Discovery, Q-RETIX.AI",
-    cover: "/images/blog/blog-2.jpg",
+    cover: "/images/blog/cover-2.jpg",
+    coverWidth: 1500,
+    coverHeight: 1000,
     coverAspect: "aspect-video",
     tocSections: [
       { label: "Executive Summary", id: "executive-summary" },

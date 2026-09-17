@@ -4,6 +4,8 @@ import { getPostMeta } from "./blogData";
 import { validSlugs } from "./validSlugs";
 import type { Metadata } from "next";
 
+const SITE_URL = "https://www.q-retix.app";
+
 export async function generateStaticParams() {
   return validSlugs.map((slug) => ({ slug }));
 }
@@ -22,7 +24,8 @@ export async function generateMetadata({
     };
   }
 
-  const canonicalUrl = `https://qretix.ai/blog/${slug}`;
+  const canonicalUrl = `${SITE_URL}/blog/${slug}`;
+  const coverUrl = new URL(post.cover, SITE_URL).toString();
 
   return {
     title: post.title,
@@ -35,13 +38,13 @@ export async function generateMetadata({
       description: post.excerpt,
       url: canonicalUrl,
       type: "article",
-      publishedTime: post.date,
+      publishedTime: post.publishedAt,
       authors: [post.author],
       images: [
         {
-          url: post.cover,
-          width: 1600,
-          height: 941,
+          url: coverUrl,
+          width: post.coverWidth,
+          height: post.coverHeight,
           alt: post.title,
         },
       ],
@@ -51,7 +54,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      images: [post.cover],
+      images: [coverUrl],
     },
     robots: {
       index: true,
@@ -69,5 +72,39 @@ export default async function BlogDetailPage({
   if (!validSlugs.includes(slug)) {
     notFound();
   }
-  return <BlogPost slug={slug} />;
+  const post = getPostMeta(slug);
+  if (!post) {
+    notFound();
+  }
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    image: [new URL(post.cover, SITE_URL).toString()],
+    mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+    author: {
+      "@type": "Organization",
+      name: post.author,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Q-RETIX AI",
+      url: SITE_URL,
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+      <BlogPost slug={slug} />
+    </>
+  );
 }

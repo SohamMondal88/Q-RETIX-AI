@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/blog/cover1.jpg",
+        url: "/images/blog/cover-1.jpg",
         width: 1600,
         height: 941,
         alt: "Q-RETIX AI - Pharmaceutical Intelligence",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     title: "Q-RETIX AI - AI-Powered Pharmaceutical Intelligence",
     description:
       "Transforming Pharmaceutical Research Through Artificial Intelligence.",
-    images: ["/images/blog/cover1.jpg"],
+    images: ["/images/blog/cover-1.jpg"],
   },
   robots: {
     index: true,
