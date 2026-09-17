@@ -18,9 +18,10 @@ const footerLinks = [
   {
     title: "Help",
     links: [
+      { label: "Legal Center", href: "/legal" },
       { label: "Terms & Conditions", href: "/legal/terms" },
       { label: "Privacy Policy", href: "/legal/privacy" },
-      { label: "Support", href: "/support" },
+      { label: "Data Rights", href: "/legal/data-rights" },
     ],
   },
   {
@@ -195,7 +196,8 @@ export default function Footer() {
             <nav aria-label="Footer legal links" className="flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link href="/legal/privacy" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Privacy Policy</Link>
               <Link href="/legal/terms" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Terms &amp; Conditions</Link>
-              <Link href="/support" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Support</Link>
+              <Link href="/legal/cookies" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Cookies</Link>
+              <Link href="/legal/disclaimer" className="text-xs text-[#5A6B82] transition-colors hover:text-[#2C4D78] sm:text-sm">Research Disclaimer</Link>
             </nav>
           </div>
 

@@ -16,10 +16,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/docs/api",
     "/press",
     "/support",
+    "/legal",
     "/legal/privacy",
     "/legal/terms",
     "/legal/cookies",
     "/legal/gdpr",
+    "/legal/disclaimer",
+    "/legal/acceptable-use",
+    "/legal/accessibility",
+    "/legal/security",
+    "/legal/ai-transparency",
+    "/legal/data-rights",
   ];
 
   const blogPosts = validSlugs.map((slug) => `/blog/${slug}`);
