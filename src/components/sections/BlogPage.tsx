@@ -1,19 +1,16 @@
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Search, Sparkles, X } from "lucide-react";
 import Link from "next/link";
-import { allPosts, searchPosts } from "@/lib/blogData";
+import { listedPosts, searchPosts } from "@/lib/blogData";
 
 const POSTS_PER_PAGE = 6;
-// Keep these articles routable for existing links while removing their cards from discovery.
-const HIDDEN_BLOG_SLUGS = new Set([
-  "aim2-therapeutic-pipeline",
-  "allosteric-modulation-immunology",
-  "structural-ai-discovery-matrix",
-]);
+
+const toIsoDate = (date: string) =>
+  new Date(`${date} 00:00:00 UTC`).toISOString().slice(0, 10);
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -21,20 +18,13 @@ export default function BlogPage() {
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const listedPosts = useMemo(
-    () => allPosts.filter((post) => !HIDDEN_BLOG_SLUGS.has(post.slug)),
-    []
-  );
-
-  const activeCategories = useMemo(
-    () => ["All", ...new Set(listedPosts.map((post) => post.category))],
-    [listedPosts]
-  );
+  const activeCategories = [
+    "All",
+    ...new Set(listedPosts.map((post) => post.category)),
+  ];
 
   const filteredPosts = searchQuery
-    ? searchPosts(searchQuery).filter(
-        (post) => !HIDDEN_BLOG_SLUGS.has(post.slug)
-      )
+    ? searchPosts(searchQuery)
     : selectedCategory === "All"
       ? listedPosts
       : listedPosts.filter((post) => post.category === selectedCategory);
@@ -130,7 +120,7 @@ export default function BlogPage() {
 
           {/* Results Info */}
           {searchQuery && (
-            <p className="text-center text-sm text-[#6B7280] mb-6">
+            <p aria-live="polite" className="text-center text-sm text-[#5A6B82] mb-6">
               Found {filteredPosts.length} result{filteredPosts.length !== 1 ? "s" : ""} for &ldquo;{searchQuery}&rdquo;
             </p>
           )}
@@ -158,8 +148,10 @@ export default function BlogPage() {
                         src={post.image}
                         alt={post.title}
                         fill
-                        className="object-cover transition-all duration-300 ease-out group-hover:scale-105"
+                        className={`${post.coverFit === "contain" ? "object-contain p-1" : "object-cover"} transition-all duration-300 ease-out group-hover:scale-[1.03]`}
                         sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        priority={visiblePosts.indexOf(post) < 3}
+                        quality={90}
                       />
                       {post.featured && (
                         <div className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-[#2C4D78] text-[10px] font-bold text-white shadow-md">
@@ -169,9 +161,9 @@ export default function BlogPage() {
                     </div>
 
                     <div className="flex items-center justify-between mt-4">
-                      <span className="text-sm font-bold text-black">
+                      <time dateTime={toIsoDate(post.date)} className="text-sm font-bold text-[#33415C]">
                         {post.date}
-                      </span>
+                      </time>
                       <span className="text-sm text-[#6B7280]">
                         {post.readTime}
                       </span>
@@ -203,8 +195,8 @@ export default function BlogPage() {
           </AnimatePresence>
 
           {filteredPosts.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-[#6B7280] text-lg">No articles found.</p>
+            <div aria-live="polite" className="text-center py-20">
+              <p className="text-[#5A6B82] text-lg">No articles found.</p>
               {searchQuery && (
                 <button
                   onClick={clearSearch}

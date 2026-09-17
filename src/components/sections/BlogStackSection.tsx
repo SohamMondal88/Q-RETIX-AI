@@ -5,9 +5,9 @@ import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight, Clock, User, Calendar } from "lucide-react";
 import Link from "next/link";
-import { allPosts } from "@/lib/blogData";
+import { listedPosts } from "@/lib/blogData";
 
-const blogs = allPosts.slice(0, 4).map((p) => ({
+const blogs = listedPosts.slice(0, 4).map((p) => ({
   id: p.slug,
   title: p.title,
   description: p.description,
@@ -18,6 +18,7 @@ const blogs = allPosts.slice(0, 4).map((p) => ({
   image: p.image,
   slug: p.slug,
   featured: p.featured,
+  coverFit: p.coverFit,
 }));
 
 function BlogCard({
@@ -109,7 +110,7 @@ function BlogCard({
                 src={blog.image}
                 alt={blog.title}
                 fill
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className={`${blog.coverFit === "contain" ? "object-contain p-1" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
                 sizes="(max-width: 768px) 100vw, 800px"
                 priority={index === 0}
               />

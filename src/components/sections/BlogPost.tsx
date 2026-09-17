@@ -142,7 +142,7 @@ export default function BlogPost({ slug }: { slug: string }) {
         </div>
       </section>
 
-      <div className={`relative w-full ${post.coverAspect} overflow-hidden bg-[#F3E4C3]`}>
+      <div className={`relative w-full ${post.coverAspect ?? "aspect-video"} overflow-hidden border-y border-[#D0E0E8] bg-[#E6EEF2]`}>
         <Image
           src={post.cover}
           alt={post.title}
@@ -150,14 +150,34 @@ export default function BlogPost({ slug }: { slug: string }) {
           className={post.coverFit === "contain" ? "object-contain" : "object-cover"}
           sizes="100vw"
           priority
+          quality={90}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/90" />
       </div>
 
       <section className="py-16 bg-white">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[1fr_280px] gap-12 max-w-5xl mx-auto">
             <div>
+              {post.tocSections && (
+                <details className="mb-10 rounded-2xl border border-[#D0E0E8] bg-[#F8FAFB] p-5 lg:hidden">
+                  <summary className="cursor-pointer text-sm font-semibold text-[#33415C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/40">
+                    Table of Contents
+                  </summary>
+                  <nav aria-label="Article table of contents" className="mt-4 grid gap-1 border-t border-[#D0E0E8] pt-4">
+                    {post.tocSections.map((section) => (
+                      <a
+                        key={section.id}
+                        href={`#${section.id}`}
+                        onClick={(event) => handleTocClick(event, section.id)}
+                        className="rounded-lg px-2 py-2 text-sm text-[#5A6B82] transition-colors hover:bg-white hover:text-[#2C4D78]"
+                      >
+                        {section.title}
+                      </a>
+                    ))}
+                  </nav>
+                </details>
+              )}
+
               <motion.article
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -193,6 +213,9 @@ export default function BlogPost({ slug }: { slug: string }) {
                         </button>
                       ))}
                     </div>
+                    <span aria-live="polite" className="sr-only">
+                      {shareStatus === "copied" ? "Article link copied" : ""}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -203,7 +226,7 @@ export default function BlogPost({ slug }: { slug: string }) {
                 {post.tocSections && (
                   <div className="bg-white rounded-2xl border border-[#D0E0E8] p-6">
                     <h4 className="text-sm font-semibold text-[#33415C] mb-4">Table of Contents</h4>
-                    <nav className="space-y-1">
+                    <nav aria-label="Article table of contents" className="space-y-1">
                       {post.tocSections.map((section) => (
                         <a
                           key={section.id}
