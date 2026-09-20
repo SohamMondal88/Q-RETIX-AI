@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowRight, Clock, User, Calendar } from "lucide-react";
 import Link from "next/link";
 import { listedPosts } from "@/lib/blogData";
@@ -112,7 +112,6 @@ function BlogCard({
                 fill
                 className={`${blog.coverFit === "contain" ? "object-contain p-1" : "object-cover"} transition-transform duration-700 ease-out group-hover:scale-[1.03]`}
                 sizes="(max-width: 768px) 100vw, 800px"
-                priority={index === 0}
               />
               <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-20 bg-gradient-to-t from-white/50 to-transparent pointer-events-none" />
 
@@ -177,8 +176,40 @@ function BlogCard({
   );
 }
 
+function StaticBlogGrid() {
+  return (
+    <div className="grid gap-5 md:grid-cols-2">
+      {blogs.map((blog) => (
+        <Link
+          key={blog.id}
+          href={`/blog/${blog.slug}`}
+          className="group overflow-hidden rounded-3xl border border-[#DFE9EE] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-[#98D7C2] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/40"
+        >
+          <div className="relative aspect-[16/10] overflow-hidden bg-[#F3F7FA]">
+            <Image
+              src={blog.image}
+              alt={blog.title}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className={`${blog.coverFit === "contain" ? "object-contain p-1" : "object-cover"} transition-transform duration-500 group-hover:scale-[1.02]`}
+            />
+            <span className="absolute left-4 top-4 rounded-full border border-white/40 bg-[#1A2942]/75 px-3 py-1 text-[11px] font-bold text-white backdrop-blur-md">{blog.category}</span>
+          </div>
+          <div className="p-5 sm:p-6">
+            <div className="flex items-center gap-3 text-[11px] font-medium text-[#718096]"><span className="inline-flex items-center gap-1"><Clock className="h-3 w-3" />{blog.readTime}</span><span>{blog.date}</span></div>
+            <h3 className="mt-3 text-lg font-bold leading-snug tracking-[-0.025em] text-[#1A2942] group-hover:text-[#2C4D78]">{blog.title}</h3>
+            <p className="mt-2 line-clamp-2 text-sm leading-6 text-[#5A6B82]">{blog.description}</p>
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#2C4D78]">Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></span>
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
 export default function BlogStackSection() {
   const spacerRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: spacerRef,
@@ -223,12 +254,18 @@ export default function BlogStackSection() {
           </h2>
 
           <p className="text-[15px] sm:text-base lg:text-[17px] text-[#5A6B82] leading-[1.7]">
-            Stay updated with breakthroughs in AI-powered healthcare, structural drug discovery, and immunology research.
+            Explore computational research notes on target discovery, disease biology, and responsible AI-assisted scientific reasoning.
           </p>
+          <p className="mt-4 inline-flex rounded-full border border-[#C8E7DD] bg-[#F1FAF7] px-3 py-1.5 text-xs font-semibold text-[#285C50]">Research hypotheses · Independent validation required</p>
         </motion.div>
       </div>
 
-      <div ref={spacerRef} className="relative">
+      {reduceMotion ? (
+        <div className="relative mx-auto max-w-[1200px] px-4 py-10 sm:px-6 lg:px-8"><StaticBlogGrid /></div>
+      ) : (
+      <>
+      <div className="relative mx-auto max-w-[1200px] px-4 py-8 sm:px-6 md:hidden"><StaticBlogGrid /></div>
+      <div ref={spacerRef} className="relative hidden md:block">
         <div className="sticky top-0 h-[100dvh] flex items-center justify-center z-10 overflow-hidden p-4 sm:p-6 lg:p-8">
           {blogs.map((blog, index) => (
             <BlogCard
@@ -243,6 +280,8 @@ export default function BlogStackSection() {
 
         <div style={{ height: "200vh" }} className="relative z-0" />
       </div>
+      </>
+      )}
 
       <div className="relative mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20 sm:py-24 lg:py-28">
         <motion.div

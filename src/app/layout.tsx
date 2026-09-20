@@ -18,44 +18,44 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://qretix.ai"),
+  metadataBase: new URL("https://www.q-retix.app"),
   title: {
-    default: "Q-RETIX AI - AI-Powered Pharmaceutical Intelligence",
+    default: "Q-RETIX AI — Evidence-Aware Therapeutic Research",
     template: "%s | Q-RETIX AI",
   },
   description:
-    "Transforming Pharmaceutical Research Through Artificial Intelligence. Empowering drug discovery, clinical research, and healthcare intelligence.",
+    "Evidence-aware AI research for therapeutic target discovery, biological reasoning, and testable scientific hypotheses.",
   keywords: [
     "pharmaceutical AI",
     "drug discovery",
-    "clinical trials",
-    "healthcare intelligence",
+    "therapeutic target discovery",
+    "biological reasoning",
     "Q-RETIX AI",
     "research analytics",
   ],
   openGraph: {
-    title: "Q-RETIX AI - AI-Powered Pharmaceutical Intelligence",
+    title: "Q-RETIX AI — Evidence-Aware Therapeutic Research",
     description:
-      "Transforming Pharmaceutical Research Through Artificial Intelligence.",
+      "Evidence-aware AI research for therapeutic target discovery and biological reasoning.",
     type: "website",
-    url: "https://qretix.ai",
+    url: "https://www.q-retix.app",
     siteName: "Q-RETIX AI",
     locale: "en_US",
     images: [
       {
-        url: "/images/blog/cover-1.jpg",
-        width: 1600,
-        height: 941,
-        alt: "Q-RETIX AI - Pharmaceutical Intelligence",
+        url: "/molecular-structure.png",
+        width: 587,
+        height: 425,
+        alt: "Q-RETIX AI computational biology research",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Q-RETIX AI - AI-Powered Pharmaceutical Intelligence",
+    title: "Q-RETIX AI — Evidence-Aware Therapeutic Research",
     description:
-      "Transforming Pharmaceutical Research Through Artificial Intelligence.",
-    images: ["/images/blog/cover-1.jpg"],
+      "Evidence-aware AI research for therapeutic target discovery and biological reasoning.",
+    images: ["/molecular-structure.png"],
   },
   robots: {
     index: true,
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://qretix.ai",
+    canonical: "https://www.q-retix.app",
   },
   icons: {
     icon: [

@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { validSlugs } from "./blog/[slug]/validSlugs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://qretix.ai";
+  const baseUrl = "https://www.q-retix.app";
 
   const staticRoutes = [
     "",
