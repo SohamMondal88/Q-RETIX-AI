@@ -38,14 +38,14 @@ export default function WaitlistCommunitySection() {
             <motion.div initial={reduceMotion ? false : { opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="p-7 sm:p-10 lg:p-12">
               <p className="text-xs font-bold uppercase tracking-[0.17em] text-[#4C7B70]">Join the list</p>
               <h3 className="mt-3 text-2xl font-bold tracking-[-0.03em] text-[#1A2942] sm:text-3xl">Stay close to the research.</h3>
-              <p className="mt-3 text-sm leading-6 text-[#5A6B82]">This website does not yet use an automated subscription backend. Use your own email app to request research updates; Q-RETIX receives information only after you choose to send the message.</p>
+              <p className="mt-3 text-sm leading-6 text-[#5A6B82]">Join the Q-RETIX waitlist with a verified email address. We will only use it for research updates and early-access opportunities.</p>
 
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                <a href="mailto:contact@qretix.ai?subject=Join%20Q-RETIX%20research%20updates" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#2C4D78] px-5 text-sm font-bold text-white shadow-lg shadow-[#2C4D78]/15 transition hover:-translate-y-0.5 hover:bg-[#1A3A5C] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78] focus-visible:ring-offset-2">Request updates <Mail className="h-4 w-4" /></a>
+                <Link href="/waitlist" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#2C4D78] px-5 text-sm font-bold text-white shadow-lg shadow-[#2C4D78]/15 transition hover:-translate-y-0.5 hover:bg-[#1A3A5C] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78] focus-visible:ring-offset-2">Join the waitlist <Mail className="h-4 w-4" /></Link>
                 <Link href="/contact" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#D0E0E8] bg-white px-5 text-sm font-bold text-[#2C4D78] transition hover:-translate-y-0.5 hover:border-[#98D7C2] hover:bg-[#F8FAFB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/40"><MessageCircle className="h-4 w-4" />Contact the team</Link>
               </div>
 
-              <div className="mt-5 flex items-start gap-2 text-xs leading-5 text-[#718096]"><LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0" /><p>No personal information is collected by this page. Your email provider handles the message you decide to send. Read the <Link href="/legal/privacy" className="font-semibold text-[#2C4D78] underline underline-offset-2">Privacy Policy</Link>.</p></div>
+              <div className="mt-5 flex items-start gap-2 text-xs leading-5 text-[#718096]"><LockKeyhole className="mt-0.5 h-3.5 w-3.5 shrink-0" /><p>We collect only the information you provide after email verification. Read the <Link href="/legal/privacy" className="font-semibold text-[#2C4D78] underline underline-offset-2">Privacy Policy</Link>.</p></div>
 
               <div className="mt-7 border-t border-[#DFE9EE] pt-6">
                 <p className="text-sm font-semibold text-[#33415C]">Prefer a direct conversation?</p>

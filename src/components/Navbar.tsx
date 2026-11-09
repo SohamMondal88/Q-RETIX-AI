@@ -10,7 +10,7 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -28,35 +28,17 @@ function JoinWaitlistButton({
   onClick?: () => void;
   mobile?: boolean;
 }) {
-  const pathname = usePathname();
-  const router = useRouter();
-
-  const handleClick = useCallback(
-    (e: React.MouseEvent) => {
-      e.preventDefault();
-      onClick?.();
-
-      if (pathname === "/") {
-        const el = document.getElementById("waitlist");
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
-        }
-      } else {
-        router.push("/#waitlist");
-      }
-    },
-    [pathname, router, onClick]
-  );
+  const handleClick = useCallback(() => onClick?.(), [onClick]);
 
   return (
-    <button onClick={handleClick} className={className}>
+    <Link href="/waitlist" onClick={handleClick} className={className}>
       Join Waitlist
       {mobile ? (
         <ChevronRight className="w-4 h-4" />
       ) : (
         <ArrowUpRight className="w-3.5 h-3.5" />
       )}
-    </button>
+    </Link>
   );
 }
 
@@ -64,6 +46,8 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const isWaitlistPage = pathname === "/waitlist";
+  const visibleNavLinks = isWaitlistPage ? [] : navLinks;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -112,8 +96,8 @@ export default function Navbar() {
               </span>
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-0.5">
-              {navLinks.map((link) => {
+            {!isWaitlistPage && <nav className="hidden lg:flex items-center gap-0.5">
+              {visibleNavLinks.map((link) => {
                 const isActive =
                   pathname === link.href ||
                   (link.href !== "/" && pathname.startsWith(link.href));
@@ -132,15 +116,17 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-            </nav>
+            </nav>}
 
-            <div className="hidden lg:flex items-center gap-3">
-              <JoinWaitlistButton
-                className="gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#2C4D78]/20 font-semibold px-5 inline-flex items-center gap-1.5 h-9 rounded-xl text-[13px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
-              />
-            </div>
+            {!isWaitlistPage && (
+              <div className="hidden lg:flex items-center gap-3">
+                <JoinWaitlistButton
+                  className="gradient-brand text-white hover:opacity-90 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#2C4D78]/20 font-semibold px-5 inline-flex items-center gap-1.5 h-9 rounded-xl text-[13px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
+                />
+              </div>
+            )}
 
-            <button
+            {!isWaitlistPage && <button
               className="lg:hidden p-2 rounded-lg hover:bg-[#E6EEF2]/50 text-[#33415C] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -152,13 +138,13 @@ export default function Navbar() {
               ) : (
                 <Menu className="w-5 h-5" />
               )}
-            </button>
+            </button>}
           </div>
         </div>
       </motion.header>
 
       <AnimatePresence>
-        {mobileOpen && (
+        {!isWaitlistPage && mobileOpen && (
           <motion.div
             id="mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
@@ -168,7 +154,7 @@ export default function Navbar() {
             className="fixed top-[84px] left-4 right-4 z-40 bg-white/95 backdrop-blur-xl border border-[#D0E0E8] rounded-2xl lg:hidden overflow-hidden shadow-xl shadow-[#2C4D78]/5"
           >
             <div className="px-4 py-5 flex flex-col gap-1">
-              {navLinks.map((link) => {
+              {visibleNavLinks.map((link) => {
                 const isActive =
                   pathname === link.href ||
                   (link.href !== "/" && pathname.startsWith(link.href));
@@ -188,11 +174,13 @@ export default function Navbar() {
                   </Link>
                 );
               })}
-              <JoinWaitlistButton
-                mobile
-                onClick={() => setMobileOpen(false)}
-                className="gradient-brand text-white mt-2 font-semibold inline-flex items-center justify-center gap-2 h-10 rounded-xl text-sm px-4 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
-              />
+              {!isWaitlistPage && (
+                <JoinWaitlistButton
+                  mobile
+                  onClick={() => setMobileOpen(false)}
+                  className="gradient-brand text-white mt-2 font-semibold inline-flex items-center justify-center gap-2 h-10 rounded-xl text-sm px-4 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50"
+                />
+              )}
             </div>
           </motion.div>
         )}
