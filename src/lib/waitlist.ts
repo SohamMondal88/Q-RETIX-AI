@@ -4,9 +4,16 @@ import nodemailer from "nodemailer";
 
 export const waitlistSchema = {
   name: (value: unknown) => typeof value === "string" && value.trim().length >= 2 && value.trim().length <= 120,
-  email: (value: unknown) => typeof value === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value) && value.length <= 254,
+  email: (value: unknown) => typeof value === "string" && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value) && value.length <= 254,
   purpose: (value: unknown) => value === undefined || value === null || (typeof value === "string" && value.length <= 1_000),
 };
+
+export class WaitlistDatabaseError extends Error {
+  constructor(message = "Waitlist database is unavailable.") {
+    super(message);
+    this.name = "WaitlistDatabaseError";
+  }
+}
 
 export function normaliseEmail(email: string) {
   return email.trim().toLowerCase();
@@ -26,32 +33,59 @@ function env(name: string) {
   return value;
 }
 
-export async function supabaseRpc<T>(functionName: string, body: Record<string, unknown>): Promise<T> {
-  const response = await fetch(`${env("SUPABASE_URL")}/rest/v1/rpc/${functionName}`, {
-    method: "POST",
-    headers: {
-      apikey: env("SUPABASE_SERVICE_ROLE_KEY"),
-      Authorization: `Bearer ${env("SUPABASE_SERVICE_ROLE_KEY")}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-    cache: "no-store",
-  });
+function supabaseHeaders() {
+  const key = env("SUPABASE_SERVICE_ROLE_KEY");
+  return { apikey: key, Authorization: `Bearer ${key}` };
+}
 
-  if (!response.ok) {
-    throw new Error(await response.text());
+function supabaseUrl(pathname: string) {
+  const base = env("SUPABASE_URL").replace(/\\/+$/, "");
+  let parsed: URL;
+  try {
+    parsed = new URL(base);
+  } catch {
+    throw new WaitlistDatabaseError("SUPABASE_URL is not a valid URL.");
   }
+  if (parsed.protocol !== "https:" || !parsed.hostname.endsWith(".supabase.co")) {
+    throw new WaitlistDatabaseError("SUPABASE_URL must be the HTTPS URL of the Supabase project.");
+  }
+  return `${base}${pathname}`;
+}
 
+async function databaseFetch(url: string, init: RequestInit = {}) {
+  try {
+    const response = await fetch(url, { ...init, headers: { ...supabaseHeaders(), ...init.headers }, cache: "no-store", signal: AbortSignal.timeout(8_000) });
+    if (!response.ok) {
+      const detail = await response.text();
+      console.error("Waitlist database request failed", { status: response.status, detail: detail.slice(0, 500) });
+      throw new WaitlistDatabaseError(`Supabase returned HTTP ${response.status}.`);
+    }
+    return response;
+  } catch (error) {
+    if (error instanceof WaitlistDatabaseError) throw error;
+    console.error("Waitlist database connection failed", error);
+    throw new WaitlistDatabaseError();
+  }
+}
+
+/** Confirms that the configured Supabase URL, service key, and waitlist table are reachable. */
+export async function checkWaitlistDatabase() {
+  await databaseFetch(supabaseUrl("/rest/v1/waitlist_entries?select=id&limit=1"));
+  return { database: "ok" as const };
+}
+
+export async function supabaseRpc<T>(functionName: string, body: Record<string, unknown>): Promise<T> {
+  const response = await databaseFetch(supabaseUrl(`/rest/v1/rpc/${functionName}`), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
   if (response.status === 204) return undefined as T;
   return response.json() as Promise<T>;
 }
 
 export async function waitlistEmailExists(email: string) {
-  const response = await fetch(`${env("SUPABASE_URL")}/rest/v1/waitlist_entries?email=eq.${encodeURIComponent(email)}&select=id`, {
-    headers: { apikey: env("SUPABASE_SERVICE_ROLE_KEY"), Authorization: `Bearer ${env("SUPABASE_SERVICE_ROLE_KEY")}` },
-    cache: "no-store",
-  });
-  if (!response.ok) throw new Error(await response.text());
+  const response = await databaseFetch(supabaseUrl(`/rest/v1/waitlist_entries?email=eq.${encodeURIComponent(email)}&select=id`));
   const entries = await response.json() as { id: string }[];
   return entries.length > 0;
 }
@@ -61,7 +95,7 @@ export async function sendWaitlistEmail({ to, subject, text, html }: { to: strin
     service: "gmail",
     auth: {
       user: env("GMAIL_USER"),
-      pass: env("GMAIL_APP_PASSWORD").replace(/\s/g, ""),
+      pass: env("GMAIL_APP_PASSWORD").replace(/\\s/g, ""),
     },
   });
 
