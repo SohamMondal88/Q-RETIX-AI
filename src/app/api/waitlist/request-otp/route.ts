@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createOtp, hashOtp, normaliseEmail, sendWaitlistEmail, supabaseRpc, waitlistEmailExists, waitlistEmailTemplate, waitlistSchema } from "@/lib/waitlist";
+import { checkWaitlistDatabase, createOtp, hashOtp, normaliseEmail, sendWaitlistEmail, supabaseRpc, waitlistEmailExists, waitlistEmailTemplate, waitlistSchema, WaitlistDatabaseError } from "@/lib/waitlist";
 
 export const runtime = "nodejs";
 
@@ -17,6 +17,8 @@ export async function POST(request: Request) {
     if (!address.endsWith("@gmail.com")) {
       return NextResponse.json({ message: "Please use a Gmail address." }, { status: 400 });
     }
+
+    await checkWaitlistDatabase();
     if (await waitlistEmailExists(address)) {
       return NextResponse.json({ message: "This email is already confirmed on the waitlist." }, { status: 409 });
     }
@@ -39,6 +41,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Verification code sent." });
   } catch (error) {
     const detail = error instanceof Error ? error.message : "";
+    if (error instanceof WaitlistDatabaseError) {
+      return NextResponse.json({ message: "The waitlist database is unavailable. Please check the Supabase project URL, service-role key, and database status." }, { status: 503 });
+    }
     if (detail.includes("already confirmed on the waitlist")) return NextResponse.json({ message: "This email is already confirmed on the waitlist." }, { status: 409 });
     if (detail.includes("Please wait")) return NextResponse.json({ message: "Please wait a minute before requesting another code." }, { status: 429 });
     if (detail.includes("Gmail is temporarily unavailable")) return NextResponse.json({ message: detail }, { status: 503 });
