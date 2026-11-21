@@ -39,7 +39,7 @@ function supabaseHeaders() {
 }
 
 function supabaseUrl(pathname: string) {
-  const base = env("SUPABASE_URL").replace(/\\/+$/, "");
+  const base = env("SUPABASE_URL").replace(/\/+$/, "");
   let parsed: URL;
   try {
     parsed = new URL(base);
