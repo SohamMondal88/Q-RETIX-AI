@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 
 export const waitlistSchema = {
   name: (value: unknown) => typeof value === "string" && value.trim().length >= 2 && value.trim().length <= 120,
-  email: (value: unknown) => typeof value === "string" && /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(value) && value.length <= 254,
+  email: (value: unknown) => typeof value === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim()) && value.trim().length <= 254,
   purpose: (value: unknown) => value === undefined || value === null || (typeof value === "string" && value.length <= 1_000),
 };
 
@@ -95,7 +95,7 @@ export async function sendWaitlistEmail({ to, subject, text, html }: { to: strin
     service: "gmail",
     auth: {
       user: env("GMAIL_USER"),
-      pass: env("GMAIL_APP_PASSWORD").replace(/\\s/g, ""),
+      pass: env("GMAIL_APP_PASSWORD").replace(/\s/g, ""),
     },
   });
 
