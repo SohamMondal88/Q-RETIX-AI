@@ -109,7 +109,7 @@ export default function Footer() {
     const body = encodeURIComponent(
       `Please add ${email} to the Q-RETIX community updates list.`
     );
-    window.location.href = `mailto:contact@qretix.ai?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:qretix.ai2405@gmail.com?subject=${subject}&body=${body}`;
   };
 
   return (
