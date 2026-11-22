@@ -28,7 +28,7 @@ export default function WaitlistPage() {
     event.preventDefault();
     setLoading(true); setMessage("");
     try {
-      const response = await fetch("/api/waitlist/verify-otp", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: details.email, code }) });
+      const response = await fetch("/api/waitlist/verify-otp", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: details.email.trim().toLowerCase(), code: code.trim() }) });
       const data = await response.json() as { message?: string };
       if (!response.ok) throw new Error(data.message ?? "Unable to verify the code.");
       setStep("complete");
