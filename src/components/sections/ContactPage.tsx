@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import {
   Mail,
   MapPin,
-  Phone,
   ArrowRight,
   Check,
   FlaskConical,
@@ -33,7 +32,7 @@ const supportOptions = [
     title: "Email Support",
     description: "Get a response within 24 hours from our dedicated support team.",
     action: "Email Us",
-    href: "mailto:hello@qretix.ai",
+    href: "mailto:qretix.ai2405@gmail.com",
     external: true,
   },
   {
@@ -195,20 +194,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="text-xs sm:text-sm font-medium text-[#33415C]">Email</p>
-                      <a href="mailto:hello@qretix.ai" className="text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
-                        hello@qretix.ai
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-[#D0E0E8] flex items-center justify-center shrink-0">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#2C4D78]" />
-                    </div>
-                    <div>
-                      <p className="text-xs sm:text-sm font-medium text-[#33415C]">Phone</p>
-                      <a href="tel:+14155551234" className="text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
-                        +1 (415) 555-1234
+                      <a href="mailto:qretix.ai2405@gmail.com" className="text-xs sm:text-sm text-[#5A6B82] hover:text-[#2C4D78] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4D78]/50 rounded">
+                        qretix.ai2405@gmail.com
                       </a>
                     </div>
                   </div>
@@ -220,9 +207,7 @@ export default function ContactPage() {
                     <div>
                       <p className="text-xs sm:text-sm font-medium text-[#33415C]">Office</p>
                       <p className="text-xs sm:text-sm text-[#5A6B82]">
-                        350 Mission Street, Suite 200
-                        <br />
-                        San Francisco, CA 94105
+                        Chandmari Jhil, Kolkata 700150, South 24 Parganas, West Bengal, India
                       </p>
                     </div>
                   </div>
